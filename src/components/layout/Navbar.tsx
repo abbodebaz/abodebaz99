@@ -6,7 +6,6 @@ import { Menu, X } from 'lucide-react'
 const navLinks = [
   { name: 'من أنا', href: '#about' },
   { name: 'مسيرتي', href: '#journey' },
-  { name: 'أعمالي', href: '#achievements' },
   { name: 'الأثر', href: '#impact' },
   { name: 'المنهجية', href: '#framework' },
   { name: 'تواصل', href: '#contact' },
