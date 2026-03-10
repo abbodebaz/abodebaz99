@@ -96,6 +96,7 @@ function playTick() {
 function TypingCard({ icon, text, onDone }: { icon: string; text: string; onDone: () => void }) {
   const [charIndex, setCharIndex] = useState(0)
   const [done, setDone] = useState(false)
+  const [showPulse, setShowPulse] = useState(false)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
@@ -104,6 +105,8 @@ function TypingCard({ icon, text, onDone }: { icon: string; text: string; onDone
         if (prev >= text.length) {
           if (intervalRef.current) clearInterval(intervalRef.current)
           setDone(true)
+          setShowPulse(true)
+          setTimeout(() => setShowPulse(false), 800)
           onDone()
           return prev
         }
@@ -115,11 +118,13 @@ function TypingCard({ icon, text, onDone }: { icon: string; text: string; onDone
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16, scale: 0.97 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
+      initial={{ opacity: 0, x: 60, scale: 0.97 }}
+      animate={{ opacity: 1, x: 0, scale: 1 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className="flex items-start gap-3 px-4 py-3.5 rounded-xl"
       style={{
+        position: 'relative',
+        overflow: 'hidden',
         background: 'rgba(255,255,255,0.03)',
         border: `1px solid ${done ? 'rgba(59,130,246,0.25)' : 'rgba(59,130,246,0.12)'}`,
         backdropFilter: 'blur(12px)',
@@ -129,7 +134,7 @@ function TypingCard({ icon, text, onDone }: { icon: string; text: string; onDone
       }}
     >
       <motion.span
-        initial={{ opacity: 0, x: 10 }}
+        initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.4 }}
         className="text-xl mt-0.5 shrink-0 select-none"
@@ -145,6 +150,20 @@ function TypingCard({ icon, text, onDone }: { icon: string; text: string; onDone
           <span className="inline-block w-[2px] h-[14px] bg-blue-400 ml-[2px] align-middle" style={{ animation: 'blink 0.6s infinite' }} />
         )}
       </p>
+      {showPulse && (
+        <motion.div
+          initial={{ opacity: 0.4, scale: 1 }}
+          animate={{ opacity: 0, scale: 1.08 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            borderRadius: '12px',
+            border: '1px solid rgba(59,130,246,0.6)',
+            pointerEvents: 'none',
+          }}
+        />
+      )}
     </motion.div>
   )
 }
@@ -154,8 +173,14 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
   const [activeMessages, setActiveMessages] = useState<number[]>([])
   const [dayData, setDayData] = useState(DAY_DATA[1])
   const [exiting, setExiting] = useState(false)
+  const [flash, setFlash] = useState(false)
   const stableOnComplete = useCallback(onComplete, [onComplete])
   const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  function triggerFlash() {
+    setFlash(true)
+    setTimeout(() => setFlash(false), 350)
+  }
 
   useEffect(() => {
     const today = new Date().getDay()
@@ -202,8 +227,8 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
       }, ms))
     })
 
-    t.push(setTimeout(() => setPhase(2), 13500))
-    t.push(setTimeout(() => setPhase(3), 17000))
+    t.push(setTimeout(() => { triggerFlash(); setPhase(2) }, 13500))
+    t.push(setTimeout(() => { triggerFlash(); setPhase(3) }, 17000))
 
     return () => t.forEach(clearTimeout)
   }, [])
@@ -218,6 +243,46 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden"
           style={{ background: '#050810' }}
         >
+          <iframe
+            src="https://player.vimeo.com/video/1172104399?badge=0&autopause=0&background=1&autoplay=1&loop=1&muted=1&controls=0&transparent=0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '177.78vh',
+              minWidth: '100%',
+              height: '56.25vw',
+              minHeight: '100%',
+              opacity: 0.12,
+              pointerEvents: 'none',
+              zIndex: 0,
+            }}
+          />
+
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'rgba(5,8,16,0.82)',
+            zIndex: 1,
+            pointerEvents: 'none',
+          }} />
+
+          {flash && (
+            <motion.div
+              initial={{ opacity: 0.15 }}
+              animate={{ opacity: 0 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'rgba(59,130,246,0.15)',
+                zIndex: 50,
+                pointerEvents: 'none',
+              }}
+            />
+          )}
+
           <style jsx global>{`
             @keyframes blink { 0%,100% { opacity: 1 } 50% { opacity: 0 } }
             @keyframes twinkle {
@@ -254,6 +319,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                 '--dx': `${s.dx}px`,
                 '--dy': `${s.dy}px`,
                 opacity: s.opacity,
+                zIndex: 2,
                 animation: `twinkle ${s.twinkleDur}s ${s.delay}s ease-in-out infinite, floatStar ${s.floatDur}s ${s.delay}s ease-in-out infinite`,
               } as React.CSSProperties}
             />
@@ -283,6 +349,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
             }}
           />
 
+          <div style={{ position: 'relative', zIndex: 10, width: '100%', display: 'flex', justifyContent: 'center' }}>
           <AnimatePresence mode="wait">
             {phase >= 1 && phase < 2 && (
               <motion.div
@@ -393,9 +460,9 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                 />
 
                 <motion.h1
-                  initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  transition={{ delay: 0.4, duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+                  initial="hidden"
+                  animate="visible"
+                  variants={{ visible: { transition: { staggerChildren: 0.045, delayChildren: 0.4 } } }}
                   className="font-sora"
                   style={{
                     fontSize: 'clamp(36px, 7vw, 80px)',
@@ -408,7 +475,18 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                     marginBottom: '20px',
                   }}
                 >
-                  Abdulrahman Bazarah
+                  {"Abdulrahman Bazarah".split("").map((char, i) => (
+                    <motion.span
+                      key={i}
+                      variants={{
+                        hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
+                        visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }
+                      }}
+                      style={{ display: char === ' ' ? 'inline' : 'inline-block' }}
+                    >
+                      {char === ' ' ? '\u00A0' : char}
+                    </motion.span>
+                  ))}
                 </motion.h1>
 
                 <motion.p
@@ -488,6 +566,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
               </motion.div>
             )}
           </AnimatePresence>
+          </div>
         </motion.div>
       ) : (
         <motion.div
