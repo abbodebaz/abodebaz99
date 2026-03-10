@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar'
 import Hero from '@/components/sections/Hero'
 import Footer from '@/components/layout/Footer'
 
+const About = dynamic(() => import('@/components/sections/About'))
 const Journey = dynamic(() => import('@/components/sections/Journey'))
 const Systems = dynamic(() => import('@/components/sections/Systems'))
 const Achievements = dynamic(() => import('@/components/sections/Achievements'))
@@ -22,6 +23,7 @@ export default function Home() {
       <main style={{ opacity: introComplete ? 1 : 0, transition: 'opacity 0.8s ease' }}>
         <Navbar />
         <Hero />
+        <About />
         <Journey />
         <Systems />
         <Achievements />

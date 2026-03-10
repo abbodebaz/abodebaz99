@@ -29,7 +29,8 @@ src/
 │       ├── Hero.tsx        # Full-screen hero with cursor glow + particles + gradient mesh
 │       ├── Journey.tsx     # Timeline with 4 phases
 │       ├── Systems.tsx     # Case studies grid (4 cards)
-│       ├── Achievements.tsx # Visual achievement cards with Unsplash images
+│       ├── About.tsx        # Profile photo + bio with floating badges
+│       ├── Achievements.tsx # Visual achievement cards with local screenshots + Unsplash fallback
 │       ├── Impact.tsx      # Animated counters with glow cards + quote
 │       ├── Framework.tsx   # 5-step methodology
 │       └── Contact.tsx     # CTA section with dramatic background
@@ -49,6 +50,17 @@ src/
 ## Running
 - Dev server: `npm run dev` (port 5000)
 - Build: `npm run build`
+
+## Image Paths
+- `/public/images/profile.jpg` — Personal photo (400x500px recommended)
+- `/public/images/system-ecommerce.jpg` — E-commerce screenshot (1280x800px)
+- `/public/images/system-delivery.jpg` — Delivery system screenshot
+- `/public/images/system-crm.jpg` — CRM screenshot
+- `/public/images/system-ai.jpg` — AI workflow screenshot
+- If images are missing, Achievements falls back to Unsplash images automatically
+
+## Section Order
+Intro → Navbar → Hero → About → Journey → Systems → Achievements → Impact → Framework → Contact → Footer
 
 ## Placeholder Links
 - LinkedIn: https://linkedin.com/in/abdulrahmanbazarah (update as needed)

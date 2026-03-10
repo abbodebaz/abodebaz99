@@ -4,8 +4,8 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
+  { name: 'About', href: '#about' },
   { name: 'Journey', href: '#journey' },
-  { name: 'Systems', href: '#systems' },
   { name: 'Work', href: '#achievements' },
   { name: 'Impact', href: '#impact' },
   { name: 'Framework', href: '#framework' },
@@ -20,7 +20,7 @@ export default function Navbar() {
   const navBorder = useTransform(scrollY, [0, 80], ['rgba(59,130,246,0)', 'rgba(59,130,246,0.12)'])
 
   useEffect(() => {
-    const sections = ['journey', 'systems', 'achievements', 'impact', 'framework', 'contact']
+    const sections = ['about', 'journey', 'achievements', 'impact', 'framework', 'contact']
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {

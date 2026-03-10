@@ -1,0 +1,620 @@
+# UPGRADE PROMPT — إضافة صور شخصية + Screenshots
+## للـ Replit Agent
+
+---
+
+## المطلوب
+
+1. إضافة قسم **About** جديد بين Hero وJourney يحتوي على صورة شخصية
+2. تحديث قسم **Achievements** ليقبل Screenshots حقيقية
+3. إضافة مجلد `/public/images/` لرفع الصور فيه
+
+---
+
+## PART 1 — تجهيز مجلد الصور
+
+أنشئ هذا الهيكل داخل `/public/`:
+
+```
+public/
+└── images/
+    ├── profile.jpg          ← صورة عبدالرحمن الشخصية
+    ├── system-delivery.jpg  ← screenshot نظام التوصيل
+    ├── system-ecommerce.jpg ← screenshot المتجر الإلكتروني
+    ├── system-crm.jpg       ← screenshot نظام CRM
+    └── system-ai.jpg        ← screenshot نظام AI
+```
+
+> ملاحظة: الصور ستُرفع لاحقاً. الكود يستخدم هذه المسارات مباشرة.
+
+---
+
+## PART 2 — قسم About الجديد
+
+أنشئ ملف: `src/components/sections/About.tsx`
+
+```tsx
+'use client'
+import { motion } from 'framer-motion'
+import { fadeInUp, staggerContainer } from '@/lib/animations'
+import { CheckCircle2 } from 'lucide-react'
+import Image from 'next/image'
+
+const traits = [
+  "Systems thinker before anything else",
+  "Obsessed with measurable business outcomes",
+  "Bridge between strategy and execution",
+  "Built systems across 4+ industries",
+]
+
+export default function About() {
+  return (
+    <section id="about" className="py-24 md:py-32 px-6 relative overflow-hidden">
+
+      {/* خط فاصل ناعم فوق القسم */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 opacity-30"
+        style={{ background: 'linear-gradient(to bottom, transparent, #3B82F6)' }}
+      />
+
+      <div className="max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
+
+          {/* ===== يسار: الصورة ===== */}
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="relative flex justify-center md:justify-start"
+          >
+            {/* الإطار الخارجي مع glow */}
+            <div className="relative">
+
+              {/* Glow خلف الصورة */}
+              <div
+                className="absolute -inset-4 rounded-2xl opacity-30 blur-2xl"
+                style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.6) 0%, transparent 70%)' }}
+              />
+
+              {/* الصورة */}
+              <div
+                className="relative w-72 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden"
+                style={{ border: '1px solid rgba(59,130,246,0.2)' }}
+              >
+                <Image
+                  src="/images/profile.jpg"
+                  alt="Abdulrahman Bazarah"
+                  fill
+                  className="object-cover object-top"
+                  priority
+                />
+
+                {/* overlay ناعم تحت الصورة */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: 'linear-gradient(to top, rgba(11,15,25,0.6) 0%, transparent 50%)'
+                  }}
+                />
+              </div>
+
+              {/* Badge يطفو فوق الصورة — أسفل يسار */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="absolute -bottom-5 -right-5 px-4 py-3 rounded-xl backdrop-blur-md"
+                style={{
+                  background: 'rgba(11,15,25,0.9)',
+                  border: '1px solid rgba(59,130,246,0.25)',
+                }}
+              >
+                <p className="text-white font-sora font-bold text-lg leading-none">4+</p>
+                <p className="text-[#9CA3AF] text-xs mt-0.5">Industries</p>
+              </motion.div>
+
+              {/* Badge يطفو — أعلى يمين */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                className="absolute -top-4 -right-4 px-3 py-2 rounded-xl backdrop-blur-md flex items-center gap-2"
+                style={{
+                  background: 'rgba(11,15,25,0.9)',
+                  border: '1px solid rgba(16,185,129,0.3)',
+                }}
+              >
+                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                <p className="text-green-400 text-xs font-medium">Open to work</p>
+              </motion.div>
+
+            </div>
+          </motion.div>
+
+          {/* ===== يمين: النص ===== */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.span
+              variants={fadeInUp}
+              className="inline-block text-xs uppercase tracking-[0.3em] text-accent mb-4"
+            >
+              Who I Am
+            </motion.span>
+
+            <motion.h2
+              variants={fadeInUp}
+              className="font-sora text-3xl md:text-4xl font-bold text-white mb-6 leading-snug"
+            >
+              I Don't Just Advise.
+              <br />
+              <span className="text-accent">I Build.</span>
+            </motion.h2>
+
+            <motion.p
+              variants={fadeInUp}
+              className="text-[#9CA3AF] text-base leading-relaxed mb-6"
+            >
+              I'm Abdulrahman Bazarah — a Business Development Leader and Systems Architect
+              based in Saudi Arabia. I work at the intersection of strategy, technology, and
+              operations to help companies grow through better systems.
+            </motion.p>
+
+            <motion.p
+              variants={fadeInUp}
+              className="text-[#9CA3AF] text-base leading-relaxed mb-8"
+            >
+              Most consultants tell you what to do. I design the system, build the infrastructure,
+              and make sure it works — then hand it over running.
+            </motion.p>
+
+            {/* القائمة */}
+            <motion.ul variants={staggerContainer} className="space-y-3">
+              {traits.map((trait) => (
+                <motion.li
+                  key={trait}
+                  variants={fadeInUp}
+                  className="flex items-start gap-3"
+                >
+                  <CheckCircle2
+                    size={18}
+                    className="text-accent mt-0.5 shrink-0"
+                  />
+                  <span className="text-[#D1D5DB] text-sm">{trait}</span>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </motion.div>
+
+        </div>
+      </div>
+    </section>
+  )
+}
+```
+
+---
+
+## PART 3 — تحديث Achievements لقبول Screenshots
+
+استبدل ملف `src/components/sections/Achievements.tsx` بالكامل:
+
+```tsx
+'use client'
+import { motion } from 'framer-motion'
+import { fadeInUp, staggerContainer } from '@/lib/animations'
+import { TrendingUp, Users, Zap, Globe } from 'lucide-react'
+import Image from 'next/image'
+import type { Variants } from 'framer-motion'
+
+const achievements = [
+  {
+    id: 1,
+    category: "Digital Transformation",
+    title: "Transformed a Traditional Retail Business Into a Digital-First Operation",
+    metric: "+60%",
+    metricLabel: "Online Revenue Growth",
+    description: "Rebuilt the entire customer journey from discovery to delivery. Implemented CRM, e-commerce infrastructure, and marketing automation from scratch.",
+    tags: ["E-Commerce", "CRM", "Automation"],
+    icon: TrendingUp,
+    // ← ضع هنا screenshot حقيقي أو اتركه كـ fallback
+    image: "/images/system-ecommerce.jpg",
+    fallbackImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+    color: "#10B981",
+  },
+  {
+    id: 2,
+    category: "Operations System",
+    title: "Built a Centralized Delivery Operations Dashboard",
+    metric: "+30%",
+    metricLabel: "Efficiency Improvement",
+    description: "Designed and deployed a real-time operations management system that unified order tracking, team management, and performance analytics.",
+    tags: ["Operations", "Dashboard", "Real-time"],
+    icon: Zap,
+    image: "/images/system-delivery.jpg",
+    fallbackImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+    color: "#3B82F6",
+  },
+  {
+    id: 3,
+    category: "Revenue Operations",
+    title: "Structured a Sales System That Grew Revenue 20% in One Quarter",
+    metric: "+20%",
+    metricLabel: "Revenue in Q1",
+    description: "Implemented pipeline management, automated follow-ups, and leadership dashboards that gave the team full visibility and accountability.",
+    tags: ["CRM", "Sales", "Analytics"],
+    icon: Users,
+    image: "/images/system-crm.jpg",
+    fallbackImage: "https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&q=80",
+    color: "#8B5CF6",
+  },
+  {
+    id: 4,
+    category: "AI & Automation",
+    title: "Deployed AI Workflows That Saved 20+ Hours Per Week",
+    metric: "20+",
+    metricLabel: "Hours Saved Weekly",
+    description: "Identified repetitive processes across marketing, operations, and reporting. Replaced them with AI-powered automation that runs 24/7.",
+    tags: ["AI", "Automation", "Workflow"],
+    icon: Globe,
+    image: "/images/system-ai.jpg",
+    fallbackImage: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80",
+    color: "#F59E0B",
+  },
+]
+
+const cardVariant: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } }
+}
+
+// Component للصورة مع fallback تلقائي
+function AchievementImage({
+  src,
+  fallback,
+  alt,
+  color,
+}: {
+  src: string
+  fallback: string
+  alt: string
+  color: string
+}) {
+  return (
+    <div className="relative w-full h-full">
+      {/* نجرب الصورة الحقيقية أولاً، لو فشلت نستخدم الـ fallback */}
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
+        onError={(e) => {
+          // لو الصورة مش موجودة، استخدم الـ fallback
+          const target = e.target as HTMLImageElement
+          target.src = fallback
+        }}
+        unoptimized // مهم للـ fallback يشتغل
+      />
+      {/* Overlays */}
+      <div
+        className="absolute inset-0"
+        style={{ background: 'linear-gradient(to right, rgba(11,15,25,0.2), rgba(11,15,25,0.05))' }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{ background: `${color}10` }}
+      />
+    </div>
+  )
+}
+
+export default function Achievements() {
+  return (
+    <section id="achievements" className="py-24 md:py-32 px-6">
+      <div className="max-w-6xl mx-auto">
+
+        {/* Header */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+          className="mb-20"
+        >
+          <motion.span
+            variants={fadeInUp}
+            className="inline-block text-xs uppercase tracking-[0.3em] text-accent mb-4"
+          >
+            Proof of Work
+          </motion.span>
+          <motion.h2
+            variants={fadeInUp}
+            className="font-sora text-3xl md:text-5xl font-bold text-white mb-4"
+          >
+            What I&rsquo;ve Built
+          </motion.h2>
+          <motion.p
+            variants={fadeInUp}
+            className="text-[#9CA3AF] text-lg max-w-2xl"
+          >
+            Not projects. Transformations. Each one built to solve a real business problem
+            and deliver measurable results.
+          </motion.p>
+        </motion.div>
+
+        {/* Cards */}
+        <div className="space-y-8">
+          {achievements.map((item, index) => {
+            const Icon = item.icon
+            const isReversed = index % 2 !== 0
+
+            return (
+              <motion.div
+                key={item.id}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={cardVariant}
+                className="group grid md:grid-cols-2 gap-0 overflow-hidden rounded-2xl transition-all duration-500 hover:shadow-[0_30px_80px_rgba(0,0,0,0.5)]"
+                style={{
+                  border: '1px solid rgba(59,130,246,0.1)',
+                  background: 'rgba(255,255,255,0.02)',
+                }}
+              >
+
+                {/* صورة الـ Screenshot */}
+                <div
+                  className={`relative overflow-hidden ${isReversed ? 'md:order-2' : ''} h-64 md:h-auto min-h-[300px]`}
+                >
+                  <AchievementImage
+                    src={item.image}
+                    fallback={item.fallbackImage}
+                    alt={item.title}
+                    color={item.color}
+                  />
+
+                  {/* Metric Badge فوق الصورة */}
+                  <div className="absolute top-6 left-6 z-10">
+                    <div
+                      className="px-4 py-3 rounded-xl backdrop-blur-md"
+                      style={{
+                        background: 'rgba(0,0,0,0.75)',
+                        border: `1px solid ${item.color}40`,
+                        boxShadow: `0 0 20px ${item.color}20`,
+                      }}
+                    >
+                      <span
+                        className="font-sora text-3xl font-bold block leading-none"
+                        style={{ color: item.color }}
+                      >
+                        {item.metric}
+                      </span>
+                      <p className="text-white/60 text-xs mt-1">{item.metricLabel}</p>
+                    </div>
+                  </div>
+
+                  {/* Screenshot label — يظهر لو كانت صورة حقيقية */}
+                  <div className="absolute bottom-4 right-4 z-10">
+                    <span
+                      className="text-[10px] uppercase tracking-[0.2em] px-2 py-1 rounded backdrop-blur-md"
+                      style={{
+                        background: 'rgba(0,0,0,0.6)',
+                        color: item.color,
+                        border: `1px solid ${item.color}30`,
+                      }}
+                    >
+                      Live System
+                    </span>
+                  </div>
+                </div>
+
+                {/* محتوى الكارد */}
+                <div
+                  className={`p-8 md:p-12 flex flex-col justify-center ${isReversed ? 'md:order-1' : ''}`}
+                >
+                  <div className="flex items-center gap-3 mb-5">
+                    <div
+                      className="w-9 h-9 rounded-xl flex items-center justify-center"
+                      style={{ background: `${item.color}20` }}
+                    >
+                      <Icon size={17} style={{ color: item.color }} />
+                    </div>
+                    <span
+                      className="text-xs uppercase tracking-[0.2em] font-medium"
+                      style={{ color: item.color }}
+                    >
+                      {item.category}
+                    </span>
+                  </div>
+
+                  <h3 className="font-sora text-xl md:text-2xl font-semibold text-white mb-4 leading-snug">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-[#9CA3AF] text-sm leading-relaxed mb-6">
+                    {item.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {item.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-3 py-1.5 rounded-full"
+                        style={{
+                          background: 'rgba(255,255,255,0.04)',
+                          border: '1px solid rgba(255,255,255,0.08)',
+                          color: '#9CA3AF',
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+              </motion.div>
+            )
+          })}
+        </div>
+
+      </div>
+    </section>
+  )
+}
+```
+
+---
+
+## PART 4 — تحديث page.tsx لإضافة About
+
+في `src/app/page.tsx`، أضف الـ About section:
+
+```tsx
+'use client'
+import { useState } from 'react'
+import dynamic from 'next/dynamic'
+import Intro from '@/components/Intro'
+import Navbar from '@/components/layout/Navbar'
+import Hero from '@/components/sections/Hero'
+import Footer from '@/components/layout/Footer'
+
+const About = dynamic(() => import('@/components/sections/About'))       // ← جديد
+const Journey = dynamic(() => import('@/components/sections/Journey'))
+const Systems = dynamic(() => import('@/components/sections/Systems'))
+const Achievements = dynamic(() => import('@/components/sections/Achievements'))
+const Impact = dynamic(() => import('@/components/sections/Impact'))
+const Framework = dynamic(() => import('@/components/sections/Framework'))
+const Contact = dynamic(() => import('@/components/sections/Contact'))
+
+export default function Home() {
+  const [introComplete, setIntroComplete] = useState(false)
+
+  return (
+    <>
+      {!introComplete && <Intro onComplete={() => setIntroComplete(true)} />}
+      <main style={{ opacity: introComplete ? 1 : 0, transition: 'opacity 0.8s ease' }}>
+        <Navbar />
+        <Hero />
+        <About />          {/* ← جديد — بين Hero وJourney */}
+        <Journey />
+        <Systems />
+        <Achievements />
+        <Impact />
+        <Framework />
+        <Contact />
+        <Footer />
+      </main>
+    </>
+  )
+}
+```
+
+---
+
+## PART 5 — تحديث Navbar لإضافة About
+
+في `src/components/layout/Navbar.tsx`، أضف About للقائمة:
+
+```tsx
+const navLinks = [
+  { name: 'About', href: '#about' },        // ← أضف هذا أول شيء
+  { name: 'Journey', href: '#journey' },
+  { name: 'Work', href: '#achievements' },
+  { name: 'Impact', href: '#impact' },
+  { name: 'Framework', href: '#framework' },
+  { name: 'Contact', href: '#contact' },
+]
+```
+
+---
+
+## PART 6 — إعداد next.config.mjs للصور الخارجية
+
+تأكد إن `next.config.mjs` يحتوي على:
+
+```js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
+  },
+}
+
+export default nextConfig
+```
+
+هذا يسمح بتحميل صور Unsplash كـ fallback + صور `/public` المحلية.
+
+---
+
+## تعليمات رفع الصور — بعد تطبيق الكود
+
+### الصورة الشخصية:
+1. أضف صورتك الاحترافية في `/public/images/profile.jpg`
+2. الأبعاد المثالية: **400×500px** أو أكبر
+3. Format: JPG أو WebP
+
+### Screenshots الأنظمة:
+أضف الصور بهذه الأسماء في `/public/images/`:
+
+| اسم الملف | وش يكون فيه |
+|---|---|
+| `system-ecommerce.jpg` | screenshot المتجر أو dashboard المبيعات |
+| `system-delivery.jpg` | screenshot نظام التوصيل |
+| `system-crm.jpg` | screenshot الـ CRM أو pipeline |
+| `system-ai.jpg` | screenshot workflow الـ AI |
+
+**الأبعاد المثالية للـ Screenshots:** 1280×800px أو 16:9
+
+> 💡 لو ما عندك screenshot معين، خلّ المسار كما هو — الكود يرجع تلقائياً لصورة Unsplash كـ fallback.
+
+---
+
+## ترتيب الأقسام النهائي
+
+```
+Intro (سينمائي)
+↓
+Navbar
+↓
+Hero          — النص + أنيميشن
+↓
+About         ← جديد — صورتك + من أنت
+↓
+Journey       — مراحل تطورك
+↓
+Systems       — case studies مختصرة
+↓
+Achievements  ← screenshots حقيقية
+↓
+Impact        — الأرقام
+↓
+Framework     — منهجيتك
+↓
+Contact       — تواصل
+↓
+Footer
+```
+
+---
+
+## Checklist بعد التطبيق
+
+- [ ] قسم About يظهر بين Hero وJourney
+- [ ] الصورة الشخصية تظهر مع glow وbadges
+- [ ] لو `/images/profile.jpg` غير موجودة — الصورة فارغة (ضيفها أنت)
+- [ ] Achievements تحاول تحمل صور `/public/images/` أولاً
+- [ ] لو screenshot غير موجود — يرجع لـ Unsplash تلقائياً
+- [ ] Navbar فيها "About" كأول link
+- [ ] `npm run build` ينجح بدون errors
