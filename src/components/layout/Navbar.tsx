@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
@@ -15,9 +15,6 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
-  const { scrollY } = useScroll()
-  const navBg = useTransform(scrollY, [0, 80], ['rgba(10,10,10,0)', 'rgba(10,10,10,0)'])
-  const navBorder = useTransform(scrollY, [0, 80], ['rgba(59,130,246,0)', 'rgba(59,130,246,0)'])
 
   useEffect(() => {
     const sections = ['about', 'journey', 'systems', 'impact', 'framework', 'contact']
@@ -43,9 +40,12 @@ export default function Navbar() {
   }
 
   return (
-    <motion.nav
-      style={{ backgroundColor: navBg, borderBottomColor: navBorder }}
+    <nav
       className="fixed top-0 left-0 right-0 z-50 border-b"
+      style={{
+        backgroundColor: 'rgba(5,8,16,0.0)',
+        borderBottomColor: 'rgba(59,130,246,0)',
+      }}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#" className="font-sora text-2xl font-bold text-accent tracking-tight">
@@ -109,6 +109,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   )
 }
