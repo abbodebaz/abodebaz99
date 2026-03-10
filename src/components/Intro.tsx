@@ -155,10 +155,12 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
   const [dayData, setDayData] = useState(DAY_DATA[1])
   const [exiting, setExiting] = useState(false)
   const stableOnComplete = useCallback(onComplete, [onComplete])
+  const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const today = new Date().getDay()
     setDayData(DAY_DATA[today])
+    return () => { if (exitTimerRef.current) clearTimeout(exitTimerRef.current) }
   }, [])
 
   const stars = useMemo(() => {
@@ -185,7 +187,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
 
   const handleEnterClick = useCallback(() => {
     setExiting(true)
-    setTimeout(() => stableOnComplete(), 1200)
+    exitTimerRef.current = setTimeout(() => stableOnComplete(), 1200)
   }, [stableOnComplete])
 
   useEffect(() => {
