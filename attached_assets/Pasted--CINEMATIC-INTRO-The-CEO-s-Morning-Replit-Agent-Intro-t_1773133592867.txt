@@ -1,80 +1,104 @@
+# CINEMATIC INTRO — "The CEO's Morning"
+## برومت Replit Agent — استبدال Intro.tsx بالكامل
+
+---
+
+## الفكرة
+
+الزائر يدخل الموقع فيشوف إشعارات تمثّل صباح يومه الحالي (الأحد، الاثنين... إلخ).
+كل رسالة تصف مشكلة حقيقية يعيشها في شركته.
+ثم يظهر عبدالرحمن كالحل.
+
+اليوم يُكتشف تلقائياً من المتصفح — **لا يوجد input من المستخدم.**
+
+---
+
+## استبدل `src/components/Intro.tsx` بالكامل بهذا الكود:
+
+```tsx
 'use client'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect, useCallback } from 'react'
 
+// ======================================================
+// بيانات كل يوم — الرسائل + وقت الصباح
+// ======================================================
 const DAY_DATA: Record<number, { day: string; time: string; messages: string[] }> = {
-  0: {
+  0: { // الأحد
     day: 'Sunday',
     time: '9:12 AM',
     messages: [
-      '\u0022\u0627\u0644\u0623\u0633\u0628\u0648\u0639 \u0628\u062F\u0623 \u2014 \u0644\u0633\u0627 \u0645\u0627 \u0639\u0646\u062F\u0646\u0627 \u062E\u0637\u0629 \u0648\u0627\u0636\u062D\u0629 \u0644\u0644\u0645\u0628\u064A\u0639\u0627\u062A\u0022',
-      '\u0022\u0627\u0644\u062A\u0642\u0631\u064A\u0631 \u0627\u0644\u0623\u0633\u0628\u0648\u0639\u064A \u0645\u0627 \u0627\u0643\u062A\u0645\u0644 \u2014 \u0627\u0644\u0641\u0631\u064A\u0642 \u064A\u062C\u0645\u0639 \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A \u064A\u062F\u0648\u064A\u0627\u064B\u0022',
-      '\u0022\u0663 \u0639\u0645\u0644\u0627\u0621 \u0645\u0627 \u0631\u062F\u064A\u0646\u0627 \u0639\u0644\u064A\u0647\u0645 \u0645\u0646 \u0627\u0644\u0623\u0633\u0628\u0648\u0639 \u0627\u0644\u0645\u0627\u0636\u064A\u0022',
-      '\u0022\u0627\u0644\u0627\u062C\u062A\u0645\u0627\u0639 \u0627\u0644\u0635\u0628\u0627\u062D\u064A \u0628\u0639\u062F \u0662\u0660 \u062F\u0642\u064A\u0642\u0629 \u2014 \u0645\u0627 \u0639\u0646\u062F\u0646\u0627 \u0623\u0631\u0642\u0627\u0645\u0022',
+      '"الأسبوع بدأ — لسا ما عندنا خطة واضحة للمبيعات"',
+      '"التقرير الأسبوعي ما اكتمل — الفريق يجمع البيانات يدوياً"',
+      '"٣ عملاء ما ردينا عليهم من الأسبوع الماضي"',
+      '"الاجتماع الصباحي بعد ٢٠ دقيقة — ما عندنا أرقام"',
     ],
   },
-  1: {
+  1: { // الاثنين
     day: 'Monday',
     time: '8:47 AM',
     messages: [
-      '\u0022\u0627\u0644\u062A\u0642\u0631\u064A\u0631 \u0645\u0648 \u062C\u0627\u0647\u0632 \u2014 \u0627\u0644\u0641\u0631\u064A\u0642 \u0644\u0633\u0627 \u064A\u062C\u0645\u0639 \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A \u064A\u062F\u0648\u064A\u0627\u064B\u0022',
-      '\u0022\u0663\u0662 \u0637\u0644\u0628 \u0645\u062A\u0623\u062E\u0631 \u2014 \u0645\u0627 \u0641\u064A \u0623\u062D\u062F \u0639\u0646\u062F\u0647 \u0635\u0648\u0631\u0629 \u0643\u0627\u0645\u0644\u0629\u0022',
-      '\u0022\u0627\u0644\u0645\u0628\u064A\u0639\u0627\u062A \u0646\u0641\u0633 \u0627\u0644\u0634\u0647\u0631 \u0627\u0644\u0645\u0627\u0636\u064A \u2014 \u0645\u0627 \u0646\u0639\u0631\u0641 \u0648\u064A\u0646 \u0627\u0644\u0645\u0634\u0643\u0644\u0629\u0022',
-      '\u0022\u0627\u0644\u0627\u062C\u062A\u0645\u0627\u0639 \u0628\u0639\u062F \u0633\u0627\u0639\u0629 \u2014 \u0645\u0627 \u0639\u0646\u062F\u0646\u0627 \u0623\u0631\u0642\u0627\u0645 \u0648\u0627\u0636\u062D\u0629\u0022',
+      '"التقرير مو جاهز — الفريق لسا يجمع البيانات يدوياً"',
+      '"٣٢ طلب متأخر — ما في أحد عنده صورة كاملة"',
+      '"المبيعات نفس الشهر الماضي — ما نعرف وين المشكلة"',
+      '"الاجتماع بعد ساعة — ما عندنا أرقام واضحة"',
     ],
   },
-  2: {
+  2: { // الثلاثاء
     day: 'Tuesday',
     time: '9:03 AM',
     messages: [
-      '\u0022\u0627\u0644\u0639\u0645\u064A\u0644 \u064A\u0633\u0623\u0644 \u0639\u0646 \u062A\u0642\u062F\u0645 \u0627\u0644\u0645\u0634\u0631\u0648\u0639 \u2014 \u0645\u0627 \u0639\u0646\u062F\u0646\u0627 update \u0645\u0648\u062D\u0651\u062F\u0022',
-      '\u0022\u0627\u0644\u0641\u0631\u064A\u0642 \u0634\u063A\u0651\u0627\u0644 \u0639\u0644\u0649 \u0664 \u0623\u0646\u0638\u0645\u0629 \u0645\u062E\u062A\u0644\u0641\u0629 \u2014 \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A \u0645\u0634\u062A\u062A\u0629\u0022',
-      '\u0022\u0641\u0627\u062A\u0648\u0631\u0629 \u0645\u062A\u0623\u062E\u0631\u0629 \u0645\u0646 \u0627\u0644\u0623\u0633\u0628\u0648\u0639 \u0627\u0644\u0645\u0627\u0636\u064A \u2014 \u0645\u0627 \u0644\u0627\u062D\u0638\u0646\u0627\u0022',
-      '\u0022\u0627\u062C\u062A\u0645\u0627\u0639 \u0627\u0644\u0645\u0631\u0627\u062C\u0639\u0629 \u0627\u0644\u0623\u0633\u0628\u0648\u0639\u064A\u0629 \u2014 \u0627\u0644\u0623\u0631\u0642\u0627\u0645 \u0645\u0648 \u0645\u062D\u062F\u0651\u062B\u0629\u0022',
+      '"العميل يسأل عن تقدم المشروع — ما عندنا update موحّد"',
+      '"الفريق شغّال على ٤ أنظمة مختلفة — البيانات مشتتة"',
+      '"فاتورة متأخرة من الأسبوع الماضي — ما لاحظنا"',
+      '"اجتماع المراجعة الأسبوعية — الأرقام مو محدّثة"',
     ],
   },
-  3: {
+  3: { // الأربعاء
     day: 'Wednesday',
     time: '8:55 AM',
     messages: [
-      '\u0022\u0645\u0646\u062A\u0635\u0641 \u0627\u0644\u0623\u0633\u0628\u0648\u0639 \u2014 \u0645\u0627 \u0646\u0639\u0631\u0641 \u0625\u0630\u0627 \u0646\u062D\u0642\u0642 \u0647\u062F\u0641 \u0627\u0644\u0634\u0647\u0631\u0022',
-      '\u0022\u0641\u0631\u064A\u0642 \u0627\u0644\u062A\u0648\u0635\u064A\u0644 \u064A\u0633\u0623\u0644 \u0639\u0646 \u0627\u0644\u0637\u0644\u0628\u0627\u062A \u2014 \u0645\u0627 \u0641\u064A \u0644\u0648\u062D\u0629 \u0645\u0631\u0643\u0632\u064A\u0629\u0022',
-      '\u0022\u0627\u0644\u0645\u062F\u064A\u0631 \u064A\u0637\u0644\u0628 \u0645\u0644\u062E\u0635 \u0627\u0644\u0623\u062F\u0627\u0621 \u2014 \u0633\u064A\u0633\u062A\u063A\u0631\u0642 \u0663 \u0633\u0627\u0639\u0627\u062A \u062A\u062C\u0645\u064A\u0639\u0647\u0022',
-      '\u0022\u0665 \u0634\u0643\u0627\u0648\u0649 \u0639\u0645\u0644\u0627\u0621 \u2014 \u0627\u0643\u062A\u0634\u0641\u0646\u0627\u0647\u0627 \u0645\u062A\u0623\u062E\u0631\u064A\u0646\u0022',
+      '"منتصف الأسبوع — ما نعرف إذا نحقق هدف الشهر"',
+      '"فريق التوصيل يسأل عن الطلبات — ما في لوحة مركزية"',
+      '"المدير يطلب ملخص الأداء — سيستغرق ٣ ساعات تجميعه"',
+      '"٥ شكاوى عملاء — اكتشفناها متأخرين"',
     ],
   },
-  4: {
+  4: { // الخميس
     day: 'Thursday',
     time: '9:21 AM',
     messages: [
-      '\u0022\u0622\u062E\u0631 \u064A\u0648\u0645 \u0639\u0645\u0644 \u2014 \u0645\u0627 \u0623\u0646\u0647\u064A\u0646\u0627 \u0646\u0635\u0641 \u0627\u0644\u0645\u0647\u0627\u0645 \u0627\u0644\u0645\u062E\u0637\u0637\u0629\u0022',
-      '\u0022\u062A\u0642\u0631\u064A\u0631 \u0646\u0647\u0627\u064A\u0629 \u0627\u0644\u0623\u0633\u0628\u0648\u0639 \u2014 \u0644\u0627\u0632\u0645 \u064A\u0643\u0648\u0646 \u062C\u0627\u0647\u0632 \u0642\u0628\u0644 \u0627\u0644\u062F\u0648\u0627\u0645\u0022',
-      '\u0022\u0627\u0644\u0639\u0645\u0644\u064A\u0627\u062A \u062A\u0648\u0642\u0641\u062A \u0645\u0631\u062A\u064A\u0646 \u0647\u0630\u0627 \u0627\u0644\u0623\u0633\u0628\u0648\u0639 \u2014 \u0645\u0627 \u0646\u0639\u0631\u0641 \u0627\u0644\u0633\u0628\u0628\u0022',
-      '\u0022\u0627\u0644\u0623\u0647\u062F\u0627\u0641 \u0627\u0644\u0623\u0633\u0628\u0648\u0639\u064A\u0629 \u2014 \u0664\u0660\u066A \u0645\u0646\u0647\u0627 \u0645\u0627 \u0627\u0643\u062A\u0645\u0644\u062A\u0022',
+      '"آخر يوم عمل — ما أنهينا نصف المهام المخططة"',
+      '"تقرير نهاية الأسبوع — لازم يكون جاهز قبل الدوام"',
+      '"العمليات توقفت مرتين هذا الأسبوع — ما نعرف السبب"',
+      '"الأهداف الأسبوعية — ٤٠٪ منها ما اكتملت"',
     ],
   },
-  5: {
+  5: { // الجمعة
     day: 'Friday',
     time: '10:15 AM',
     messages: [
-      '\u0022\u0627\u0644\u0623\u0633\u0628\u0648\u0639 \u0627\u0646\u062A\u0647\u0649 \u2014 \u0627\u0644\u0623\u0631\u0642\u0627\u0645 \u0627\u0644\u062D\u0642\u064A\u0642\u064A\u0629 \u0644\u0633\u0627 \u0645\u0627 \u062A\u062C\u0645\u0651\u0639\u062A\u0022',
-      '\u0022\u0639\u0645\u064A\u0644 \u0645\u062D\u062A\u0645\u0644 \u0627\u0646\u062A\u0638\u0631 \u0631\u062F\u0646\u0627 \u0663 \u0623\u064A\u0627\u0645 \u2014 \u062E\u0633\u0631\u0646\u0627\u0647\u0022',
-      '\u0022\u0627\u0644\u0641\u0631\u064A\u0642 \u064A\u0639\u0645\u0644 \u064A\u062F\u0648\u064A\u0627\u064B \u0639\u0644\u0649 \u0646\u0641\u0633 \u0627\u0644\u0645\u0647\u0627\u0645 \u0643\u0644 \u0623\u0633\u0628\u0648\u0639\u0022',
-      '\u0022\u0623\u064A\u0646 \u0630\u0647\u0628 \u0648\u0642\u062A\u0646\u0627 \u0647\u0630\u0627 \u0627\u0644\u0623\u0633\u0628\u0648\u0639\u061F \u2014 \u0645\u0627 \u0641\u064A \u0625\u062C\u0627\u0628\u0629 \u0648\u0627\u0636\u062D\u0629\u0022',
+      '"الأسبوع انتهى — الأرقام الحقيقية لسا ما تجمّعت"',
+      '"عميل محتمل انتظر ردنا ٣ أيام — خسرناه"',
+      '"الفريق يعمل يدوياً على نفس المهام كل أسبوع"',
+      '"أين ذهب وقتنا هذا الأسبوع؟ — ما في إجابة واضحة"',
     ],
   },
-  6: {
+  6: { // السبت
     day: 'Saturday',
     time: '11:30 AM',
     messages: [
-      '\u0022\u0639\u0637\u0644\u0629 \u2014 \u0644\u0643\u0646 \u0627\u0644\u0631\u0633\u0627\u0626\u0644 \u0645\u0627 \u062A\u0648\u0642\u0641\u062A\u0022',
-      '\u0022\u0645\u0634\u0643\u0644\u0629 \u0641\u064A \u0627\u0644\u0646\u0638\u0627\u0645 \u2014 \u0645\u0627 \u0641\u064A \u0623\u062D\u062F \u064A\u0639\u0631\u0641 \u0643\u064A\u0641 \u064A\u062D\u0644\u0647\u0627\u0022',
-      '\u0022\u0627\u0644\u0639\u0645\u0644\u064A\u0627\u062A \u062A\u0633\u064A\u0631 \u0628\u062F\u0648\u0646 \u0631\u0642\u0627\u0628\u0629 \u2014 \u0648\u0646\u0643\u062A\u0634\u0641 \u0627\u0644\u0645\u0634\u0627\u0643\u0644 \u0645\u062A\u0623\u062E\u0631\u064A\u0646\u0022',
-      '\u0022\u0627\u0644\u0623\u0633\u0628\u0648\u0639 \u0627\u0644\u0642\u0627\u062F\u0645 \u0633\u064A\u0628\u062F\u0623 \u0628\u0646\u0641\u0633 \u0627\u0644\u0641\u0648\u0636\u0649\u0022',
+      '"عطلة — لكن الرسائل ما توقفت"',
+      '"مشكلة في النظام — ما في أحد يعرف كيف يحلها"',
+      '"العمليات تسير بدون رقابة — ونكتشف المشاكل متأخرين"',
+      '"الأسبوع القادم سيبدأ بنفس الفوضى"',
     ],
   },
 }
 
+// ======================================================
+// مكوّن الإشعار الواحد
+// ======================================================
 function NotificationCard({
   message,
   index,
@@ -84,7 +108,7 @@ function NotificationCard({
   index: number
   visible: boolean
 }) {
-  const icons = ['\uD83D\uDCCA', '\uD83D\uDCE6', '\uD83D\uDCB8', '\uD83D\uDC65']
+  const icons = ['📊', '📦', '💸', '👥']
 
   return (
     <AnimatePresence>
@@ -109,8 +133,8 @@ function NotificationCard({
           >
             <span className="text-lg mt-0.5 shrink-0">{icons[index]}</span>
             <p
-              className="text-sm leading-relaxed font-arabic"
-              style={{ color: 'rgba(255,255,255,0.85)' }}
+              className="text-sm leading-relaxed"
+              style={{ color: 'rgba(255,255,255,0.85)', fontFamily: 'DM Sans, sans-serif' }}
             >
               {message}
             </p>
@@ -121,24 +145,40 @@ function NotificationCard({
   )
 }
 
+// ======================================================
+// الـ Intro الرئيسي
+// ======================================================
 export default function Intro({ onComplete }: { onComplete: () => void }) {
+  // المراحل:
+  // 0 → شاشة سوداء
+  // 1 → يظهر التاريخ واليوم
+  // 2 → تظهر الإشعارات واحدة واحدة (4 إشعارات)
+  // 3 → تتجمد + يظهر نص "هذا الصباح يتكرر"
+  // 4 → يظهر اسم عبدالرحمن
+  // 5 → fade out → onComplete
   const [phase, setPhase] = useState(0)
   const [visibleNotifs, setVisibleNotifs] = useState<boolean[]>([false, false, false, false])
-  const [dayData, setDayData] = useState(DAY_DATA[1])
+  const [dayData, setDayData] = useState(DAY_DATA[1]) // default: Monday
 
   const stableOnComplete = useCallback(onComplete, [onComplete])
 
+  // اكتشاف اليوم الحالي
   useEffect(() => {
-    const today = new Date().getDay()
+    const today = new Date().getDay() // 0=Sun, 1=Mon, ..., 6=Sat
     setDayData(DAY_DATA[today])
   }, [])
 
+  // تسلسل المراحل
   useEffect(() => {
     const timers: ReturnType<typeof setTimeout>[] = []
 
+    // المرحلة 1 — يظهر التاريخ
     timers.push(setTimeout(() => setPhase(1), 600))
+
+    // المرحلة 2 — تظهر الإشعارات
     timers.push(setTimeout(() => setPhase(2), 1400))
 
+    // إظهار كل إشعار بفارق 900ms
     timers.push(setTimeout(() => {
       setVisibleNotifs([true, false, false, false])
     }, 1600))
@@ -152,9 +192,16 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
       setVisibleNotifs([true, true, true, true])
     }, 4300))
 
+    // المرحلة 3 — تجمّد + رسالة "يتكرر كل أسبوع"
     timers.push(setTimeout(() => setPhase(3), 5400))
+
+    // المرحلة 4 — اسم عبدالرحمن
     timers.push(setTimeout(() => setPhase(4), 7000))
+
+    // المرحلة 5 — fade out
     timers.push(setTimeout(() => setPhase(5), 8800))
+
+    // onComplete
     timers.push(setTimeout(() => stableOnComplete(), 9600))
 
     return () => timers.forEach(clearTimeout)
@@ -169,6 +216,8 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden"
           style={{ background: '#050810' }}
         >
+
+          {/* خلفية — نقاط ضوئية ناعمة */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
@@ -184,6 +233,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
             }}
           />
 
+          {/* ===== المرحلة 1 + 2 + 3: الإشعارات ===== */}
           <AnimatePresence>
             {phase >= 1 && phase < 4 && (
               <motion.div
@@ -192,6 +242,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                 transition={{ duration: 0.6 }}
                 className="flex flex-col items-center gap-3 w-full px-6"
               >
+                {/* التاريخ واليوم */}
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -203,13 +254,14 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                     style={{ background: '#3B82F6', boxShadow: '0 0 8px rgba(59,130,246,0.8)' }}
                   />
                   <span
-                    className="text-xs uppercase tracking-[0.3em] font-sora"
-                    style={{ color: 'rgba(59,130,246,0.9)' }}
+                    className="text-xs uppercase tracking-[0.3em]"
+                    style={{ color: 'rgba(59,130,246,0.9)', fontFamily: 'Sora, sans-serif' }}
                   >
-                    {dayData.day} &mdash; {dayData.time}
+                    {dayData.day} — {dayData.time}
                   </span>
                 </motion.div>
 
+                {/* الإشعارات */}
                 <div className="flex flex-col gap-3 w-full max-w-sm">
                   {dayData.messages.map((msg, i) => (
                     <NotificationCard
@@ -224,6 +276,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
             )}
           </AnimatePresence>
 
+          {/* ===== المرحلة 3: نص "يتكرر" ===== */}
           <AnimatePresence>
             {phase === 3 && (
               <motion.div
@@ -232,36 +285,45 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute inset-0 flex flex-col items-center justify-center px-6"
               >
+                {/* الإشعارات الخافتة خلف النص — تبقى مرئية بشكل ضعيف */}
                 <div className="flex flex-col gap-3 w-full max-w-sm opacity-20 mb-0 absolute">
                   {dayData.messages.map((msg, i) => (
                     <NotificationCard key={i} message={msg} index={i} visible={true} />
                   ))}
                 </div>
 
+                {/* النص المركزي */}
                 <div className="relative z-10 text-center">
                   <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2, duration: 0.8 }}
-                    className="text-lg md:text-xl mb-2 font-arabic"
-                    style={{ color: 'rgba(255,255,255,0.5)' }}
+                    className="text-lg md:text-xl mb-2"
+                    style={{
+                      color: 'rgba(255,255,255,0.5)',
+                      fontFamily: 'DM Sans, sans-serif',
+                    }}
                   >
-                    {'\u0647\u0630\u0627 \u0627\u0644\u0635\u0628\u0627\u062D \u064A\u062A\u0643\u0631\u0631 \u0643\u0644 \u0623\u0633\u0628\u0648\u0639.'}
+                    هذا الصباح يتكرر كل أسبوع.
                   </motion.p>
                   <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.6, duration: 0.8 }}
-                    className="text-lg md:text-xl font-arabic"
-                    style={{ color: 'rgba(255,255,255,0.5)' }}
+                    className="text-lg md:text-xl"
+                    style={{
+                      color: 'rgba(255,255,255,0.5)',
+                      fontFamily: 'DM Sans, sans-serif',
+                    }}
                   >
-                    {'\u0641\u064A \u0645\u0639\u0638\u0645 \u0627\u0644\u0634\u0631\u0643\u0627\u062A.'}
+                    في معظم الشركات.
                   </motion.p>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
 
+          {/* ===== المرحلة 4: اسم عبدالرحمن ===== */}
           <AnimatePresence>
             {phase === 4 && (
               <motion.div
@@ -271,6 +333,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                 transition={{ duration: 0.8 }}
                 className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center"
               >
+                {/* خط أفقي مضيء يمشي من اليسار لليمين قبل ما يظهر الاسم */}
                 <motion.div
                   initial={{ scaleX: 0, opacity: 0 }}
                   animate={{ scaleX: 1, opacity: 1 }}
@@ -279,12 +342,13 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                   style={{ background: '#3B82F6', boxShadow: '0 0 12px rgba(59,130,246,0.8)' }}
                 />
 
+                {/* الاسم */}
                 <motion.h1
                   initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                  className="font-sora"
                   style={{
+                    fontFamily: 'Sora, sans-serif',
                     fontSize: 'clamp(32px, 6vw, 72px)',
                     fontWeight: 700,
                     color: 'white',
@@ -296,21 +360,23 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                   Abdulrahman Bazarah
                 </motion.h1>
 
+                {/* الرسالة */}
                 <motion.p
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8, duration: 0.7 }}
-                  className="font-arabic"
                   style={{
+                    fontFamily: 'DM Sans, sans-serif',
                     fontSize: 'clamp(14px, 2vw, 18px)',
                     color: 'rgba(255,255,255,0.45)',
                     marginTop: '16px',
                     letterSpacing: '0.02em',
                   }}
                 >
-                  {'\u0623\u0628\u0646\u064A \u0627\u0644\u0623\u0646\u0638\u0645\u0629 \u0627\u0644\u062A\u064A \u062A\u0646\u0647\u064A \u0647\u0630\u0627 \u0627\u0644\u0635\u0628\u0627\u062D.'}
+                  أبني الأنظمة التي تنهي هذا الصباح.
                 </motion.p>
 
+                {/* نبضة زرقاء تحت الرسالة */}
                 <motion.div
                   initial={{ opacity: 0, scaleX: 0 }}
                   animate={{ opacity: 1, scaleX: 1 }}
@@ -323,8 +389,51 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
               </motion.div>
             )}
           </AnimatePresence>
+
         </motion.div>
       )}
     </AnimatePresence>
   )
 }
+```
+
+---
+
+## ملاحظات للـ Replit Agent
+
+1. **لا تغيّر** أي ملف آخر — فقط `src/components/Intro.tsx`
+2. الـ `onComplete` prop موجود بنفس الشكل — لا يحتاج تغيير في `page.tsx`
+3. الفونتس `Sora` و `DM Sans` محمّلة بالفعل في `layout.tsx`
+4. اليوم يُكتشف تلقائياً بـ `new Date().getDay()` — لا يحتاج API
+5. المدة الكاملة للإنترو: **~9.6 ثانية** ثم ينتقل للصفحة تلقائياً
+
+---
+
+## تسلسل زمني كامل
+
+```
+0.0s  → شاشة سوداء
+0.6s  → يظهر اليوم والوقت (Monday 8:47 AM)
+1.6s  → إشعار 1 يظهر
+2.5s  → إشعار 2 يظهر
+3.4s  → إشعار 3 يظهر
+4.3s  → إشعار 4 يظهر
+5.4s  → الإشعارات تخفت — يظهر "هذا الصباح يتكرر"
+7.0s  → Abdulrahman Bazarah + الرسالة
+8.8s  → fade out
+9.6s  → الصفحة الرئيسية
+```
+
+---
+
+## اليوم يتغير تلقائياً
+
+| اليوم | الوقت | نبرة الرسائل |
+|---|---|---|
+| الأحد | 9:12 AM | بداية أسبوع بلا خطة |
+| الاثنين | 8:47 AM | فوضى الاجتماعات والتقارير |
+| الثلاثاء | 9:03 AM | بيانات مشتتة وعملاء معلقون |
+| الأربعاء | 8:55 AM | منتصف أسبوع بلا مؤشرات |
+| الخميس | 9:21 AM | نهاية أسبوع بمهام ناقصة |
+| الجمعة | 10:15 AM | حصاد أسبوع ضائع |
+| السبت | 11:30 AM | عطلة لكن المشاكل ما تعطّلت |
