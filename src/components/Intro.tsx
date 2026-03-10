@@ -1,6 +1,6 @@
 'use client'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 
 const DAY_DATA: Record<number, { day: string; time: string; messages: { icon: string; text: string }[] }> = {
   0: {
@@ -75,9 +75,83 @@ const DAY_DATA: Record<number, { day: string; time: string; messages: { icon: st
   },
 }
 
+const MSG_STARTS = [1200, 3500, 6000, 8500]
+const CHAR_SPEED = 28
+
+function playTick() {
+  try {
+    const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)()
+    const osc = ctx.createOscillator()
+    const gain = ctx.createGain()
+    osc.connect(gain)
+    gain.connect(ctx.destination)
+    osc.frequency.value = 800
+    gain.gain.value = 0.03
+    osc.start()
+    osc.stop(ctx.currentTime + 0.08)
+    osc.onended = () => ctx.close()
+  } catch {}
+}
+
+function TypingCard({ icon, text, onDone }: { icon: string; text: string; onDone: () => void }) {
+  const [charIndex, setCharIndex] = useState(0)
+  const [done, setDone] = useState(false)
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setCharIndex(prev => {
+        if (prev >= text.length) {
+          if (intervalRef.current) clearInterval(intervalRef.current)
+          setDone(true)
+          onDone()
+          return prev
+        }
+        return prev + 1
+      })
+    }, CHAR_SPEED)
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
+  }, [text, onDone])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="flex items-start gap-3 px-4 py-3.5 rounded-xl"
+      style={{
+        background: 'rgba(255,255,255,0.03)',
+        border: `1px solid ${done ? 'rgba(59,130,246,0.25)' : 'rgba(59,130,246,0.12)'}`,
+        backdropFilter: 'blur(12px)',
+        boxShadow: done ? '0 0 16px rgba(59,130,246,0.08)' : '0 4px 24px rgba(0,0,0,0.3)',
+        direction: 'rtl' as const,
+        transition: 'border-color 0.6s, box-shadow 0.6s',
+      }}
+    >
+      <motion.span
+        initial={{ opacity: 0, x: 10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.4 }}
+        className="text-base mt-0.5 shrink-0 select-none"
+      >
+        {icon}
+      </motion.span>
+      <p
+        className="text-sm leading-relaxed font-arabic flex-1"
+        style={{ color: 'rgba(255,255,255,0.8)', minHeight: '1.5em' }}
+      >
+        {text.slice(0, charIndex)}
+        {charIndex < text.length && (
+          <span className="inline-block w-[2px] h-[14px] bg-blue-400 ml-[2px] align-middle" style={{ animation: 'blink 0.6s infinite' }} />
+        )}
+      </p>
+    </motion.div>
+  )
+}
+
 export default function Intro({ onComplete }: { onComplete: () => void }) {
   const [phase, setPhase] = useState(0)
-  const [visibleCount, setVisibleCount] = useState(0)
+  const [activeMessages, setActiveMessages] = useState<number[]>([])
   const [dayData, setDayData] = useState(DAY_DATA[1])
   const stableOnComplete = useCallback(onComplete, [onComplete])
 
@@ -86,18 +160,38 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
     setDayData(DAY_DATA[today])
   }, [])
 
+  const stars = useMemo(() => {
+    function sr(seed: number) {
+      const x = Math.sin(seed + 1) * 10000
+      return x - Math.floor(x)
+    }
+    return Array.from({ length: 120 }, (_, i) => ({
+      id: i,
+      left: sr(i * 7) * 100,
+      top: sr(i * 7 + 1) * 100,
+      size: 1 + sr(i * 7 + 2) * 1.5,
+      opacity: 0.2 + sr(i * 7 + 3) * 0.6,
+      duration: 3 + sr(i * 7 + 4) * 5,
+      delay: sr(i * 7 + 5) * 4,
+    }))
+  }, [])
+
   useEffect(() => {
     const t: ReturnType<typeof setTimeout>[] = []
 
     t.push(setTimeout(() => setPhase(1), 1000))
-    t.push(setTimeout(() => setVisibleCount(1), 2500))
-    t.push(setTimeout(() => setVisibleCount(2), 4200))
-    t.push(setTimeout(() => setVisibleCount(3), 5900))
-    t.push(setTimeout(() => setVisibleCount(4), 7600))
-    t.push(setTimeout(() => setPhase(2), 9500))
-    t.push(setTimeout(() => setPhase(3), 12000))
-    t.push(setTimeout(() => setPhase(4), 15000))
-    t.push(setTimeout(() => stableOnComplete(), 16000))
+
+    MSG_STARTS.forEach((ms, i) => {
+      t.push(setTimeout(() => {
+        playTick()
+        setActiveMessages(prev => [...prev, i])
+      }, ms))
+    })
+
+    t.push(setTimeout(() => setPhase(2), 9000))
+    t.push(setTimeout(() => setPhase(3), 13000))
+    t.push(setTimeout(() => setPhase(4), 17000))
+    t.push(setTimeout(() => stableOnComplete(), 18200))
 
     return () => t.forEach(clearTimeout)
   }, [stableOnComplete])
@@ -107,33 +201,72 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
       {phase < 4 && (
         <motion.div
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.0, ease: 'easeInOut' }}
+          transition={{ duration: 1.2, ease: 'easeInOut' }}
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden"
           style={{ background: '#050810' }}
         >
+          <style jsx global>{`
+            @keyframes blink { 0%,100% { opacity: 1 } 50% { opacity: 0 } }
+            @keyframes twinkle {
+              0%, 100% { opacity: var(--star-opacity); transform: scale(1); }
+              50% { opacity: calc(var(--star-opacity) * 0.3); transform: scale(0.8); }
+            }
+            @keyframes scanline {
+              0% { top: -2px; }
+              100% { top: 100%; }
+            }
+          `}</style>
+
+          {stars.map(s => (
+            <div
+              key={s.id}
+              className="absolute rounded-full pointer-events-none"
+              style={{
+                left: `${s.left}%`,
+                top: `${s.top}%`,
+                width: `${s.size}px`,
+                height: `${s.size}px`,
+                background: 'white',
+                '--star-opacity': s.opacity,
+                opacity: s.opacity,
+                animation: `twinkle ${s.duration}s ${s.delay}s ease-in-out infinite`,
+              } as React.CSSProperties}
+            />
+          ))}
+
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
-              backgroundImage: 'radial-gradient(rgba(59,130,246,0.07) 1px, transparent 1px)',
-              backgroundSize: '52px 52px',
+              backgroundImage: 'radial-gradient(rgba(59,130,246,0.06) 1px, transparent 1px)',
+              backgroundSize: '48px 48px',
             }}
           />
+
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
             style={{
-              background: 'radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)',
               filter: 'blur(60px)',
             }}
           />
 
-          <AnimatePresence>
-            {phase >= 1 && phase < 3 && (
+          <div
+            className="absolute left-0 w-full h-[2px] pointer-events-none"
+            style={{
+              background: 'linear-gradient(to right, transparent 10%, rgba(59,130,246,0.03) 50%, transparent 90%)',
+              animation: 'scanline 8s linear infinite',
+            }}
+          />
+
+          <AnimatePresence mode="wait">
+            {phase >= 1 && phase < 2 && (
               <motion.div
-                key="notifications"
+                key="messages"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: phase === 2 ? 0.15 : 1 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0, filter: 'blur(8px)' }}
                 transition={{ duration: 1.2, ease: 'easeInOut' }}
-                className="flex flex-col items-center gap-4 w-full px-6 max-w-md"
+                className="flex flex-col items-center gap-4 w-full px-5 max-w-[420px]"
               >
                 <motion.div
                   initial={{ opacity: 0, y: -8 }}
@@ -157,71 +290,47 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
 
                 <div className="flex flex-col gap-3 w-full">
                   {dayData.messages.map((msg, i) => (
-                    <AnimatePresence key={i}>
-                      {visibleCount > i && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 20, scale: 0.97 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                          className="flex items-start gap-3 px-4 py-3.5 rounded-2xl"
-                          style={{
-                            background: 'rgba(255,255,255,0.055)',
-                            border: '1px solid rgba(255,255,255,0.09)',
-                            backdropFilter: 'blur(12px)',
-                            boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
-                          }}
-                        >
-                          <span className="text-base mt-0.5 shrink-0 select-none">{msg.icon}</span>
-                          <p
-                            className="text-sm leading-relaxed font-arabic"
-                            style={{
-                              color: 'rgba(255,255,255,0.8)',
-                              direction: 'rtl',
-                            }}
-                          >
-                            {msg.text}
-                          </p>
-                        </motion.div>
+                    <div key={i}>
+                      {activeMessages.includes(i) && (
+                        <TypingCard icon={msg.icon} text={msg.text} onDone={() => {}} />
                       )}
-                    </AnimatePresence>
+                    </div>
                   ))}
                 </div>
               </motion.div>
             )}
-          </AnimatePresence>
 
-          <AnimatePresence>
             {phase === 2 && (
               <motion.div
                 key="repeat-text"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute inset-0 flex flex-col items-center justify-center px-8 text-center pointer-events-none"
+                transition={{ duration: 0.8 }}
+                className="flex flex-col items-center justify-center px-8 text-center"
               >
                 <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 1.0 }}
-                  className="text-xl md:text-2xl mb-3 font-arabic"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 0.65, y: 0 }}
+                  transition={{ delay: 0.3, duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+                  className="font-arabic mb-3"
                   style={{
-                    color: 'rgba(255,255,255,0.6)',
-                    fontWeight: 400,
-                    lineHeight: 1.7,
+                    fontSize: '22px',
+                    color: 'white',
                     direction: 'rtl',
+                    lineHeight: 1.7,
                   }}
                 >
                   {'\u0647\u0630\u0627 \u0627\u0644\u0635\u0628\u0627\u062D \u064A\u062A\u0643\u0631\u0631 \u0643\u0644 \u0623\u0633\u0628\u0648\u0639.'}
                 </motion.p>
                 <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1.0, duration: 1.0 }}
-                  className="text-xl md:text-2xl font-arabic"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 0.38, y: 0 }}
+                  transition={{ delay: 1.5, duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+                  className="font-arabic"
                   style={{
-                    color: 'rgba(255,255,255,0.4)',
-                    fontWeight: 400,
+                    fontSize: '20px',
+                    color: 'white',
                     direction: 'rtl',
                   }}
                 >
@@ -229,9 +338,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                 </motion.p>
               </motion.div>
             )}
-          </AnimatePresence>
 
-          <AnimatePresence>
             {phase === 3 && (
               <motion.div
                 key="name-reveal"
@@ -239,32 +346,32 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1.0 }}
-                className="absolute inset-0 flex flex-col items-center justify-center px-8 text-center"
+                className="flex flex-col items-center justify-center px-8 text-center"
               >
                 <motion.div
                   initial={{ scaleX: 0, opacity: 0 }}
                   animate={{ scaleX: 1, opacity: 1 }}
-                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                   className="mb-10 origin-left"
                   style={{
-                    width: '48px',
+                    width: '56px',
                     height: '1px',
                     background: '#3B82F6',
-                    boxShadow: '0 0 16px rgba(59,130,246,0.9)',
+                    boxShadow: '0 0 20px rgba(59,130,246,1)',
                   }}
                 />
 
                 <motion.h1
-                  initial={{ opacity: 0, y: 24, filter: 'blur(10px)' }}
+                  initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  transition={{ delay: 0.4, duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: 0.4, duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
                   className="font-sora"
                   style={{
-                    fontSize: 'clamp(28px, 5.5vw, 68px)',
+                    fontSize: 'clamp(32px, 6vw, 72px)',
                     fontWeight: 700,
                     color: 'white',
                     letterSpacing: '-0.02em',
-                    textShadow: '0 0 80px rgba(59,130,246,0.35)',
+                    textShadow: '0 0 100px rgba(59,130,246,0.4)',
                     lineHeight: 1.1,
                     marginBottom: '20px',
                   }}
@@ -273,15 +380,15 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                 </motion.h1>
 
                 <motion.p
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.0, duration: 0.9 }}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 0.38, y: 0 }}
+                  transition={{ delay: 1.3, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                   className="font-arabic"
                   style={{
-                    fontSize: 'clamp(14px, 2vw, 19px)',
-                    color: 'rgba(255,255,255,0.42)',
-                    letterSpacing: '0.01em',
+                    fontSize: 'clamp(14px, 2vw, 20px)',
+                    color: 'white',
                     direction: 'rtl',
+                    letterSpacing: '0.01em',
                   }}
                 >
                   {'\u0623\u0628\u0646\u064A \u0627\u0644\u0623\u0646\u0638\u0645\u0629 \u0627\u0644\u062A\u064A \u062A\u0646\u0647\u064A \u0647\u0630\u0627 \u0627\u0644\u0635\u0628\u0627\u062D.'}
@@ -290,12 +397,12 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                 <motion.div
                   initial={{ opacity: 0, scaleX: 0 }}
                   animate={{ opacity: 1, scaleX: 1 }}
-                  transition={{ delay: 1.6, duration: 0.8 }}
+                  transition={{ delay: 1.9, duration: 0.8 }}
                   className="mt-8"
                   style={{
-                    width: '80px',
+                    width: '90px',
                     height: '1px',
-                    background: 'linear-gradient(to right, transparent, rgba(59,130,246,0.5), transparent)',
+                    background: 'linear-gradient(to right, transparent, rgba(59,130,246,0.4), transparent)',
                   }}
                 />
               </motion.div>

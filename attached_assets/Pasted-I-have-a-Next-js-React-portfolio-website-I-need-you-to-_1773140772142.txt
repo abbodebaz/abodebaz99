@@ -1,0 +1,72 @@
+I have a Next.js + React portfolio website. I need you to completely rebuild the Intro.tsx component with a cinematic, dramatic, emotional experience.
+
+CURRENT FILE: src/components/Intro.tsx
+
+--- WHAT THE INTRO DOES (keep the same story logic) ---
+The intro shows a story in 4 phases:
+1. A dark screen → WhatsApp-style notification messages appear one by one (real problems a business team faces every morning)
+2. Messages fade out → dramatic text appears: "هذا الصباح يتكرر كل أسبوع" / "في معظم الشركات"
+3. Name reveal: "Abdulrahman Bazarah" + subtitle: "أبني الأنظمة التي تنهي هذا الصباح"
+4. Intro fades out → main site appears
+
+--- WHAT I WANT YOU TO BUILD ---
+
+**Background:**
+- Deep dark background (#050810)
+- Animated star field: 120 small particles (white dots, varying opacity 0.2–0.8, random positions, slow floating/twinkling animation using CSS keyframes)
+- Subtle blue radial glow in center (rgba(59,130,246,0.08))
+- Fine dot grid overlay (rgba(59,130,246,0.06))
+- Animated horizontal scan line that slowly moves top to bottom (opacity 0.03, loops every 8s)
+
+**Phase 1 — Messages (0s to 9s):**
+- Show the notification card container after 1s
+- Each message appears one at a time with a TYPING EFFECT:
+  - The text types out character by character (speed: 28ms per character)
+  - The icon slides in from left simultaneously
+  - A soft blue glow pulse appears on the card border when it finishes typing
+- Messages timing: msg1 at 1.2s, msg2 at 3.5s, msg3 at 6.0s, msg4 at 8.5s
+- Card style: dark glass (rgba(255,255,255,0.03)), border rgba(59,130,246,0.12), border-radius 12px, backdrop-filter blur(12px)
+- Each card: icon on right (since RTL), text on left, direction rtl
+- Use Web Audio API to play a subtle soft "tick" sound (oscillator, frequency 800hz, duration 80ms, gain 0.03) when each message STARTS appearing
+- Cards stack vertically, max-width 420px, centered
+
+**Phase 2 — "هذا الصباح يتكرر" text (9s to 13s):**
+- All message cards fade out with blur (filter: blur(8px), opacity: 0) over 1.2s
+- Then show centered Arabic text:
+  - Line 1: "هذا الصباح يتكرر كل أسبوع." — opacity 0.65, size 22px, font-arabic
+  - Line 2 (appears 1.2s later): "في معظم الشركات." — opacity 0.38, size 20px
+- Both lines fade in with slight upward motion (y: 20 → 0)
+
+**Phase 3 — Name Reveal (13s to 17s):**
+- Previous text fades out
+- A thin horizontal blue line (width 0 → 56px, height 1px, color #3B82F6, glow: 0 0 20px rgba(59,130,246,1)) animates in from left — takes 0.7s
+- Then name appears: "Abdulrahman Bazarah"
+  - Font: var(--font-sora), weight 700
+  - Size: clamp(32px, 6vw, 72px)
+  - Color: white
+  - Animation: opacity 0→1, y 30→0, filter blur(12px)→blur(0px), duration 1.1s, ease [0.22,1,0.36,1]
+  - Text shadow: 0 0 100px rgba(59,130,246,0.4)
+- Subtitle appears 0.9s after name:
+  - Text: "أبني الأنظمة التي تنهي هذا الصباح."
+  - Font: font-arabic, direction rtl
+  - Size: clamp(14px, 2vw, 20px)
+  - Color: rgba(255,255,255,0.38)
+  - Animation: fade in + y 12→0
+- A second thin line animates in below (gradient: transparent → rgba(59,130,246,0.4) → transparent), width 90px, appears 1.5s after name
+
+**Phase 4 — Exit (17s):**
+- Entire intro fades out: opacity 1→0, duration 1.2s, ease easeInOut
+- onComplete() fires at 18.2s
+
+**Additional details:**
+- All Arabic text must have: direction: 'rtl', fontFamily: 'var(--font-arabic)'
+- Use framer-motion for all animations (already installed)
+- The component receives: { onComplete: () => void }
+- Use useCallback for onComplete
+- Clean up all setTimeout on unmount
+- The star particles should be generated once with useMemo (array of 120 objects with random x, y, size, opacity, duration)
+- NO external libraries beyond framer-motion (already available)
+- Make it work perfectly on mobile too (max-width: 420px cards → on mobile full width with px-5)
+
+Keep the DAY_DATA object exactly as it is in the current file (same messages content).
+The component must be a drop-in replacement for the current Intro.tsx — same props, same export.
