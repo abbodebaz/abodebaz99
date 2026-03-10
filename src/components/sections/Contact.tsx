@@ -36,7 +36,7 @@ export default function Contact() {
               minWidth: '100%',
               height: '56.25vw',
               minHeight: '100%',
-              opacity: 0.18,
+              opacity: 0.28,
               pointerEvents: 'none',
               border: 'none',
             }}
@@ -67,7 +67,7 @@ export default function Contact() {
           className="font-arabic font-sora text-[120px] md:text-[200px] font-bold opacity-[0.015] whitespace-nowrap"
           style={{ color: 'white' }}
         >
-          لنبني
+          نبني
         </span>
       </div>
 
@@ -78,11 +78,19 @@ export default function Contact() {
         variants={staggerContainer}
         className="max-w-3xl mx-auto text-center relative z-10"
       >
-        <motion.h2 variants={fadeInUp} className="font-arabic font-sora text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
-          المستقبل لمن يبني<br />أنظمة أفضل.
+        <motion.h2
+          variants={fadeInUp}
+          className="font-arabic font-sora text-3xl md:text-5xl font-bold text-white mb-4 leading-tight"
+          style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
+        >
+          فكرتك تستحق نظاماً حقيقياً.<br />خلنا نبنيه.
         </motion.h2>
-        <motion.p variants={fadeInUp} className="font-arabic text-[#9CA3AF] text-lg mb-12">
-          خلنا نتكلم عن اللي مكسور في عملك — وكيف نصلحه.
+        <motion.p
+          variants={fadeInUp}
+          className="font-arabic text-[#9CA3AF] text-lg mb-12"
+          style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
+        >
+          إذا حسيت إن شركتك تشتغل بجهد أكثر من اللازم — أنا من تبحث عنه.
         </motion.p>
 
         <motion.div
