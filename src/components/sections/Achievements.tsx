@@ -59,7 +59,7 @@ function AchievementImage({
         }}
         unoptimized
       />
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(11,15,25,0.2), rgba(11,15,25,0.05))' }} />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(10,10,10,0.2), rgba(10,10,10,0.05))' }} />
       <div className="absolute inset-0" style={{ background: `${color}10` }} />
     </div>
   )

@@ -16,7 +16,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
   const { scrollY } = useScroll()
-  const navBg = useTransform(scrollY, [0, 80], ['rgba(11,15,25,0)', 'rgba(11,15,25,0.95)'])
+  const navBg = useTransform(scrollY, [0, 80], ['rgba(10,10,10,0)', 'rgba(10,10,10,0.95)'])
   const navBorder = useTransform(scrollY, [0, 80], ['rgba(59,130,246,0)', 'rgba(59,130,246,0.12)'])
 
   useEffect(() => {

@@ -50,7 +50,7 @@ export default function About() {
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: 'linear-gradient(to top, rgba(11,15,25,0.6) 0%, transparent 50%)'
+                    background: 'linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 50%)'
                   }}
                 />
               </div>
@@ -62,7 +62,7 @@ export default function About() {
                 transition={{ delay: 0.4, duration: 0.6 }}
                 className="absolute -bottom-5 -right-5 px-4 py-3 rounded-xl backdrop-blur-md"
                 style={{
-                  background: 'rgba(11,15,25,0.9)',
+                  background: 'rgba(10,10,10,0.9)',
                   border: '1px solid rgba(59,130,246,0.25)',
                 }}
               >
@@ -77,7 +77,7 @@ export default function About() {
                 transition={{ delay: 0.5, duration: 0.6 }}
                 className="absolute -top-4 -right-4 px-3 py-2 rounded-xl backdrop-blur-md flex items-center gap-2"
                 style={{
-                  background: 'rgba(11,15,25,0.9)',
+                  background: 'rgba(10,10,10,0.9)',
                   border: '1px solid rgba(16,185,129,0.3)',
                 }}
               >

@@ -155,7 +155,7 @@ export default function Hero() {
           />
           <button
             onClick={handleEnter}
-            className="relative border border-accent/50 bg-[#0B0F19] text-white px-9 py-3.5 tracking-[0.08em] text-sm uppercase transition-all duration-300 hover:bg-accent/10 hover:border-accent hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
+            className="relative border border-accent/50 bg-[#0A0A0A] text-white px-9 py-3.5 tracking-[0.08em] text-sm uppercase transition-all duration-300 hover:bg-accent/10 hover:border-accent hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
           >
             Enter the Experience →
           </button>

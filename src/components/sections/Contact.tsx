@@ -9,7 +9,7 @@ export default function Contact() {
       id="contact"
       className="relative py-32 px-6 overflow-hidden"
       style={{
-        background: 'linear-gradient(to bottom, #0B0F19 0%, #0D1525 100%)',
+        background: 'linear-gradient(to bottom, #0A0A0A 0%, #0F0F0F 100%)',
       }}
     >
       <div
