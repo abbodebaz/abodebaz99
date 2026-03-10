@@ -7,6 +7,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
+      dir="rtl"
       className="relative py-32 px-6 overflow-hidden"
       style={{
         background: 'linear-gradient(to bottom, #0A0A0A 0%, #0F0F0F 100%)',
@@ -26,10 +27,10 @@ export default function Contact() {
         aria-hidden="true"
       >
         <span
-          className="font-sora text-[120px] md:text-[200px] font-bold opacity-[0.015] whitespace-nowrap"
+          className="font-arabic font-sora text-[120px] md:text-[200px] font-bold opacity-[0.015] whitespace-nowrap"
           style={{ color: 'white' }}
         >
-          LET&rsquo;S BUILD
+          لنبني
         </span>
       </div>
 
@@ -40,11 +41,11 @@ export default function Contact() {
         variants={staggerContainer}
         className="max-w-3xl mx-auto text-center relative z-10"
       >
-        <motion.h2 variants={fadeInUp} className="font-sora text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
-          The future belongs to companies<br />that build better systems.
+        <motion.h2 variants={fadeInUp} className="font-arabic font-sora text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+          المستقبل لمن يبني<br />أنظمة أفضل.
         </motion.h2>
-        <motion.p variants={fadeInUp} className="text-[#9CA3AF] text-lg mb-12">
-          Let&rsquo;s talk about what&rsquo;s broken in your business — and how to fix it.
+        <motion.p variants={fadeInUp} className="font-arabic text-[#9CA3AF] text-lg mb-12">
+          خلنا نتكلم عن اللي مكسور في عملك — وكيف نصلحه.
         </motion.p>
 
         <motion.div
@@ -79,12 +80,12 @@ export default function Contact() {
             whileTap={{ scale: 0.97 }}
             className="flex items-center gap-2 px-8 py-3.5 text-[#9CA3AF] hover:text-white rounded-lg font-medium text-sm tracking-wide transition-colors"
           >
-            <Mail size={18} /> Email
+            <Mail size={18} /> إيميل
           </motion.a>
         </motion.div>
 
-        <motion.p variants={fadeInUp} className="text-[#4B5563] text-sm">
-          Usually responds within 24 hours.
+        <motion.p variants={fadeInUp} className="font-arabic text-[#4B5563] text-sm">
+          عادةً أرد خلال ٢٤ ساعة.
         </motion.p>
       </motion.div>
     </section>

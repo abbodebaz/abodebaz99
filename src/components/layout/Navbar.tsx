@@ -4,12 +4,12 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
-  { name: 'About', href: '#about' },
-  { name: 'Journey', href: '#journey' },
-  { name: 'Work', href: '#achievements' },
-  { name: 'Impact', href: '#impact' },
-  { name: 'Framework', href: '#framework' },
-  { name: 'Contact', href: '#contact' },
+  { name: '\u0645\u0646 \u0623\u0646\u0627', href: '#about' },
+  { name: '\u0645\u0633\u064A\u0631\u062A\u064A', href: '#journey' },
+  { name: '\u0623\u0639\u0645\u0627\u0644\u064A', href: '#achievements' },
+  { name: '\u0627\u0644\u0623\u062B\u0631', href: '#impact' },
+  { name: '\u0627\u0644\u0645\u0646\u0647\u062C\u064A\u0629', href: '#framework' },
+  { name: '\u062A\u0648\u0627\u0635\u0644', href: '#contact' },
 ]
 
 export default function Navbar() {
@@ -57,7 +57,7 @@ export default function Navbar() {
             <button
               key={link.name}
               onClick={() => handleClick(link.href)}
-              className={`text-sm transition-all duration-300 relative tracking-wide ${
+              className={`text-sm font-arabic transition-all duration-300 relative tracking-wide ${
                 activeSection === link.href.replace('#', '')
                   ? 'text-white'
                   : 'text-[#9CA3AF] hover:text-white'
@@ -96,7 +96,7 @@ export default function Navbar() {
                 <button
                   key={link.name}
                   onClick={() => handleClick(link.href)}
-                  className={`text-left transition-colors duration-300 text-lg ${
+                  className={`text-right font-arabic transition-colors duration-300 text-lg ${
                     activeSection === link.href.replace('#', '')
                       ? 'text-white'
                       : 'text-[#9CA3AF] hover:text-white'

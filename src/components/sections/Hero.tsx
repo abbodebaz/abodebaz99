@@ -55,7 +55,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section dir="rtl" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0 overflow-hidden">
         <iframe
           src="https://player.vimeo.com/video/1172103667?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&controls=0&transparent=0"
@@ -119,28 +119,30 @@ export default function Hero() {
         animate="visible"
         className="relative z-10 text-center px-6 max-w-4xl mx-auto"
       >
-        <motion.p variants={item} className="text-[#9CA3AF] text-lg md:text-xl mb-2">
-          Every company runs on systems.
+        <motion.p variants={item} className="font-arabic text-[#9CA3AF] text-lg md:text-xl mb-2" style={{ direction: 'rtl' }}>
+          كل شركة تشتغل على أنظمة.
         </motion.p>
-        <motion.p variants={item} className="text-[#9CA3AF] text-lg md:text-xl mb-2">
-          Most systems are broken.
+        <motion.p variants={item} className="font-arabic text-[#9CA3AF] text-lg md:text-xl mb-2" style={{ direction: 'rtl' }}>
+          معظم هذي الأنظمة مكسورة.
         </motion.p>
-        <motion.p variants={item} className="text-accent text-lg md:text-xl font-medium mb-12">
-          My work is fixing them.
+        <motion.p variants={item} className="font-arabic text-accent text-lg md:text-xl font-medium mb-12" style={{ direction: 'rtl' }}>
+          شغلتي أصلّحها.
         </motion.p>
 
         <motion.h1
           variants={delayedItem}
           className="font-sora text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight"
+          style={{ direction: 'ltr' }}
         >
           Abdulrahman Bazarah
         </motion.h1>
 
         <motion.p
           variants={delayedItem}
-          className="text-[#9CA3AF] tracking-[0.2em] text-xs md:text-sm uppercase"
+          className="font-arabic text-[#9CA3AF] tracking-[0.1em] text-xs md:text-sm"
+          style={{ direction: 'rtl' }}
         >
-          Business Development Leader &middot; Systems Architect &middot; AI &amp; Automation Builder
+          قائد تطوير أعمال &middot; مهندس أنظمة &middot; باني أتمتة و AI
         </motion.p>
 
         <motion.div
@@ -148,17 +150,18 @@ export default function Hero() {
           className="flex items-center gap-2 justify-center mt-6 mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-[#4B5563] text-xs tracking-widest uppercase">
-            Available for new projects
+          <span className="font-arabic text-[#4B5563] text-xs tracking-widest" style={{ direction: 'rtl' }}>
+            متاح لمشاريع جديدة
           </span>
         </motion.div>
 
         <motion.div variants={delayedItem} className="relative inline-block">
           <button
             onClick={handleEnter}
-            className="relative border border-accent/50 bg-black/40 backdrop-blur-sm text-white px-9 py-3.5 tracking-[0.08em] text-sm uppercase transition-all duration-300 hover:bg-accent/20 hover:border-accent hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
+            className="font-arabic relative border border-accent/50 bg-black/40 backdrop-blur-sm text-white px-9 py-3.5 tracking-[0.08em] text-sm transition-all duration-300 hover:bg-accent/20 hover:border-accent hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
+            style={{ direction: 'rtl' }}
           >
-            Enter the Experience &rarr;
+            اكتشف أكثر &larr;
           </button>
         </motion.div>
       </motion.div>

@@ -1,0 +1,89 @@
+Rewrite my Intro.tsx component completely. Keep the same DAY_DATA object and same story logic, but apply ALL these changes:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. TIMING — stretch to 22 seconds total:
+   - Phase 1 starts: 1000ms
+   - Message 1 appears: 1200ms
+   - Message 2 appears: 4500ms
+   - Message 3 appears: 7800ms
+   - Message 4 appears: 11000ms
+   - Phase 2 starts: 13500ms
+   - Phase 3 starts: 17000ms
+   - onComplete fires: only when user clicks the button (no auto-complete)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. STARS — make them actually move:
+   - Generate 120 stars with useMemo using seeded random (Math.sin based, no Math.random)
+   - Each star floats in a slow random direction using CSS animation
+   - Add TWO keyframes:
+     @keyframes floatStar {
+       0% { transform: translate(0, 0) }
+       33% { transform: translate(var(--dx), var(--dy)) }
+       66% { transform: translate(calc(var(--dx) * -0.5), calc(var(--dy) * 1.2)) }
+       100% { transform: translate(0, 0) }
+     }
+     @keyframes twinkle {
+       0%, 100% { opacity: var(--star-opacity) }
+       50% { opacity: calc(var(--star-opacity) * 0.25) }
+     }
+   - Each star has CSS vars: --dx (random -15px to 15px), --dy (random -15px to 15px), --star-opacity
+   - floatStar duration: 8–20s, twinkle duration: 3–7s, both looping, with random delays
+   - Stars vary in size: 1px to 2.5px
+   - Some stars (1 in 15) are slightly bigger (3–4px) and brighter — "hero stars"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. TEXT SIZES — make everything bigger and clearer:
+   - Message card text: 15px (was 14px), line-height 1.8
+   - Message icon: text-xl (was text-base)
+   - Phase 2 line 1: 26px, opacity 0.75
+   - Phase 2 line 2: 22px, opacity 0.45
+   - Name (phase 3): clamp(36px, 7vw, 80px)
+   - Subtitle (phase 3): clamp(16px, 2.2vw, 22px), opacity 0.5
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. INTERACTIVE BUTTON — appears in phase 3, after the name and subtitle:
+   - Appears 2.2s after phase 3 starts (after name + subtitle are visible)
+   - Text: "اكتشف عبدالرحمن ←"
+   - Font: font-arabic, direction rtl
+   - Style: NOT a filled button — use a bordered ghost button:
+     - border: 1px solid rgba(59,130,246,0.5)
+     - background: rgba(59,130,246,0.06)
+     - backdrop-filter: blur(8px)
+     - padding: 14px 36px
+     - border-radius: 100px
+     - font size: 15px
+     - color: rgba(255,255,255,0.85)
+   - On hover:
+     - border-color: rgba(59,130,246,0.9)
+     - background: rgba(59,130,246,0.12)
+     - box-shadow: 0 0 30px rgba(59,130,246,0.25)
+     - text color: white
+     - a small blue arrow slides right on hover (→ moves 4px)
+   - On click:
+     - Button scales down slightly (scale 0.96) then the ENTIRE intro fades out over 1.2s
+     - onComplete() fires after the fade
+   - Entry animation: opacity 0→1, y 20→0, duration 0.9s, ease [0.22,1,0.36,1]
+   - Add a subtle breathing glow animation on the border (borderGlow keyframe, 3s loop)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. GENERAL POLISH:
+   - Keep the Web Audio tick sound on each message (oscillator 800hz, gain 0.03, 80ms)
+   - Keep the TypingCard component with typing effect (28ms per char)
+   - Keep the scan line animation
+   - Keep the blue radial glow in center
+   - Keep the dot grid overlay
+   - The day/time header above messages should be slightly bigger: text-sm (was text-xs)
+   - Add a subtle "LIVE" indicator next to the day: a red dot (w-1.5 h-1.5) with pulse animation
+   - Message cards max-width: 460px (was 420px)
+   - On mobile (< 640px): full width with px-4
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TECHNICAL REQUIREMENTS:
+- framer-motion already installed — use it for all transitions
+- All Arabic text: direction: 'rtl', fontFamily: 'var(--font-arabic)'
+- Name: fontFamily: 'var(--font-sora)'
+- Clean up ALL setTimeouts on unmount
+- No Math.random() for stars — use deterministic seeded function
+- Same props: { onComplete: () => void }
+- Same default export
+- Keep all DAY_DATA exactly as is

@@ -75,7 +75,7 @@ const DAY_DATA: Record<number, { day: string; time: string; messages: { icon: st
   },
 }
 
-const MSG_STARTS = [1200, 3500, 6000, 8500]
+const MSG_STARTS = [1200, 4500, 7800, 11000]
 const CHAR_SPEED = 28
 
 function playTick() {
@@ -132,13 +132,13 @@ function TypingCard({ icon, text, onDone }: { icon: string; text: string; onDone
         initial={{ opacity: 0, x: 10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.4 }}
-        className="text-base mt-0.5 shrink-0 select-none"
+        className="text-xl mt-0.5 shrink-0 select-none"
       >
         {icon}
       </motion.span>
       <p
-        className="text-sm leading-relaxed font-arabic flex-1"
-        style={{ color: 'rgba(255,255,255,0.8)', minHeight: '1.5em' }}
+        className="flex-1 font-arabic"
+        style={{ color: 'rgba(255,255,255,0.8)', minHeight: '1.5em', fontSize: '15px', lineHeight: 1.8, fontFamily: 'var(--font-arabic)' }}
       >
         {text.slice(0, charIndex)}
         {charIndex < text.length && (
@@ -153,6 +153,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
   const [phase, setPhase] = useState(0)
   const [activeMessages, setActiveMessages] = useState<number[]>([])
   const [dayData, setDayData] = useState(DAY_DATA[1])
+  const [exiting, setExiting] = useState(false)
   const stableOnComplete = useCallback(onComplete, [onComplete])
 
   useEffect(() => {
@@ -165,16 +166,27 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
       const x = Math.sin(seed + 1) * 10000
       return x - Math.floor(x)
     }
-    return Array.from({ length: 120 }, (_, i) => ({
-      id: i,
-      left: sr(i * 7) * 100,
-      top: sr(i * 7 + 1) * 100,
-      size: 1 + sr(i * 7 + 2) * 1.5,
-      opacity: 0.2 + sr(i * 7 + 3) * 0.6,
-      duration: 3 + sr(i * 7 + 4) * 5,
-      delay: sr(i * 7 + 5) * 4,
-    }))
+    return Array.from({ length: 120 }, (_, i) => {
+      const isHero = i % 15 === 0
+      return {
+        id: i,
+        left: sr(i * 7) * 100,
+        top: sr(i * 7 + 1) * 100,
+        size: isHero ? 3 + sr(i * 7 + 2) * 1 : 1 + sr(i * 7 + 2) * 1.5,
+        opacity: isHero ? 0.6 + sr(i * 7 + 3) * 0.2 : 0.2 + sr(i * 7 + 3) * 0.6,
+        twinkleDur: 3 + sr(i * 7 + 4) * 4,
+        floatDur: 8 + sr(i * 7 + 5) * 12,
+        delay: sr(i * 7 + 6) * 4,
+        dx: (sr(i * 11) - 0.5) * 30,
+        dy: (sr(i * 11 + 1) - 0.5) * 30,
+      }
+    })
   }, [])
+
+  const handleEnterClick = useCallback(() => {
+    setExiting(true)
+    setTimeout(() => stableOnComplete(), 1200)
+  }, [stableOnComplete])
 
   useEffect(() => {
     const t: ReturnType<typeof setTimeout>[] = []
@@ -188,18 +200,17 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
       }, ms))
     })
 
-    t.push(setTimeout(() => setPhase(2), 9000))
-    t.push(setTimeout(() => setPhase(3), 13000))
-    t.push(setTimeout(() => setPhase(4), 17000))
-    t.push(setTimeout(() => stableOnComplete(), 18200))
+    t.push(setTimeout(() => setPhase(2), 13500))
+    t.push(setTimeout(() => setPhase(3), 17000))
 
     return () => t.forEach(clearTimeout)
-  }, [stableOnComplete])
+  }, [])
 
   return (
     <AnimatePresence>
-      {phase < 4 && (
+      {!exiting ? (
         <motion.div
+          key="intro-wrapper"
           exit={{ opacity: 0 }}
           transition={{ duration: 1.2, ease: 'easeInOut' }}
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden"
@@ -208,12 +219,22 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
           <style jsx global>{`
             @keyframes blink { 0%,100% { opacity: 1 } 50% { opacity: 0 } }
             @keyframes twinkle {
-              0%, 100% { opacity: var(--star-opacity); transform: scale(1); }
-              50% { opacity: calc(var(--star-opacity) * 0.3); transform: scale(0.8); }
+              0%, 100% { opacity: var(--star-opacity); }
+              50% { opacity: calc(var(--star-opacity) * 0.25); }
+            }
+            @keyframes floatStar {
+              0% { transform: translate(0, 0); }
+              33% { transform: translate(var(--dx), var(--dy)); }
+              66% { transform: translate(calc(var(--dx) * -0.5), calc(var(--dy) * 1.2)); }
+              100% { transform: translate(0, 0); }
             }
             @keyframes scanline {
               0% { top: -2px; }
               100% { top: 100%; }
+            }
+            @keyframes borderGlow {
+              0%, 100% { border-color: rgba(59,130,246,0.5); box-shadow: 0 0 12px rgba(59,130,246,0.08); }
+              50% { border-color: rgba(59,130,246,0.75); box-shadow: 0 0 24px rgba(59,130,246,0.2); }
             }
           `}</style>
 
@@ -228,8 +249,10 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                 height: `${s.size}px`,
                 background: 'white',
                 '--star-opacity': s.opacity,
+                '--dx': `${s.dx}px`,
+                '--dy': `${s.dy}px`,
                 opacity: s.opacity,
-                animation: `twinkle ${s.duration}s ${s.delay}s ease-in-out infinite`,
+                animation: `twinkle ${s.twinkleDur}s ${s.delay}s ease-in-out infinite, floatStar ${s.floatDur}s ${s.delay}s ease-in-out infinite`,
               } as React.CSSProperties}
             />
           ))}
@@ -266,7 +289,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0, filter: 'blur(8px)' }}
                 transition={{ duration: 1.2, ease: 'easeInOut' }}
-                className="flex flex-col items-center gap-4 w-full px-5 max-w-[420px]"
+                className="flex flex-col items-center gap-4 w-full px-4 sm:px-5 max-w-[460px]"
               >
                 <motion.div
                   initial={{ opacity: 0, y: -8 }}
@@ -281,11 +304,15 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                     style={{ background: '#3B82F6', boxShadow: '0 0 10px rgba(59,130,246,0.9)' }}
                   />
                   <span
-                    className="text-xs uppercase tracking-[0.35em] font-sora"
+                    className="text-sm uppercase tracking-[0.35em] font-sora"
                     style={{ color: 'rgba(59,130,246,0.85)' }}
                   >
                     {dayData.day} &mdash; {dayData.time}
                   </span>
+                  <div className="flex items-center gap-1.5 ml-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                    <span className="text-[10px] uppercase tracking-widest" style={{ color: 'rgba(239,68,68,0.7)' }}>LIVE</span>
+                  </div>
                 </motion.div>
 
                 <div className="flex flex-col gap-3 w-full">
@@ -311,13 +338,14 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
               >
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 0.65, y: 0 }}
+                  animate={{ opacity: 0.75, y: 0 }}
                   transition={{ delay: 0.3, duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
                   className="font-arabic mb-3"
                   style={{
-                    fontSize: '22px',
+                    fontSize: '26px',
                     color: 'white',
                     direction: 'rtl',
+                    fontFamily: 'var(--font-arabic)',
                     lineHeight: 1.7,
                   }}
                 >
@@ -325,13 +353,14 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                 </motion.p>
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 0.38, y: 0 }}
+                  animate={{ opacity: 0.45, y: 0 }}
                   transition={{ delay: 1.5, duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
                   className="font-arabic"
                   style={{
-                    fontSize: '20px',
+                    fontSize: '22px',
                     color: 'white',
                     direction: 'rtl',
+                    fontFamily: 'var(--font-arabic)',
                   }}
                 >
                   {'\u0641\u064A \u0645\u0639\u0638\u0645 \u0627\u0644\u0634\u0631\u0643\u0627\u062A.'}
@@ -367,9 +396,10 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                   transition={{ delay: 0.4, duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
                   className="font-sora"
                   style={{
-                    fontSize: 'clamp(32px, 6vw, 72px)',
+                    fontSize: 'clamp(36px, 7vw, 80px)',
                     fontWeight: 700,
                     color: 'white',
+                    fontFamily: 'var(--font-sora)',
                     letterSpacing: '-0.02em',
                     textShadow: '0 0 100px rgba(59,130,246,0.4)',
                     lineHeight: 1.1,
@@ -381,13 +411,14 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
 
                 <motion.p
                   initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 0.38, y: 0 }}
+                  animate={{ opacity: 0.5, y: 0 }}
                   transition={{ delay: 1.3, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                   className="font-arabic"
                   style={{
-                    fontSize: 'clamp(14px, 2vw, 20px)',
+                    fontSize: 'clamp(16px, 2.2vw, 22px)',
                     color: 'white',
                     direction: 'rtl',
+                    fontFamily: 'var(--font-arabic)',
                     letterSpacing: '0.01em',
                   }}
                 >
@@ -405,10 +436,66 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                     background: 'linear-gradient(to right, transparent, rgba(59,130,246,0.4), transparent)',
                   }}
                 />
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 2.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                  className="mt-10"
+                >
+                  <button
+                    onClick={handleEnterClick}
+                    className="group relative font-arabic"
+                    style={{
+                      direction: 'rtl',
+                      fontFamily: 'var(--font-arabic)',
+                      fontSize: '15px',
+                      color: 'rgba(255,255,255,0.85)',
+                      border: '1px solid rgba(59,130,246,0.5)',
+                      background: 'rgba(59,130,246,0.06)',
+                      backdropFilter: 'blur(8px)',
+                      padding: '14px 36px',
+                      borderRadius: '100px',
+                      cursor: 'pointer',
+                      animation: 'borderGlow 3s ease-in-out infinite',
+                      transition: 'background 0.3s, border-color 0.3s, box-shadow 0.3s, color 0.3s, transform 0.15s',
+                    }}
+                    onMouseEnter={e => {
+                      const el = e.currentTarget
+                      el.style.borderColor = 'rgba(59,130,246,0.9)'
+                      el.style.background = 'rgba(59,130,246,0.12)'
+                      el.style.boxShadow = '0 0 30px rgba(59,130,246,0.25)'
+                      el.style.color = 'white'
+                    }}
+                    onMouseLeave={e => {
+                      const el = e.currentTarget
+                      el.style.borderColor = 'rgba(59,130,246,0.5)'
+                      el.style.background = 'rgba(59,130,246,0.06)'
+                      el.style.boxShadow = 'none'
+                      el.style.color = 'rgba(255,255,255,0.85)'
+                    }}
+                    onMouseDown={e => { e.currentTarget.style.transform = 'scale(0.96)' }}
+                    onMouseUp={e => { e.currentTarget.style.transform = 'scale(1)' }}
+                  >
+                    <span className="flex items-center gap-2">
+                      {'\u0627\u0643\u062A\u0634\u0641 \u0639\u0628\u062F\u0627\u0644\u0631\u062D\u0645\u0646'}
+                      <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">&larr;</span>
+                    </span>
+                  </button>
+                </motion.div>
               </motion.div>
             )}
           </AnimatePresence>
         </motion.div>
+      ) : (
+        <motion.div
+          key="intro-exit"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: 'easeInOut' }}
+          className="fixed inset-0 z-[9999]"
+          style={{ background: '#050810' }}
+        />
       )}
     </AnimatePresence>
   )

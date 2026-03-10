@@ -8,12 +8,12 @@ import type { Variants } from 'framer-motion'
 const achievements = [
   {
     id: 1,
-    category: "Operations System",
-    title: "Built a Live Delivery Operations Dashboard",
+    category: "\u0646\u0638\u0627\u0645 \u0639\u0645\u0644\u064A\u0627\u062A",
+    title: "\u0628\u0646\u064A\u062A \u0644\u0648\u062D\u0629 \u0639\u0645\u0644\u064A\u0627\u062A \u0627\u0644\u062A\u0648\u0635\u064A\u0644 \u0627\u0644\u0644\u062D\u0638\u064A\u0629",
     metric: "+30%",
-    metricLabel: "Operational Efficiency",
-    description: "Designed and deployed OneStation — a real-time delivery tracking dashboard with advanced filters, smart caching, and auto-refresh every 5 minutes. Unified order visibility across delivery teams and eliminated manual follow-ups.",
-    tags: ["Real-time Dashboard", "Smart Caching", "Operations"],
+    metricLabel: "\u0643\u0641\u0627\u0621\u0629 \u062A\u0634\u063A\u064A\u0644\u064A\u0629",
+    description: "\u0635\u0645\u0645\u062A \u0648\u0646\u0634\u0631\u062A OneStation \u2014 \u0644\u0648\u062D\u0629 \u062A\u062A\u0628\u0639 \u062A\u0648\u0635\u064A\u0644 \u0641\u0648\u0631\u064A\u0629 \u0645\u0639 \u0641\u0644\u0627\u062A\u0631 \u0645\u062A\u0642\u062F\u0645\u0629 \u0648\u062A\u062D\u062F\u064A\u062B \u062A\u0644\u0642\u0627\u0626\u064A \u0643\u0644 \u0665 \u062F\u0642\u0627\u0626\u0642. \u0648\u062D\u0651\u062F\u062A \u0631\u0624\u064A\u0629 \u0627\u0644\u0637\u0644\u0628\u0627\u062A \u0639\u0628\u0631 \u0641\u0631\u0642 \u0627\u0644\u062A\u0648\u0635\u064A\u0644 \u0648\u0623\u0644\u063A\u062A \u0627\u0644\u0645\u062A\u0627\u0628\u0639\u0629 \u0627\u0644\u064A\u062F\u0648\u064A\u0629.",
+    tags: ["\u0644\u0648\u062D\u0629 \u0641\u0648\u0631\u064A\u0629", "\u062A\u062E\u0632\u064A\u0646 \u0630\u0643\u064A", "\u0639\u0645\u0644\u064A\u0627\u062A"],
     icon: Zap,
     image: "/images/system-delivery.jpg",
     fallbackImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
@@ -22,12 +22,12 @@ const achievements = [
   },
   {
     id: 2,
-    category: "Data & Automation",
-    title: "Built a Business Data Automation Platform",
+    category: "\u0628\u064A\u0627\u0646\u0627\u062A \u0648\u0623\u062A\u0645\u062A\u0629",
+    title: "\u0628\u0646\u064A\u062A \u0645\u0646\u0635\u0629 \u0623\u062A\u0645\u062A\u0629 \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0623\u0639\u0645\u0627\u0644",
     metric: "5x",
-    metricLabel: "Faster Decision Making",
-    description: "Databay Talebaa — a full data solutions platform delivering automation workflows, business intelligence reports, and decision-support dashboards. Reduced manual data tasks and accelerated team decisions across operations.",
-    tags: ["Data Automation", "BI Reports", "AI Workflows"],
+    metricLabel: "\u0642\u0631\u0627\u0631\u0627\u062A \u0623\u0633\u0631\u0639",
+    description: "Databay Talebaa \u2014 \u0645\u0646\u0635\u0629 \u062D\u0644\u0648\u0644 \u0628\u064A\u0627\u0646\u0627\u062A \u0645\u062A\u0643\u0627\u0645\u0644\u0629 \u062A\u0642\u062F\u0645 \u062A\u062F\u0641\u0642\u0627\u062A \u0623\u062A\u0645\u062A\u0629 \u0648\u062A\u0642\u0627\u0631\u064A\u0631 \u0630\u0643\u0627\u0621 \u0623\u0639\u0645\u0627\u0644 \u0648\u0644\u0648\u062D\u0627\u062A \u062F\u0639\u0645 \u0642\u0631\u0627\u0631. \u0642\u0644\u0651\u0635\u062A \u0627\u0644\u0645\u0647\u0627\u0645 \u0627\u0644\u064A\u062F\u0648\u064A\u0629 \u0648\u0633\u0631\u0651\u0639\u062A \u0642\u0631\u0627\u0631\u0627\u062A \u0627\u0644\u0641\u0631\u064A\u0642.",
+    tags: ["\u0623\u062A\u0645\u062A\u0629 \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A", "\u062A\u0642\u0627\u0631\u064A\u0631 BI", "\u062A\u062F\u0641\u0642\u0627\u062A AI"],
     icon: BarChart3,
     image: "/images/system-data.jpg",
     fallbackImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
@@ -67,7 +67,7 @@ function AchievementImage({
 
 export default function Achievements() {
   return (
-    <section id="achievements" className="py-24 md:py-32 px-6">
+    <section id="achievements" dir="rtl" className="py-24 md:py-32 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial="hidden"
@@ -76,14 +76,14 @@ export default function Achievements() {
           variants={staggerContainer}
           className="mb-20"
         >
-          <motion.span variants={fadeInUp} className="inline-block text-xs uppercase tracking-[0.3em] text-accent mb-4">
-            Featured Systems
+          <motion.span variants={fadeInUp} className="font-arabic inline-block text-xs uppercase tracking-[0.3em] text-accent mb-4">
+            أبرز الأنظمة
           </motion.span>
-          <motion.h2 variants={fadeInUp} className="font-sora text-3xl md:text-5xl font-bold text-white mb-4">
-            Systems I Built
+          <motion.h2 variants={fadeInUp} className="font-arabic font-sora text-3xl md:text-5xl font-bold text-white mb-4">
+            أنظمة بنيتها
           </motion.h2>
-          <motion.p variants={fadeInUp} className="text-[#9CA3AF] text-lg max-w-2xl">
-            Not websites. Not apps. Systems — built to automate work, unify data, and drive measurable business outcomes.
+          <motion.p variants={fadeInUp} className="font-arabic text-[#9CA3AF] text-lg max-w-2xl">
+            مو مواقع. مو تطبيقات. أنظمة — مبنية لأتمتة العمل، وتوحيد البيانات، وتحقيق نتائج أعمال قابلة للقياس.
           </motion.p>
         </motion.div>
 
@@ -105,7 +105,7 @@ export default function Achievements() {
                 <div className={`relative overflow-hidden ${isReversed ? 'md:order-2' : ''} h-64 md:h-auto min-h-[300px]`}>
                   <AchievementImage src={item.image} fallback={item.fallbackImage} alt={item.title} color={item.color} />
 
-                  <div className="absolute top-6 left-6 z-10">
+                  <div className="absolute top-6 right-6 z-10">
                     <div
                       className="px-4 py-3 rounded-xl backdrop-blur-md"
                       style={{ background: 'rgba(0,0,0,0.75)', border: `1px solid ${item.color}40`, boxShadow: `0 0 20px ${item.color}20` }}
@@ -113,20 +113,20 @@ export default function Achievements() {
                       <span className="font-sora text-3xl font-bold block leading-none" style={{ color: item.color }}>
                         {item.metric}
                       </span>
-                      <p className="text-white/60 text-xs mt-1">{item.metricLabel}</p>
+                      <p className="font-arabic text-white/60 text-xs mt-1">{item.metricLabel}</p>
                     </div>
                   </div>
 
-                  <div className="absolute bottom-4 right-4 z-10">
+                  <div className="absolute bottom-4 left-4 z-10">
                     <a
                       href={item.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-full backdrop-blur-md flex items-center gap-1.5 transition-all hover:opacity-80"
+                      className="font-arabic text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-full backdrop-blur-md flex items-center gap-1.5 transition-all hover:opacity-80"
                       style={{ background: 'rgba(0,0,0,0.7)', color: item.color, border: `1px solid ${item.color}40` }}
                     >
                       <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: item.color }} />
-                      View Live &rarr;
+                      شاهد المشروع &larr;
                     </a>
                   </div>
                 </div>
@@ -136,16 +136,16 @@ export default function Achievements() {
                     <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: `${item.color}20` }}>
                       <Icon size={17} style={{ color: item.color }} />
                     </div>
-                    <span className="text-xs uppercase tracking-[0.2em] font-medium" style={{ color: item.color }}>
+                    <span className="font-arabic text-xs uppercase tracking-[0.2em] font-medium" style={{ color: item.color }}>
                       {item.category}
                     </span>
                   </div>
 
-                  <h3 className="font-sora text-xl md:text-2xl font-semibold text-white mb-4 leading-snug">
+                  <h3 className="font-arabic font-sora text-xl md:text-2xl font-semibold text-white mb-4 leading-snug">
                     {item.title}
                   </h3>
 
-                  <p className="text-[#9CA3AF] text-sm leading-relaxed mb-6">
+                  <p className="font-arabic text-[#9CA3AF] text-sm leading-relaxed mb-6">
                     {item.description}
                   </p>
 
@@ -153,7 +153,7 @@ export default function Achievements() {
                     {item.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs px-3 py-1.5 rounded-full"
+                        className="font-arabic text-xs px-3 py-1.5 rounded-full"
                         style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#9CA3AF' }}
                       >
                         {tag}
