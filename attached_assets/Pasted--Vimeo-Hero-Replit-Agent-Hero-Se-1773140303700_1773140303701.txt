@@ -1,3 +1,17 @@
+# إضافة فيديو Vimeo كخلفية للـ Hero
+## برومت Replit Agent
+
+---
+
+## المطلوب
+
+استبدل خلفية الـ Hero Section بفيديو Vimeo يشتغل تلقائياً بدون صوت كخلفية سينمائية.
+
+---
+
+## استبدل `src/components/sections/Hero.tsx` بالكامل:
+
+```tsx
 'use client'
 import { motion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
@@ -56,6 +70,8 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+      {/* ===== فيديو Vimeo كخلفية ===== */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <iframe
           src="https://player.vimeo.com/video/1172103667?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&controls=0&transparent=0"
@@ -63,23 +79,28 @@ export default function Hero() {
           allow="autoplay; fullscreen; picture-in-picture"
           style={{
             position: 'absolute',
+            // نكبّر الـ iframe أكبر من الشاشة لإخفاء الـ letterboxing
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: '177.78vh',
+            width: '177.78vh',   // نسبة 16:9
             minWidth: '100%',
-            height: '56.25vw',
+            height: '56.25vw',  // نسبة 16:9
             minHeight: '100%',
           }}
           title="Hero Background"
         />
       </div>
 
+      {/* ===== Overlays فوق الفيديو ===== */}
+
+      {/* overlay داكن أساسي — يخلي النص يقرأ */}
       <div
         className="absolute inset-0 z-[1]"
         style={{ background: 'rgba(10,10,10,0.72)' }}
       />
 
+      {/* gradient من الأسفل — يحمي النص السفلي */}
       <div
         className="absolute inset-0 z-[2]"
         style={{
@@ -87,6 +108,7 @@ export default function Hero() {
         }}
       />
 
+      {/* gradient من الأعلى — ناعم */}
       <div
         className="absolute inset-0 z-[2]"
         style={{
@@ -94,6 +116,7 @@ export default function Hero() {
         }}
       />
 
+      {/* glow أزرق مركزي خلف النص */}
       <div
         className="absolute inset-0 z-[2] pointer-events-none"
         style={{
@@ -101,8 +124,10 @@ export default function Hero() {
         }}
       />
 
+      {/* cursor glow */}
       <div ref={glowRef} className="pointer-events-none fixed inset-0 z-[3] transition-opacity duration-300" />
 
+      {/* نقاط طافية — أقل كثافة عشان ما تغطي الفيديو */}
       {mounted && particles.map((p) => (
         <motion.div
           key={p.id}
@@ -113,6 +138,7 @@ export default function Hero() {
         />
       ))}
 
+      {/* ===== النص فوق كل شيء ===== */}
       <motion.div
         variants={container}
         initial="hidden"
@@ -140,7 +166,7 @@ export default function Hero() {
           variants={delayedItem}
           className="text-[#9CA3AF] tracking-[0.2em] text-xs md:text-sm uppercase"
         >
-          Business Development Leader &middot; Systems Architect &middot; AI &amp; Automation Builder
+          Business Development Leader · Systems Architect · AI & Automation Builder
         </motion.p>
 
         <motion.div
@@ -158,11 +184,12 @@ export default function Hero() {
             onClick={handleEnter}
             className="relative border border-accent/50 bg-black/40 backdrop-blur-sm text-white px-9 py-3.5 tracking-[0.08em] text-sm uppercase transition-all duration-300 hover:bg-accent/20 hover:border-accent hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
           >
-            Enter the Experience &rarr;
+            Enter the Experience →
           </button>
         </motion.div>
       </motion.div>
 
+      {/* scroll indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
         animate={{ y: [0, 10, 0] }}
@@ -170,6 +197,69 @@ export default function Hero() {
       >
         <ChevronDown className="text-[#4B5563]" size={28} />
       </motion.div>
+
     </section>
   )
 }
+```
+
+---
+
+## تحديث next.config.mjs — السماح بـ Vimeo
+
+```js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: '*.vimeocdn.com' },
+    ],
+  },
+  // السماح بـ Vimeo iframe
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-src 'self' https://player.vimeo.com;",
+          },
+        ],
+      },
+    ]
+  },
+}
+
+export default nextConfig
+```
+
+---
+
+## الـ Overlays المستخدمة وسببها
+
+```
+الفيديو (z-0)
+    ↓
+overlay داكن 72%  (z-1)  ← يخلي الفيديو خلفية مش مشتت
+    ↓
+gradient أسفل     (z-2)  ← يحمي قراءة النص
+gradient أعلى     (z-2)  ← ناعم للـ navbar
+glow أزرق         (z-2)  ← يربط الفيديو بالهوية
+    ↓
+cursor glow       (z-3)
+particles         (z-3)
+    ↓
+النص              (z-10) ← فوق كل شيء
+```
+
+---
+
+## Checklist بعد التطبيق
+
+- [ ] الفيديو يشتغل تلقائياً بدون صوت عند فتح الصفحة
+- [ ] النص واضح ومقروء فوق الفيديو
+- [ ] الفيديو يغطي كامل الشاشة بدون letterboxing
+- [ ] على الجوال الفيديو يشتغل (iOS يحتاج user interaction أحياناً)
+- [ ] `npm run build` ينجح بدون errors
