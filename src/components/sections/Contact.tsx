@@ -80,7 +80,7 @@ export default function Contact() {
       >
         <motion.h2
           variants={fadeInUp}
-          className="font-arabic font-sora text-3xl md:text-5xl font-bold text-white mb-4 leading-tight"
+          className="font-arabic font-sora text-2xl md:text-3xl font-bold text-white mb-4 leading-tight"
           style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
         >
           فكرتك تستحق نظاماً حقيقياً.<br />خلنا نبنيه.
