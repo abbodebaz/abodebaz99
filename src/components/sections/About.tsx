@@ -66,8 +66,23 @@ export default function About() {
                   border: '1px solid rgba(59,130,246,0.25)',
                 }}
               >
-                <p className="text-white font-sora font-bold text-lg leading-none">4+</p>
-                <p className="font-arabic text-[#9CA3AF] text-xs mt-0.5">قطاع</p>
+                <p className="text-white font-sora font-bold text-lg leading-none">+٤</p>
+                <p className="font-arabic text-[#9CA3AF] text-xs mt-0.5">قطاعات</p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+                className="absolute -bottom-5 -right-5 px-4 py-3 rounded-xl backdrop-blur-md"
+                style={{
+                  background: 'rgba(10,10,10,0.9)',
+                  border: '1px solid rgba(59,130,246,0.25)',
+                }}
+              >
+                <p className="text-white font-sora font-bold text-lg leading-none">+٨</p>
+                <p className="text-[#9CA3AF] text-xs mt-0.5 font-arabic" style={{ fontFamily: 'var(--font-arabic)' }}>سنوات</p>
               </motion.div>
 
               <motion.div
@@ -103,28 +118,27 @@ export default function About() {
 
             <motion.h2
               variants={fadeInUp}
-              className="font-arabic font-sora text-3xl md:text-4xl font-bold text-white mb-6"
-              style={{ lineHeight: 1.8 }}
+              className="font-arabic text-3xl md:text-4xl font-bold text-white mb-6 leading-snug"
+              style={{ direction: 'rtl', fontFamily: 'var(--font-arabic)' }}
             >
-              لا أقدّم توصيات فقط.
+              أبني الأنظمة.{' '}
               <br />
-              <span className="text-accent">أبني الأنظمة التي تجعلها تعمل.</span>
+              <span style={{ color: '#3B82F6' }}>لا أبيع الأفكار.</span>
             </motion.h2>
 
             <motion.p
               variants={fadeInUp}
-              className="font-arabic text-[#9CA3AF] text-base leading-relaxed mb-6"
-              style={{ direction: 'rtl' }}
+              className="font-arabic text-base leading-relaxed mb-8"
+              style={{
+                color: 'rgba(255,255,255,0.55)',
+                direction: 'rtl',
+                fontFamily: 'var(--font-arabic)',
+                fontSize: '17px',
+                lineHeight: 1.9,
+                fontWeight: 400,
+              }}
             >
-              أنا عبدالرحمن بازرعة — قائد تطوير أعمال ومهندس أنظمة أعمل عند تقاطع الاستراتيجية، التقنية، والعمليات لمساعدة الشركات على النمو عبر بناء أنظمة فعّالة وقابلة للتوسع.
-            </motion.p>
-
-            <motion.p
-              variants={fadeInUp}
-              className="font-arabic text-[#9CA3AF] text-base leading-relaxed mb-8"
-              style={{ direction: 'rtl' }}
-            >
-              بدلاً من تقديم توصيات نظرية، أقوم بتصميم وبناء البنية التشغيلية والتقنية التي تجعل الاستراتيجية قابلة للتنفيذ — ثم أضمن أنها تعمل.
+              كل ما تتخيله قابل للبناء — هذا ما أؤمن به وأعمله.
             </motion.p>
 
             <motion.ul variants={staggerContainer} className="space-y-3">
