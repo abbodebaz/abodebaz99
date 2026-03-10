@@ -41,6 +41,8 @@ export default function Home() {
         style={{
           opacity: introComplete ? 1 : 0,
           transition: "opacity 0.8s ease",
+          transform: 'none',
+          willChange: 'auto',
         }}
       >
         <Hero />
