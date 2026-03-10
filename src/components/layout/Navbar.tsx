@@ -16,8 +16,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
   const { scrollY } = useScroll()
-  const navBg = useTransform(scrollY, [0, 80], ['rgba(10,10,10,0)', 'rgba(10,10,10,0.95)'])
-  const navBorder = useTransform(scrollY, [0, 80], ['rgba(59,130,246,0)', 'rgba(59,130,246,0.12)'])
+  const navBg = useTransform(scrollY, [0, 80], ['rgba(10,10,10,0)', 'rgba(10,10,10,0)'])
+  const navBorder = useTransform(scrollY, [0, 80], ['rgba(59,130,246,0)', 'rgba(59,130,246,0)'])
 
   useEffect(() => {
     const sections = ['about', 'journey', 'achievements', 'impact', 'framework', 'contact']
@@ -45,7 +45,7 @@ export default function Navbar() {
   return (
     <motion.nav
       style={{ backgroundColor: navBg, borderBottomColor: navBorder }}
-      className="fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-md"
+      className="fixed top-0 left-0 right-0 z-50 border-b"
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#" className="font-sora text-2xl font-bold text-accent tracking-tight">

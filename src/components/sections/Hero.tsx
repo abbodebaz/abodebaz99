@@ -119,39 +119,6 @@ export default function Hero() {
         animate="visible"
         className="relative z-10 text-center px-6 max-w-4xl mx-auto"
       >
-        <motion.div variants={item} className="mb-10" style={{ direction: 'rtl' }}>
-          <p
-            className="font-arabic"
-            style={{
-              fontFamily: 'var(--font-arabic)',
-              fontSize: 'clamp(17px, 2.2vw, 22px)',
-              color: 'rgba(255,255,255,0.45)',
-              lineHeight: 2,
-              direction: 'rtl',
-              letterSpacing: '0.01em',
-            }}
-          >
-            البيانات مشتتة.
-            <span style={{ margin: '0 10px', color: 'rgba(59,130,246,0.3)' }}>·</span>
-            القرارات بطيئة.
-            <span style={{ margin: '0 10px', color: 'rgba(59,130,246,0.3)' }}>·</span>
-            الفريق منهك.
-          </p>
-          <p
-            className="font-arabic mt-2"
-            style={{
-              fontFamily: 'var(--font-arabic)',
-              fontSize: 'clamp(20px, 2.8vw, 28px)',
-              fontWeight: 600,
-              color: 'rgba(255,255,255,0.92)',
-              direction: 'rtl',
-              letterSpacing: '0.01em',
-            }}
-          >
-            أنا أحل هذا.
-          </p>
-        </motion.div>
-
         <motion.h1
           variants={delayedItem}
           className="font-sora font-bold text-white mb-6 leading-tight"
