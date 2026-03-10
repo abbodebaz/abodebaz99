@@ -30,7 +30,8 @@ src/
 │       ├── Journey.tsx     # Timeline with 4 phases
 │       ├── Systems.tsx     # Case studies grid (4 cards)
 │       ├── About.tsx        # Profile photo + bio with floating badges
-│       ├── Achievements.tsx # Visual achievement cards with local screenshots + Unsplash fallback
+│       ├── Achievements.tsx # 2 featured systems (OneStation + Databay) with live links
+│       ├── WorkGallery.tsx  # Grid of 18 additional projects with category badges
 │       ├── Impact.tsx      # Animated counters with glow cards + quote
 │       ├── Framework.tsx   # 5-step methodology
 │       └── Contact.tsx     # CTA section with dramatic background
@@ -60,7 +61,7 @@ src/
 - If images are missing, Achievements falls back to Unsplash images automatically
 
 ## Section Order
-Intro → Navbar → Hero → About → Journey → Systems → Achievements → Impact → Framework → Contact → Footer
+Intro → Navbar → Hero → About → Journey → Systems → Achievements → WorkGallery → Impact → Framework → Contact → Footer
 
 ## Placeholder Links
 - LinkedIn: https://linkedin.com/in/abdulrahmanbazarah (update as needed)

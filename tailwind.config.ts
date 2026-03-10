@@ -18,7 +18,8 @@ const config: Config = {
       },
       fontFamily: {
         sora: ['var(--font-sora)', 'sans-serif'],
-        sans: ['var(--font-dm-sans)', 'sans-serif'],
+        sans: ['var(--font-dm-sans)', 'var(--font-arabic)', 'sans-serif'],
+        arabic: ['var(--font-arabic)', 'sans-serif'],
       },
     },
   },

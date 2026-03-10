@@ -10,6 +10,7 @@ const About = dynamic(() => import('@/components/sections/About'))
 const Journey = dynamic(() => import('@/components/sections/Journey'))
 const Systems = dynamic(() => import('@/components/sections/Systems'))
 const Achievements = dynamic(() => import('@/components/sections/Achievements'))
+const WorkGallery = dynamic(() => import('@/components/sections/WorkGallery'))
 const Impact = dynamic(() => import('@/components/sections/Impact'))
 const Framework = dynamic(() => import('@/components/sections/Framework'))
 const Contact = dynamic(() => import('@/components/sections/Contact'))
@@ -27,6 +28,7 @@ export default function Home() {
         <Journey />
         <Systems />
         <Achievements />
+        <WorkGallery />
         <Impact />
         <Framework />
         <Contact />
