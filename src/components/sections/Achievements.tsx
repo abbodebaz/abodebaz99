@@ -75,14 +75,15 @@ export default function Achievements() {
           viewport={{ once: true }}
           variants={staggerContainer}
           className="mb-20"
+          style={{ direction: 'rtl', textAlign: 'right' }}
         >
-          <motion.span variants={fadeInUp} className="font-arabic inline-block text-xs uppercase tracking-[0.3em] text-accent mb-4">
+          <motion.span variants={fadeInUp} className="font-arabic inline-block text-xs uppercase tracking-[0.3em] text-accent mb-4" style={{ fontFamily: 'var(--font-arabic)' }}>
             أبرز الأنظمة
           </motion.span>
-          <motion.h2 variants={fadeInUp} className="font-arabic font-sora text-3xl md:text-5xl font-bold text-white mb-4">
+          <motion.h2 variants={fadeInUp} className="font-arabic font-sora text-3xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl', textAlign: 'right' }}>
             أنظمة بنيتها
           </motion.h2>
-          <motion.p variants={fadeInUp} className="font-arabic text-[#9CA3AF] text-lg max-w-2xl">
+          <motion.p variants={fadeInUp} className="font-arabic text-[#9CA3AF] text-lg max-w-2xl" style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl', textAlign: 'right' }}>
             مو مواقع. مو تطبيقات. أنظمة — مبنية لأتمتة العمل، وتوحيد البيانات، وتحقيق نتائج أعمال قابلة للقياس.
           </motion.p>
         </motion.div>
@@ -113,7 +114,7 @@ export default function Achievements() {
                       <span className="font-sora text-3xl font-bold block leading-none" style={{ color: item.color }}>
                         {item.metric}
                       </span>
-                      <p className="font-arabic text-white/60 text-xs mt-1">{item.metricLabel}</p>
+                      <p className="font-arabic text-white/60 text-xs mt-1" style={{ fontFamily: 'var(--font-arabic)', textAlign: 'right', direction: 'rtl' }}>{item.metricLabel}</p>
                     </div>
                   </div>
 
@@ -123,7 +124,7 @@ export default function Achievements() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="font-arabic text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-full backdrop-blur-md flex items-center gap-1.5 transition-all hover:opacity-80"
-                      style={{ background: 'rgba(0,0,0,0.7)', color: item.color, border: `1px solid ${item.color}40` }}
+                      style={{ background: 'rgba(0,0,0,0.7)', color: item.color, border: `1px solid ${item.color}40`, fontFamily: 'var(--font-arabic)', direction: 'rtl', flexDirection: 'row-reverse' }}
                     >
                       <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: item.color }} />
                       شاهد المشروع &larr;
@@ -131,30 +132,30 @@ export default function Achievements() {
                   </div>
                 </div>
 
-                <div className={`p-8 md:p-12 flex flex-col justify-center ${isReversed ? 'md:order-1' : ''}`}>
-                  <div className="flex items-center gap-3 mb-5">
+                <div className={`p-8 md:p-12 flex flex-col justify-center ${isReversed ? 'md:order-1' : ''}`} style={{ direction: 'rtl', textAlign: 'right', width: '100%', overflow: 'visible' }}>
+                  <div className="flex items-center gap-3 mb-5" style={{ justifyContent: 'flex-end' }}>
+                    <span className="font-arabic text-xs uppercase tracking-[0.2em] font-medium" style={{ color: item.color, fontFamily: 'var(--font-arabic)' }}>
+                      {item.category}
+                    </span>
                     <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: `${item.color}20` }}>
                       <Icon size={17} style={{ color: item.color }} />
                     </div>
-                    <span className="font-arabic text-xs uppercase tracking-[0.2em] font-medium" style={{ color: item.color }}>
-                      {item.category}
-                    </span>
                   </div>
 
-                  <h3 className="font-arabic font-sora text-xl md:text-2xl font-semibold text-white mb-4 leading-snug">
+                  <h3 className="font-arabic font-sora text-xl md:text-2xl font-semibold text-white mb-4 leading-snug" style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl', textAlign: 'right' }}>
                     {item.title}
                   </h3>
 
-                  <p className="font-arabic text-[#9CA3AF] text-sm leading-relaxed mb-6">
+                  <p className="font-arabic text-[#9CA3AF] text-sm leading-relaxed mb-6" style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl', textAlign: 'right', width: '100%', overflow: 'visible' }}>
                     {item.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2" style={{ justifyContent: 'flex-end' }}>
                     {item.tags.map((tag) => (
                       <span
                         key={tag}
                         className="font-arabic text-xs px-3 py-1.5 rounded-full"
-                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#9CA3AF' }}
+                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#9CA3AF', fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
                       >
                         {tag}
                       </span>
