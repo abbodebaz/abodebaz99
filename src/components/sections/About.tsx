@@ -103,7 +103,8 @@ export default function About() {
 
             <motion.h2
               variants={fadeInUp}
-              className="font-arabic font-sora text-3xl md:text-4xl font-bold text-white mb-6 leading-relaxed"
+              className="font-arabic font-sora text-3xl md:text-4xl font-bold text-white mb-6"
+              style={{ lineHeight: 1.8 }}
             >
               لا أقدّم توصيات فقط.
               <br />
