@@ -1,8 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import { useMemo, useState, useEffect } from 'react'
-
+import { useMemo, useState, useEffect, useRef, useCallback } from 'react'
 import type { Variants } from 'framer-motion'
 
 const container: Variants = {
@@ -14,17 +13,29 @@ const container: Variants = {
 
 const item: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" as const } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
 }
 
 const delayedItem: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" as const, delay: 1.6 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 1.6 } }
 }
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
+  const glowRef = useRef<HTMLDivElement>(null)
+
+  const handleMouse = useCallback((e: MouseEvent) => {
+    if (glowRef.current) {
+      glowRef.current.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(59,130,246,0.06), transparent 40%)`
+    }
+  }, [])
+
+  useEffect(() => {
+    setMounted(true)
+    window.addEventListener('mousemove', handleMouse)
+    return () => window.removeEventListener('mousemove', handleMouse)
+  }, [handleMouse])
 
   const particles = useMemo(() => {
     function seededRandom(seed: number) {
@@ -47,6 +58,20 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div
+        ref={glowRef}
+        className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
+      />
+
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+          className="absolute -top-1/2 -left-1/2 w-full h-full rounded-full opacity-5"
+          style={{ background: 'conic-gradient(from 0deg, #3B82F6, transparent, #60A5FA, transparent, #3B82F6)' }}
+        />
+      </div>
+
       <div
         className="absolute inset-0"
         style={{
@@ -105,18 +130,36 @@ export default function Hero() {
 
         <motion.p
           variants={delayedItem}
-          className="text-[#9CA3AF] tracking-[0.2em] text-xs md:text-sm uppercase mb-12"
+          className="text-[#9CA3AF] tracking-[0.2em] text-xs md:text-sm uppercase"
         >
           Business Development Leader · Systems Architect · AI & Automation Builder
         </motion.p>
 
-        <motion.button
+        <motion.div
           variants={delayedItem}
-          onClick={handleEnter}
-          className="border border-accent bg-transparent text-white px-9 py-3.5 tracking-[0.08em] text-sm uppercase transition-all duration-300 hover:bg-accent hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]"
+          className="flex items-center gap-2 justify-center mt-6 mb-8"
         >
-          Enter the Experience →
-        </motion.button>
+          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+          <span className="text-[#4B5563] text-xs tracking-widest uppercase">
+            Available for new projects
+          </span>
+        </motion.div>
+
+        <motion.div
+          variants={delayedItem}
+          className="relative inline-block"
+        >
+          <div
+            className="absolute inset-0 rounded-sm animate-pulse"
+            style={{ background: 'linear-gradient(90deg, #3B82F6, #60A5FA, #3B82F6)', backgroundSize: '200%', padding: '1px' }}
+          />
+          <button
+            onClick={handleEnter}
+            className="relative border border-accent/50 bg-[#0B0F19] text-white px-9 py-3.5 tracking-[0.08em] text-sm uppercase transition-all duration-300 hover:bg-accent/10 hover:border-accent hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
+          >
+            Enter the Experience →
+          </button>
+        </motion.div>
       </motion.div>
 
       <motion.div

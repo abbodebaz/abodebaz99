@@ -7,17 +7,31 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="py-24 md:py-32 px-6 relative"
+      className="relative py-32 px-6 overflow-hidden"
       style={{
         background: 'linear-gradient(to bottom, #0B0F19 0%, #0D1525 100%)',
       }}
     >
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at center, rgba(59,130,246,0.08) 0%, transparent 70%)',
-        }}
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 opacity-60"
+        style={{ background: 'linear-gradient(to right, transparent, #3B82F6, transparent)' }}
       />
+      <div
+        className="absolute -top-40 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full"
+        style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%)', filter: 'blur(40px)' }}
+      />
+
+      <div
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+        aria-hidden="true"
+      >
+        <span
+          className="font-sora text-[120px] md:text-[200px] font-bold opacity-[0.015] whitespace-nowrap"
+          style={{ color: 'white' }}
+        >
+          LET&rsquo;S BUILD
+        </span>
+      </div>
 
       <motion.div
         initial="hidden"
@@ -43,7 +57,7 @@ export default function Contact() {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2 px-8 py-3.5 bg-accent text-white rounded-lg font-medium text-sm tracking-wide transition-shadow hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]"
+            className="flex items-center gap-2 px-8 py-3.5 bg-accent text-white rounded-lg font-medium text-sm tracking-wide transition-shadow btn-glow"
           >
             <Linkedin size={18} /> LinkedIn
           </motion.a>

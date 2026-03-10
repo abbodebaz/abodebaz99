@@ -1,11 +1,12 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
   { name: 'Journey', href: '#journey' },
   { name: 'Systems', href: '#systems' },
+  { name: 'Work', href: '#achievements' },
   { name: 'Impact', href: '#impact' },
   { name: 'Framework', href: '#framework' },
   { name: 'Contact', href: '#contact' },
@@ -13,9 +14,27 @@ const navLinks = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
   const { scrollY } = useScroll()
   const navBg = useTransform(scrollY, [0, 80], ['rgba(11,15,25,0)', 'rgba(11,15,25,0.95)'])
   const navBorder = useTransform(scrollY, [0, 80], ['rgba(59,130,246,0)', 'rgba(59,130,246,0.12)'])
+
+  useEffect(() => {
+    const sections = ['journey', 'systems', 'achievements', 'impact', 'framework', 'contact']
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
+        })
+      },
+      { threshold: 0.3 }
+    )
+    sections.forEach(id => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+    return () => observer.disconnect()
+  }, [])
 
   const handleClick = (href: string) => {
     setIsOpen(false)
@@ -38,9 +57,19 @@ export default function Navbar() {
             <button
               key={link.name}
               onClick={() => handleClick(link.href)}
-              className="text-sm text-[#9CA3AF] hover:text-white transition-colors duration-300 tracking-wide"
+              className={`text-sm transition-all duration-300 relative tracking-wide ${
+                activeSection === link.href.replace('#', '')
+                  ? 'text-white'
+                  : 'text-[#9CA3AF] hover:text-white'
+              }`}
             >
               {link.name}
+              {activeSection === link.href.replace('#', '') && (
+                <motion.div
+                  layoutId="activeNav"
+                  className="absolute -bottom-1 left-0 right-0 h-px bg-accent"
+                />
+              )}
             </button>
           ))}
         </div>
@@ -67,7 +96,11 @@ export default function Navbar() {
                 <button
                   key={link.name}
                   onClick={() => handleClick(link.href)}
-                  className="text-left text-[#9CA3AF] hover:text-white transition-colors duration-300 text-lg"
+                  className={`text-left transition-colors duration-300 text-lg ${
+                    activeSection === link.href.replace('#', '')
+                      ? 'text-white'
+                      : 'text-[#9CA3AF] hover:text-white'
+                  }`}
                 >
                   {link.name}
                 </button>

@@ -1,7 +1,7 @@
 'use client'
 import { motion, useInView, useMotionValue, animate } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { fadeInUp, staggerContainer } from '@/lib/animations'
+import { fadeInUp, staggerContainer, scaleIn } from '@/lib/animations'
 
 const stats = [
   { value: 60, suffix: "%", label: "Online Sales Growth" },
@@ -28,7 +28,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   }, [inView, motionValue, value])
 
   return (
-    <span ref={ref} className="font-sora text-5xl md:text-6xl font-bold text-white">
+    <span ref={ref} className="font-sora text-5xl md:text-6xl font-bold text-white relative z-10">
       {displayValue}{suffix}
     </span>
   )
@@ -45,6 +45,9 @@ export default function Impact() {
           variants={staggerContainer}
           className="text-center mb-16"
         >
+          <motion.span variants={fadeInUp} className="section-label">
+            Results That Speak
+          </motion.span>
           <motion.h2 variants={fadeInUp} className="font-sora text-3xl md:text-5xl font-bold text-white mb-4">
             The Numbers
           </motion.h2>
@@ -61,9 +64,23 @@ export default function Impact() {
           className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-20"
         >
           {stats.map((stat) => (
-            <motion.div key={stat.label} variants={fadeInUp} className="text-center">
-              <Counter value={stat.value} suffix={stat.suffix} />
-              <p className="text-[#9CA3AF] text-sm mt-3">{stat.label}</p>
+            <motion.div
+              key={stat.label}
+              variants={scaleIn}
+              className="text-center p-8 rounded-2xl card-hover"
+              style={{
+                background: 'rgba(255,255,255,0.02)',
+                border: '1px solid rgba(59,130,246,0.1)',
+              }}
+            >
+              <div className="relative inline-block">
+                <Counter value={stat.value} suffix={stat.suffix} />
+                <div
+                  className="absolute -inset-4 rounded-full opacity-20 blur-xl"
+                  style={{ background: '#3B82F6' }}
+                />
+              </div>
+              <p className="text-[#9CA3AF] text-sm mt-4 tracking-wide">{stat.label}</p>
             </motion.div>
           ))}
         </motion.div>

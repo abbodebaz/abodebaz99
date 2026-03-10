@@ -32,9 +32,51 @@ body {
   overflow-x: hidden;
 }
 
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 150px 150px;
+}
+
 ::selection {
-  background: rgba(59, 130, 246, 0.3);
-  color: #F9FAFB;
+  background: rgba(59, 130, 246, 0.35);
+  color: white;
+}
+
+section {
+  position: relative;
+}
+
+@keyframes borderGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(59,130,246,0.3); }
+  50% { box-shadow: 0 0 40px rgba(59,130,246,0.6), 0 0 80px rgba(59,130,246,0.2); }
+}
+
+.btn-glow {
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #3B82F6;
+  margin-bottom: 16px;
+}
+
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 80px rgba(59,130,246,0.12);
+  border-color: rgba(59,130,246,0.3) !important;
 }
 
 ::-webkit-scrollbar {

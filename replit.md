@@ -1,7 +1,7 @@
 # Abdulrahman Bazarah — Cinematic Portfolio
 
 ## Overview
-A cinematic dark portfolio website for Abdulrahman Bazarah built with Next.js 14, featuring immersive animations and premium design.
+A cinematic dark portfolio website for Abdulrahman Bazarah built with Next.js 14, featuring immersive animations, a cinematic intro sequence, and premium design.
 
 ## Tech Stack
 - **Framework**: Next.js 14 (App Router)
@@ -17,23 +17,25 @@ A cinematic dark portfolio website for Abdulrahman Bazarah built with Next.js 14
 src/
 ├── app/
 │   ├── layout.tsx          # Root layout + Google Fonts (Sora, DM Sans) + Lenis
-│   ├── page.tsx            # Main page — imports all sections via dynamic()
-│   └── globals.css         # CSS variables + global styles
+│   ├── page.tsx            # Main page (client) — Intro + all sections
+│   └── globals.css         # CSS variables + grain texture + global styles
 ├── components/
+│   ├── Intro.tsx           # Cinematic intro sequence (blue pulse → AB → fade out)
 │   ├── SmoothScroll.tsx    # Lenis smooth scroll wrapper
 │   ├── layout/
-│   │   ├── Navbar.tsx      # Fixed navbar with scroll-aware background
+│   │   ├── Navbar.tsx      # Fixed navbar with active section tracking
 │   │   └── Footer.tsx      # Simple footer
 │   └── sections/
-│       ├── Hero.tsx        # Full-screen hero with particles + stagger text
+│       ├── Hero.tsx        # Full-screen hero with cursor glow + particles + gradient mesh
 │       ├── Journey.tsx     # Timeline with 4 phases
 │       ├── Systems.tsx     # Case studies grid (4 cards)
-│       ├── Impact.tsx      # Animated counters + quote
+│       ├── Achievements.tsx # Visual achievement cards with Unsplash images
+│       ├── Impact.tsx      # Animated counters with glow cards + quote
 │       ├── Framework.tsx   # 5-step methodology
-│       └── Contact.tsx     # CTA section with LinkedIn/WhatsApp/Email
+│       └── Contact.tsx     # CTA section with dramatic background
 └── lib/
     ├── utils.ts            # clsx helper
-    └── animations.ts       # Shared Framer Motion variants
+    └── animations.ts       # Shared Framer Motion variants (fadeInUp, scaleIn, slideIn)
 ```
 
 ## Design System
@@ -41,6 +43,8 @@ src/
 - Accent: #3B82F6 (blue)
 - Text: #F9FAFB (primary), #9CA3AF (secondary)
 - Fonts: Sora (headings), DM Sans (body)
+- Grain texture overlay on body
+- Cursor glow effect on hero
 
 ## Running
 - Dev server: `npm run dev` (port 5000)
