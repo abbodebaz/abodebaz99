@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from 'react'
 import { fadeInUp, staggerContainer, scaleIn } from '@/lib/animations'
 
 const stats = [
-  { value: 60, suffix: "%", label: "\u0646\u0645\u0648 \u0627\u0644\u0645\u0628\u064A\u0639\u0627\u062A \u0627\u0644\u0625\u0644\u0643\u062A\u0631\u0648\u0646\u064A\u0629" },
-  { value: 30, suffix: "%", label: "\u0643\u0641\u0627\u0621\u0629 \u0627\u0644\u062A\u0634\u063A\u064A\u0644" },
-  { value: 20, suffix: "%", label: "\u0646\u0645\u0648 \u0627\u0644\u0625\u064A\u0631\u0627\u062F\u0627\u062A" },
-  { value: 4, suffix: "+", label: "\u0642\u0637\u0627\u0639 \u062A\u062D\u0648\u0651\u0644" },
+  { value: 60, suffix: "%", label: "نمو المبيعات الإلكترونية" },
+  { value: 30, suffix: "%", label: "كفاءة التشغيل" },
+  { value: 20, suffix: "%", label: "نمو الإيرادات" },
+  { value: 4, suffix: "+", label: "قطاع تحوّل" },
 ]
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {

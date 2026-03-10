@@ -5,10 +5,10 @@ import { CheckCircle2 } from 'lucide-react'
 import Image from 'next/image'
 
 const traits = [
-  "\u0623\u0641\u0643\u0631 \u0628\u0627\u0644\u0623\u0646\u0638\u0645\u0629 \u0642\u0628\u0644 \u0623\u064A \u0634\u064A\u0621",
-  "\u0645\u0647\u0648\u0648\u0633 \u0628\u0627\u0644\u0646\u062A\u0627\u0626\u062C \u0627\u0644\u0642\u0627\u0628\u0644\u0629 \u0644\u0644\u0642\u064A\u0627\u0633",
-  "\u0627\u0644\u062C\u0633\u0631 \u0628\u064A\u0646 \u0627\u0644\u0627\u0633\u062A\u0631\u0627\u062A\u064A\u062C\u064A\u0629 \u0648\u0627\u0644\u062A\u0646\u0641\u064A\u0630",
-  "\u0628\u0646\u064A\u062A \u0623\u0646\u0638\u0645\u0629 \u0641\u064A \u0623\u0643\u062B\u0631 \u0645\u0646 \u0664 \u0642\u0637\u0627\u0639\u0627\u062A",
+  "أفكر بالأنظمة قبل أي شيء",
+  "مهووس بالنتائج القابلة للقياس",
+  "الجسر بين الاستراتيجية والتنفيذ",
+  "بنيت أنظمة في أكثر من ٤ قطاعات",
 ]
 
 export default function About() {
@@ -67,7 +67,7 @@ export default function About() {
                 }}
               >
                 <p className="text-white font-sora font-bold text-lg leading-none">4+</p>
-                <p className="font-arabic text-[#9CA3AF] text-xs mt-0.5">{'\u0642\u0637\u0627\u0639'}</p>
+                <p className="font-arabic text-[#9CA3AF] text-xs mt-0.5">قطاع</p>
               </motion.div>
 
               <motion.div
@@ -98,16 +98,16 @@ export default function About() {
               variants={fadeInUp}
               className="font-arabic inline-block text-xs uppercase tracking-[0.3em] text-accent mb-4"
             >
-              {'\u0645\u0646 \u0623\u0646\u0627'}
+              من أنا
             </motion.span>
 
             <motion.h2
               variants={fadeInUp}
               className="font-arabic font-sora text-3xl md:text-4xl font-bold text-white mb-6 leading-snug"
             >
-              {'\u0645\u0627 \u0623\u0643\u062A\u0641\u064A \u0628\u0627\u0644\u0646\u0635\u064A\u062D\u0629.'}
+              ما أكتفي بالنصيحة.
               <br />
-              <span className="text-accent">{'\u0623\u0628\u0646\u064A.'}</span>
+              <span className="text-accent">أبني.</span>
             </motion.h2>
 
             <motion.p

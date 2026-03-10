@@ -4,12 +4,12 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
-  { name: '\u0645\u0646 \u0623\u0646\u0627', href: '#about' },
-  { name: '\u0645\u0633\u064A\u0631\u062A\u064A', href: '#journey' },
-  { name: '\u0623\u0639\u0645\u0627\u0644\u064A', href: '#achievements' },
-  { name: '\u0627\u0644\u0623\u062B\u0631', href: '#impact' },
-  { name: '\u0627\u0644\u0645\u0646\u0647\u062C\u064A\u0629', href: '#framework' },
-  { name: '\u062A\u0648\u0627\u0635\u0644', href: '#contact' },
+  { name: 'من أنا', href: '#about' },
+  { name: 'مسيرتي', href: '#journey' },
+  { name: 'أعمالي', href: '#achievements' },
+  { name: 'الأثر', href: '#impact' },
+  { name: 'المنهجية', href: '#framework' },
+  { name: 'تواصل', href: '#contact' },
 ]
 
 export default function Navbar() {
