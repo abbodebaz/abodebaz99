@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Sora, DM_Sans, IBM_Plex_Sans_Arabic } from 'next/font/google';
+import { Sora, DM_Sans, Readex_Pro } from 'next/font/google';
 import "./globals.css";
 import { SmoothScroll } from "@/components/SmoothScroll";
 
@@ -15,9 +15,9 @@ const dmSans = DM_Sans({
   display: 'swap',
 });
 
-const ibmArabic = IBM_Plex_Sans_Arabic({
-  subsets: ['arabic'],
-  weight: ['400', '500', '600'],
+const readexPro = Readex_Pro({
+  subsets: ['arabic', 'latin'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-arabic',
   display: 'swap',
 });
@@ -40,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${sora.variable} ${dmSans.variable} ${ibmArabic.variable} font-sans antialiased`}>
+      <body className={`${sora.variable} ${dmSans.variable} ${readexPro.variable} font-sans antialiased`}>
         <SmoothScroll>
           {children}
         </SmoothScroll>
