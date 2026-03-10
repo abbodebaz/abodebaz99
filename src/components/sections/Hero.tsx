@@ -53,7 +53,14 @@ export default function Hero() {
 
   return (
     <section dir="rtl" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      <div
+        className="absolute inset-0 z-0 overflow-hidden"
+        style={{
+          backgroundImage: "url('/images/hero-fallback.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
         {videoReady && (
           <iframe
             src="https://player.vimeo.com/video/1172103667?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&controls=0&transparent=0"
