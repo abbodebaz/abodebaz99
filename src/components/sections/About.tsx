@@ -115,7 +115,7 @@ export default function About() {
               className="font-arabic text-[#9CA3AF] text-base leading-relaxed mb-6"
               style={{ direction: 'rtl' }}
             >
-              أنا Abdulrahman Bazarah — قائد تطوير أعمال ومهندس أنظمة من السعودية. أشتغل عند تقاطع الاستراتيجية والتقنية والعمليات لمساعدة الشركات على النمو من خلال أنظمة أفضل.
+              أنا عبدالرحمن بازرعة — قائد تطوير أعمال ومهندس أنظمة أعمل عند تقاطع الاستراتيجية، التقنية، والعمليات لمساعدة الشركات على النمو عبر بناء أنظمة فعّالة وقابلة للتوسع.
             </motion.p>
 
             <motion.p
@@ -123,7 +123,7 @@ export default function About() {
               className="font-arabic text-[#9CA3AF] text-base leading-relaxed mb-8"
               style={{ direction: 'rtl' }}
             >
-              معظم الاستشاريين يخبرونك بما تسوي. أنا أصمم النظام، أبني البنية التحتية، وأضمن أنه يشتغل — وأسلّمه وهو شغّال.
+              بدلاً من تقديم توصيات نظرية، أقوم بتصميم وبناء البنية التشغيلية والتقنية التي تجعل الاستراتيجية قابلة للتنفيذ — ثم أضمن أنها تعمل.
             </motion.p>
 
             <motion.ul variants={staggerContainer} className="space-y-3">
