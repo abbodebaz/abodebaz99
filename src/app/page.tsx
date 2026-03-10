@@ -8,6 +8,7 @@ import Footer from '@/components/layout/Footer'
 
 const About = dynamic(() => import('@/components/sections/About'))
 const Journey = dynamic(() => import('@/components/sections/Journey'))
+const Systems = dynamic(() => import('@/components/sections/Systems'))
 const Achievements = dynamic(() => import('@/components/sections/Achievements'))
 const WorkGallery = dynamic(() => import('@/components/sections/WorkGallery'))
 const Impact = dynamic(() => import('@/components/sections/Impact'))
@@ -25,6 +26,7 @@ export default function Home() {
         <Hero />
         <About />
         <Journey />
+        <Systems />
         <Achievements />
         <WorkGallery />
         <Impact />
