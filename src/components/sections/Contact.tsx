@@ -1,9 +1,17 @@
 'use client'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Linkedin, MessageCircle, Mail } from 'lucide-react'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
 export default function Contact() {
+  const [videoReady, setVideoReady] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVideoReady(true), 1200)
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
     <section
       id="contact"
@@ -13,17 +21,46 @@ export default function Contact() {
         background: 'linear-gradient(to bottom, #0A0A0A 0%, #0F0F0F 100%)',
       }}
     >
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {videoReady && (
+          <iframe
+            src="https://player.vimeo.com/video/1172103500?badge=0&autopause=0&background=1&autoplay=1&loop=1&muted=1&controls=0&transparent=0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '177.78vh',
+              minWidth: '100%',
+              height: '56.25vw',
+              minHeight: '100%',
+              opacity: 0.18,
+              pointerEvents: 'none',
+              border: 'none',
+            }}
+          />
+        )}
+      </div>
+
+      {/* Dark overlay on video */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 opacity-60"
-        style={{ background: 'linear-gradient(to right, transparent, #3B82F6, transparent)' }}
-      />
-      <div
-        className="absolute -top-40 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%)', filter: 'blur(40px)' }}
+        className="absolute inset-0 z-[1]"
+        style={{ background: 'rgba(5,8,16,0.78)' }}
       />
 
       <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 opacity-60"
+        style={{ background: 'linear-gradient(to right, transparent, #3B82F6, transparent)', zIndex: 2 }}
+      />
+      <div
+        className="absolute -top-40 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full"
+        style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%)', filter: 'blur(40px)', zIndex: 2 }}
+      />
+
+      <div
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-[2]"
         aria-hidden="true"
       >
         <span

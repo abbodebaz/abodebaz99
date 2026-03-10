@@ -1,0 +1,70 @@
+Update ONLY src/components/sections/Contact.tsx
+
+Add a Vimeo video background to the contact section with lazy loading.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 1 — Add state for lazy load
+
+At the top of the Contact component, add:
+const [videoReady, setVideoReady] = useState(false)
+
+Import useState from react:
+import { useState, useEffect } from 'react'
+
+Add useEffect to delay video load:
+useEffect(() => {
+  const timer = setTimeout(() => setVideoReady(true), 1200)
+  return () => clearTimeout(timer)
+}, [])
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 2 — Add video background
+
+Inside the section tag, add this as the FIRST child (before all existing divs):
+
+{/* Video Background */}
+<div className="absolute inset-0 z-0 overflow-hidden">
+  {videoReady && (
+    <iframe
+      src="https://player.vimeo.com/video/1172103500?badge=0&autopause=0&background=1&autoplay=1&loop=1&muted=1&controls=0&transparent=0"
+      allow="autoplay; fullscreen; picture-in-picture"
+      style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '177.78vh',
+        minWidth: '100%',
+        height: '56.25vw',
+        minHeight: '100%',
+        opacity: 0.18,
+        pointerEvents: 'none',
+        border: 'none',
+      }}
+    />
+  )}
+</div>
+
+{/* Dark overlay on video */}
+<div
+  className="absolute inset-0 z-[1]"
+  style={{ background: 'rgba(5,8,16,0.78)' }}
+/>
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 3 — Fix z-index of existing content
+
+Make sure the existing content divs (the gradient top line, glow, watermark text, and the main motion.div) all have z-index higher than 1.
+
+Find the existing top gradient div and add z-index: 2:
+style={{ ... , zIndex: 2 }}
+
+Find the glow div and add zIndex: 2.
+
+Find the watermark div (with 'لنبني' text) and ensure it has className with z-index, change any existing z-index class to z-[2].
+
+Find the main motion.div with className="max-w-3xl mx-auto text-center relative z-10" — keep z-10, it's already fine.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DO NOT change any text, buttons, or layout.
+DO NOT change the section's existing background gradient.
