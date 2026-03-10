@@ -6,6 +6,7 @@ import { Menu, X } from 'lucide-react'
 const navLinks = [
   { name: 'من أنا', href: '#about' },
   { name: 'مسيرتي', href: '#journey' },
+  { name: 'أعمالي', href: '#systems' },
   { name: 'الأثر', href: '#impact' },
   { name: 'المنهجية', href: '#framework' },
   { name: 'تواصل', href: '#contact' },
@@ -19,7 +20,7 @@ export default function Navbar() {
   const navBorder = useTransform(scrollY, [0, 80], ['rgba(59,130,246,0)', 'rgba(59,130,246,0)'])
 
   useEffect(() => {
-    const sections = ['about', 'journey', 'achievements', 'impact', 'framework', 'contact']
+    const sections = ['about', 'journey', 'systems', 'impact', 'framework', 'contact']
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
