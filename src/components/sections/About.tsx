@@ -13,7 +13,36 @@ const traits = [
 
 export default function About() {
   return (
-    <section id="about" dir="rtl" className="py-24 md:py-32 px-6 relative overflow-hidden">
+    <>
+      <style jsx global>{`
+        @keyframes neonPulse {
+          0%, 100% {
+            box-shadow:
+              0 0 6px rgba(59,130,246,0.6),
+              0 0 12px rgba(59,130,246,0.4),
+              0 0 24px rgba(59,130,246,0.3),
+              0 0 48px rgba(59,130,246,0.15),
+              inset 0 0 12px rgba(59,130,246,0.05);
+          }
+          50% {
+            box-shadow:
+              0 0 10px rgba(59,130,246,0.9),
+              0 0 20px rgba(59,130,246,0.7),
+              0 0 40px rgba(59,130,246,0.5),
+              0 0 80px rgba(59,130,246,0.25),
+              inset 0 0 20px rgba(59,130,246,0.08);
+          }
+        }
+
+        @keyframes neonBorderRotate {
+          0% { border-color: rgba(59,130,246,0.6); }
+          25% { border-color: rgba(96,165,250,0.8); }
+          50% { border-color: rgba(59,130,246,1); }
+          75% { border-color: rgba(96,165,250,0.8); }
+          100% { border-color: rgba(59,130,246,0.6); }
+        }
+      `}</style>
+      <section id="about" dir="rtl" className="py-24 md:py-32 px-6 relative overflow-hidden">
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 opacity-30"
         style={{ background: 'linear-gradient(to bottom, transparent, #3B82F6)' }}
@@ -42,10 +71,29 @@ export default function About() {
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 style={{ transformStyle: 'preserve-3d' }}
               >
+                {/* Outer glow ring */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: '-3px',
+                    borderRadius: '18px',
+                    background: 'transparent',
+                    border: '1px solid rgba(59,130,246,0.2)',
+                    animation: 'neonPulse 2.5s ease-in-out infinite',
+                    animationDelay: '0.4s',
+                    pointerEvents: 'none',
+                    zIndex: 10,
+                  }}
+                />
+
                 {/* Image frame */}
                 <div
                   className="relative w-72 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden"
-                  style={{ border: '1px solid rgba(59,130,246,0.2)' }}
+                  style={{
+                    border: '1px solid rgba(59,130,246,0.7)',
+                    animation: 'neonPulse 2.5s ease-in-out infinite, neonBorderRotate 2.5s ease-in-out infinite',
+                    borderRadius: '16px',
+                  }}
                 >
                   <Image
                     src="/images/profile.jpg"
@@ -194,5 +242,6 @@ export default function About() {
         </div>
       </div>
     </section>
+    </>
   )
 }

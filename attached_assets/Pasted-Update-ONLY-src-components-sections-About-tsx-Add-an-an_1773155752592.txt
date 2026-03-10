@@ -1,0 +1,79 @@
+Update ONLY src/components/sections/About.tsx
+
+Add an animated neon blue border effect to the image frame.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 1 — Add keyframes
+
+Find the existing <style> tag OR add a new one inside the component return, before the section tag:
+
+<style jsx global>{`
+  @keyframes neonPulse {
+    0%, 100% {
+      box-shadow:
+        0 0 6px rgba(59,130,246,0.6),
+        0 0 12px rgba(59,130,246,0.4),
+        0 0 24px rgba(59,130,246,0.3),
+        0 0 48px rgba(59,130,246,0.15),
+        inset 0 0 12px rgba(59,130,246,0.05);
+    }
+    50% {
+      box-shadow:
+        0 0 10px rgba(59,130,246,0.9),
+        0 0 20px rgba(59,130,246,0.7),
+        0 0 40px rgba(59,130,246,0.5),
+        0 0 80px rgba(59,130,246,0.25),
+        inset 0 0 20px rgba(59,130,246,0.08);
+    }
+  }
+
+  @keyframes neonBorderRotate {
+    0% { border-color: rgba(59,130,246,0.6); }
+    25% { border-color: rgba(96,165,250,0.8); }
+    50% { border-color: rgba(59,130,246,1); }
+    75% { border-color: rgba(96,165,250,0.8); }
+    100% { border-color: rgba(59,130,246,0.6); }
+  }
+`}</style>
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 2 — Apply to image frame div
+
+Find the div with className "relative w-72 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden"
+
+Change its style from:
+style={{ border: '1px solid rgba(59,130,246,0.2)' }}
+
+To:
+style={{
+  border: '1px solid rgba(59,130,246,0.7)',
+  animation: 'neonPulse 2.5s ease-in-out infinite, neonBorderRotate 2.5s ease-in-out infinite',
+  borderRadius: '16px',
+}}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 3 — Add outer glow ring
+
+Add this div BEFORE the image frame div (as a sibling, inside the motion.div wrapper):
+
+<div
+  style={{
+    position: 'absolute',
+    inset: '-3px',
+    borderRadius: '18px',
+    background: 'transparent',
+    border: '1px solid rgba(59,130,246,0.2)',
+    animation: 'neonPulse 2.5s ease-in-out infinite',
+    animationDelay: '0.4s',
+    pointerEvents: 'none',
+    zIndex: 10,
+  }}
+/>
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DO NOT CHANGE:
+- Any layout, grid, or column order
+- The image component itself
+- The badges
+- The 3D tilt animation
+- Any text content or the right column
