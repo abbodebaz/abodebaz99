@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Sora, DM_Sans, Readex_Pro } from 'next/font/google';
 import "./globals.css";
-import { SmoothScroll } from "@/components/SmoothScroll";
 
 const sora = Sora({
   subsets: ['latin'],
@@ -41,9 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${sora.variable} ${dmSans.variable} ${readexPro.variable} font-sans antialiased`}>
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
+        {children}
       </body>
     </html>
   );
