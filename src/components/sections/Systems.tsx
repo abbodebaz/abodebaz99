@@ -58,11 +58,16 @@ export default function Systems() {
         >
           <motion.h2
             variants={fadeInUp}
-            className="font-sora text-3xl md:text-5xl font-bold text-white mb-4"
+            className="font-arabic text-3xl md:text-5xl font-bold text-white mb-4"
+            style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
           >
             الأنظمة التي قمت ببنائها
           </motion.h2>
-          <motion.p variants={fadeInUp} className="text-[#9CA3AF] text-lg">
+          <motion.p
+            variants={fadeInUp}
+            className="font-arabic text-[#9CA3AF] text-lg"
+            style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
+          >
             مشكلات حقيقية. حلول عملية. نتائج قابلة للقياس.
           </motion.p>
         </motion.div>
@@ -91,33 +96,54 @@ export default function Systems() {
                 {study.tag}
               </span>
 
-              <h3 className="font-sora text-xl font-semibold text-white mb-6">
+              <h3
+                className="font-arabic text-xl font-semibold text-white mb-6"
+                style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
+              >
                 {study.title}
               </h3>
 
               <div className="mb-4 pr-4 border-r-2 border-red-500/40">
-                <p className="text-xs uppercase tracking-wider text-red-400/70 mb-1 font-medium">
+                <p
+                  className="font-arabic text-xs text-red-400/70 mb-1 font-medium"
+                  style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl', letterSpacing: '0' }}
+                >
                   المشكلة
                 </p>
-                <p className="text-[#9CA3AF] text-sm leading-relaxed">
+                <p
+                  className="font-arabic text-[#9CA3AF] text-sm leading-relaxed"
+                  style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl', lineHeight: 1.9 }}
+                >
                   {study.problem}
                 </p>
               </div>
 
               <div className="mb-6 pr-4 border-r-2 border-accent/40">
-                <p className="text-xs uppercase tracking-wider text-accent/70 mb-1 font-medium">
+                <p
+                  className="font-arabic text-xs text-accent/70 mb-1 font-medium"
+                  style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl', letterSpacing: '0' }}
+                >
                   الحل
                 </p>
-                <p className="text-[#9CA3AF] text-sm leading-relaxed">
+                <p
+                  className="font-arabic text-[#9CA3AF] text-sm leading-relaxed"
+                  style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl', lineHeight: 1.9 }}
+                >
                   {study.solution}
                 </p>
               </div>
 
               <div className="pt-4 border-t border-[rgba(59,130,246,0.08)]">
-                <span className="text-success font-sora font-bold text-lg">
+                <span
+                  className="font-arabic font-bold text-lg"
+                  style={{ fontFamily: 'var(--font-arabic)', color: 'var(--success)' }}
+                >
                   {study.impact}
                 </span>
-                <span className="text-[#4B5563] text-sm mr-2">
+                <span
+                  className="font-arabic text-[#4B5563] text-sm mr-2"
+                  style={{ fontFamily: 'var(--font-arabic)' }}
+                >
                   {study.impactDetail}
                 </span>
               </div>
