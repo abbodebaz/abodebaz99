@@ -48,8 +48,9 @@ export default function Navbar() {
         left: 0,
         right: 0,
         zIndex: 9999,
-        backgroundColor: 'rgba(5,8,16,0.0)',
-        borderBottomColor: 'rgba(59,130,246,0)',
+        backgroundColor: 'transparent',
+        borderBottomColor: 'transparent',
+        transform: 'translateZ(0)',
       }}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
