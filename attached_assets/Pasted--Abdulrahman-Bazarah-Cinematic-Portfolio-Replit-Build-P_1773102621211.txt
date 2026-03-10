@@ -1,0 +1,671 @@
+# Abdulrahman Bazarah — Cinematic Portfolio
+## Replit Build Prompt (Next.js 14 + React + Framer Motion)
+
+---
+
+## OBJECTIVE
+
+Build a **world-class, cinematic dark portfolio** for Abdulrahman Bazarah.
+This is NOT a typical portfolio — it's an immersive storytelling experience.
+Performance must be exceptional. Animations must feel premium.
+Think: Apple × Vercel × Stripe energy.
+
+---
+
+## TECH STACK — EXACT VERSIONS
+
+```bash
+# Initialize project
+npx create-next-app@14 abdulrahman-portfolio \
+  --typescript \
+  --tailwind \
+  --eslint \
+  --app \
+  --src-dir \
+  --import-alias "@/*"
+
+# Install dependencies
+npm install framer-motion
+npm install @studio-freight/lenis
+npm install lucide-react
+npm install clsx
+```
+
+**Stack:**
+- Next.js 14 (App Router)
+- React 18
+- TypeScript
+- TailwindCSS
+- Framer Motion (all animations)
+- Lenis (smooth scroll)
+- Lucide React (icons)
+
+---
+
+## PROJECT FOLDER STRUCTURE
+
+```
+src/
+├── app/
+│   ├── layout.tsx          # Root layout + fonts + Lenis
+│   ├── page.tsx            # Main page — imports all sections
+│   └── globals.css         # Global styles + CSS variables
+│
+├── components/
+│   ├── layout/
+│   │   ├── Navbar.tsx
+│   │   └── Footer.tsx
+│   │
+│   └── sections/
+│       ├── Hero.tsx
+│       ├── Journey.tsx
+│       ├── Systems.tsx
+│       ├── Impact.tsx
+│       ├── Framework.tsx
+│       └── Contact.tsx
+│
+└── lib/
+    └── utils.ts            # clsx helper
+```
+
+---
+
+## DESIGN SYSTEM (globals.css)
+
+```css
+:root {
+  --bg-primary:    #0B0F19;
+  --bg-secondary:  #111827;
+  --bg-card:       #0D1117;
+  --accent:        #3B82F6;
+  --accent-light:  #60A5FA;
+  --accent-glow:   rgba(59, 130, 246, 0.15);
+  --text-primary:  #F9FAFB;
+  --text-secondary:#9CA3AF;
+  --text-muted:    #4B5563;
+  --border:        rgba(59, 130, 246, 0.12);
+  --success:       #10B981;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+```
+
+**Tailwind config additions:**
+```js
+// tailwind.config.ts
+theme: {
+  extend: {
+    colors: {
+      'bg-primary': '#0B0F19',
+      'bg-secondary': '#111827',
+      'bg-card': '#0D1117',
+      'accent': '#3B82F6',
+      'accent-light': '#60A5FA',
+    },
+    fontFamily: {
+      sora: ['Sora', 'sans-serif'],
+      sans: ['DM Sans', 'sans-serif'],
+    },
+  }
+}
+```
+
+---
+
+## FONTS (layout.tsx)
+
+```tsx
+import { Sora, DM_Sans } from 'next/font/google'
+
+const sora = Sora({
+  subsets: ['latin'],
+  variable: '--font-sora',
+  display: 'swap',
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+})
+```
+
+---
+
+## LENIS SMOOTH SCROLL (layout.tsx)
+
+```tsx
+'use client'
+import Lenis from '@studio-freight/lenis'
+import { useEffect } from 'react'
+
+export function SmoothScroll({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    })
+
+    function raf(time: number) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+    requestAnimationFrame(raf)
+
+    return () => lenis.destroy()
+  }, [])
+
+  return <>{children}</>
+}
+```
+
+---
+
+## SECTION 1 — NAVBAR (Navbar.tsx)
+
+**Behavior:**
+- Fixed top, full width
+- Transparent on load → `backdrop-blur + border-bottom` on scroll (Framer Motion useScroll)
+- Left: `AB` monogram in blue
+- Right: nav links — Journey · Systems · Impact · Framework · Contact
+- Mobile: hamburger → animated slide-down menu
+
+```tsx
+// Use Framer Motion useScroll + useTransform for navbar background opacity
+const { scrollY } = useScroll()
+const navBg = useTransform(scrollY, [0, 80], ['rgba(11,15,25,0)', 'rgba(11,15,25,0.95)'])
+```
+
+---
+
+## SECTION 2 — HERO (Hero.tsx)
+
+**Layout:** Full viewport height, centered, dark bg with glow
+
+**Background effects:**
+```tsx
+// 1. Large radial gradient glow behind text (CSS)
+background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(59,130,246,0.12) 0%, transparent 70%)
+
+// 2. Animated floating particles — 20 small divs
+// Random position, random float animation delay
+// opacity: 0.3, size: 2px, background: #3B82F6
+
+// 3. Subtle dot grid pattern overlay (CSS background-image)
+background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)
+background-size: 40px 40px
+```
+
+**Text animation sequence (Framer Motion):**
+```tsx
+// staggerChildren: 0.3
+// each child: { opacity: 0, y: 20 } → { opacity: 1, y: 0 }
+// duration: 0.8, ease: "easeOut"
+
+<motion.p className="text-secondary text-xl">
+  Every company runs on systems.
+</motion.p>
+
+<motion.p className="text-secondary text-xl">
+  Most systems are broken.
+</motion.p>
+
+<motion.p className="text-accent text-xl font-medium">
+  My work is fixing them.
+</motion.p>
+
+// pause (delay: 1.6s)
+
+<motion.h1 className="font-sora text-6xl md:text-8xl font-bold text-white">
+  Abdulrahman Bazarah
+</motion.h1>
+
+<motion.p className="text-secondary tracking-widest text-sm uppercase">
+  Business Development Leader · Systems Architect · AI & Automation Builder
+</motion.p>
+
+<motion.button>
+  Enter the Experience →
+</motion.button>
+```
+
+**CTA Button:**
+```css
+border: 1px solid #3B82F6;
+background: transparent;
+padding: 14px 36px;
+letter-spacing: 0.08em;
+transition: all 0.3s;
+
+/* hover */
+background: #3B82F6;
+box-shadow: 0 0 30px rgba(59,130,246,0.4);
+```
+
+**Scroll indicator:** bouncing animated chevron-down icon at bottom center
+
+---
+
+## SECTION 3 — JOURNEY (Journey.tsx)
+
+**Title:** My Journey Building Systems
+**Subtitle:** From understanding businesses to building the systems that scale them.
+
+**Layout:** Vertical timeline with centered line. Cards alternate left/right on desktop.
+
+**Framer Motion:** `whileInView` with `viewport={{ once: true }}`, slide in from left/right
+
+```tsx
+const phases = [
+  {
+    number: "01",
+    icon: Search,       // lucide
+    title: "Understanding Business",
+    description: "I started by deeply studying how businesses operate — their workflows, bottlenecks, and growth blockers. Every system starts with understanding the business first."
+  },
+  {
+    number: "02",
+    icon: Building2,
+    title: "Building Digital Systems",
+    description: "Translated business needs into digital infrastructure — CRMs, dashboards, operations tools. Systems that replaced manual work and created structure."
+  },
+  {
+    number: "03",
+    icon: Link,
+    title: "Connecting Data",
+    description: "Integrated disconnected tools and platforms to create unified data flows. Real-time visibility across operations, sales, and marketing."
+  },
+  {
+    number: "04",
+    icon: Bot,
+    title: "AI & Automation",
+    description: "Applied AI and automation to eliminate repetitive work, predict patterns, and make businesses faster and smarter at scale."
+  }
+]
+```
+
+**Card style:**
+```css
+background: rgba(255,255,255,0.02);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(59,130,246,0.12);
+border-left: 3px solid #3B82F6;
+border-radius: 12px;
+padding: 32px;
+```
+
+---
+
+## SECTION 4 — SYSTEMS (Systems.tsx)
+
+**Title:** Systems I Built
+**Subtitle:** Real problems. Real solutions. Measurable impact.
+
+**Layout:** 2-column grid (desktop), 1-column (mobile)
+**Animation:** staggered `whileInView` fade-up for each card
+
+```tsx
+const caseStudies = [
+  {
+    tag: "Operations",
+    title: "Delivery Operations System",
+    problem: "Delivery operations were fragmented with no central tracking. Teams worked in silos, orders were lost, management had zero visibility.",
+    solution: "Built a centralized dashboard integrating order management, team assignment, and real-time status tracking across all operations.",
+    impact: "+30% Delivery Efficiency",
+    impactDetail: "within 60 days of launch"
+  },
+  {
+    tag: "E-Commerce",
+    title: "Online Sales Growth System",
+    problem: "Online store had traffic but poor conversion. No data on customer behavior, no retargeting, no structured sales funnel.",
+    solution: "Redesigned the customer journey, implemented analytics, built automated email sequences, connected ad platforms to CRM data.",
+    impact: "+60% Online Sales Growth",
+    impactDetail: "over 3 months"
+  },
+  {
+    tag: "Revenue Operations",
+    title: "Revenue Growth Framework",
+    problem: "Sales team lacked structure. No pipeline visibility, inconsistent follow-ups, no performance metrics for leadership.",
+    solution: "Implemented full CRM with automated follow-up sequences, sales stage tracking, and performance dashboards.",
+    impact: "+20% Revenue Growth",
+    impactDetail: "in Q1 after launch"
+  },
+  {
+    tag: "Digital Transformation",
+    title: "Business Digitization Program",
+    problem: "Core business processes were manual and paper-based. Scaling was impossible without digital infrastructure.",
+    solution: "Mapped all processes, digitized operations step by step, trained teams, built reporting systems for real-time decisions.",
+    impact: "−25% Operational Costs",
+    impactDetail: "enabled 2x growth capacity"
+  }
+]
+```
+
+**Card structure:**
+```tsx
+<div className="card">
+  <span className="tag">{tag}</span>          {/* blue pill badge */}
+  <h3>{title}</h3>
+
+  <div className="problem">                   {/* red-ish left border */}
+    <label>Problem</label>
+    <p>{problem}</p>
+  </div>
+
+  <div className="solution">                  {/* blue left border */}
+    <label>Solution</label>
+    <p>{solution}</p>
+  </div>
+
+  <div className="impact">                    {/* green, prominent */}
+    <span className="impact-number">{impact}</span>
+    <span className="impact-detail">{impactDetail}</span>
+  </div>
+</div>
+```
+
+**Card hover:**
+```css
+transform: translateY(-6px);
+border-color: rgba(59,130,246,0.35);
+box-shadow: 0 20px 60px rgba(59,130,246,0.1);
+```
+
+---
+
+## SECTION 5 — IMPACT (Impact.tsx)
+
+**Title:** The Numbers
+**Subtitle:** Every system I build is measured by business impact.
+
+**Background:** `#111827`
+
+**4 Counters:**
+```tsx
+const stats = [
+  { value: 60, suffix: "%", label: "Online Sales Growth" },
+  { value: 30, suffix: "%", label: "Operational Efficiency" },
+  { value: 20, suffix: "%", label: "Revenue Growth" },
+  { value: 4,  suffix: "+", label: "Industries Transformed" },
+]
+```
+
+**Counter animation (Framer Motion):**
+```tsx
+// Use useInView + useMotionValue + animate from framer-motion
+// Count from 0 to value over 2s with ease-out when enters viewport
+import { useInView, useMotionValue, animate } from 'framer-motion'
+
+useEffect(() => {
+  if (inView) {
+    const controls = animate(motionValue, targetValue, {
+      duration: 2,
+      ease: "easeOut",
+      onUpdate: (v) => setDisplayValue(Math.round(v))
+    })
+    return controls.stop
+  }
+}, [inView])
+```
+
+**Quote block below counters:**
+```
+"Systems don't just solve problems. They multiply what's possible."
+— Abdulrahman Bazarah
+```
+Style: italic, centered, muted color, left border accent
+
+---
+
+## SECTION 6 — FRAMEWORK (Framework.tsx)
+
+**Title:** How I Design Systems
+**Subtitle:** A repeatable methodology that works across industries.
+
+**Layout:** Horizontal steps connected by dashed line (desktop) / vertical (mobile)
+
+```tsx
+const steps = [
+  {
+    number: "01",
+    title: "Understand the Business",
+    description: "Deep dive into workflows, bottlenecks, and growth goals before touching any tool."
+  },
+  {
+    number: "02",
+    title: "Map the System",
+    description: "Document every process, data flow, and integration point. Build the blueprint before building."
+  },
+  {
+    number: "03",
+    title: "Automate Processes",
+    description: "Replace manual work with smart automation. Free the team to focus on what matters."
+  },
+  {
+    number: "04",
+    title: "Connect the Data",
+    description: "Unify all data sources. One source of truth for decisions across the entire organization."
+  },
+  {
+    number: "05",
+    title: "Measure Impact",
+    description: "Define KPIs before launch. Track, iterate, and optimize continuously."
+  }
+]
+```
+
+**Animation:** steps animate in sequentially left-to-right (`staggerChildren: 0.15`)
+
+**Step number style:** 
+```css
+width: 48px; height: 48px;
+border: 2px solid #3B82F6;
+border-radius: 50%;
+color: #3B82F6;
+font-family: Sora;
+font-weight: 700;
+/* hover: background fills blue, text white, glow appears */
+```
+
+---
+
+## SECTION 7 — CONTACT (Contact.tsx)
+
+**Full-width section, centered content**
+
+**Background:**
+```css
+background: linear-gradient(to bottom, #0B0F19 0%, #0D1525 100%);
+/* + subtle blue radial glow at top */
+```
+
+**Headline (large, Sora):**
+```
+The future belongs to companies
+that build better systems.
+```
+
+**Subtext:**
+```
+Let's talk about what's broken in your business — and how to fix it.
+```
+
+**3 CTA Buttons:**
+```tsx
+// LinkedIn — solid blue
+<a href="https://linkedin.com/in/abdulrahmanbazarah" target="_blank">  {/* UPDATE */}
+  <Linkedin size={18} /> LinkedIn
+</a>
+
+// WhatsApp — outline style
+<a href="https://wa.me/966XXXXXXXXX" target="_blank">  {/* UPDATE */}
+  <MessageCircle size={18} /> WhatsApp
+</a>
+
+// Email — ghost
+<a href="mailto:hello@bazarah.dev">  {/* UPDATE */}
+  <Mail size={18} /> Email
+</a>
+```
+
+**Button animation (Framer Motion):**
+```tsx
+whileHover={{ scale: 1.04, y: -2 }}
+whileTap={{ scale: 0.97 }}
+```
+
+**Below buttons:**
+```
+"Usually responds within 24 hours."
+```
+
+---
+
+## FOOTER (Footer.tsx)
+
+```tsx
+<footer>
+  <p>Abdulrahman Bazarah © 2025</p>
+  <p>Built to build better systems.</p>
+</footer>
+```
+
+---
+
+## PERFORMANCE REQUIREMENTS
+
+```tsx
+// 1. All sections use dynamic import with loading fallback
+const Hero = dynamic(() => import('@/components/sections/Hero'))
+
+// 2. 'use client' only on components that need it (animations)
+// Server components where possible
+
+// 3. next/font for zero layout shift
+
+// 4. Images: use next/image if any added later
+
+// 5. Framer Motion: import only what's needed
+import { motion, useScroll, useTransform } from 'framer-motion'
+```
+
+---
+
+## ANIMATION PRINCIPLES
+
+```
+RULE 1: Every section animates in with whileInView + viewport={{ once: true }}
+RULE 2: Stagger children for lists/grids (staggerChildren: 0.1)
+RULE 3: Default animation: opacity 0→1 + y 30→0, duration 0.6, ease easeOut
+RULE 4: Hover animations: subtle — max scale(1.04), max translateY(-6px)
+RULE 5: No animation should feel "cheap" — every motion has purpose
+RULE 6: Lenis handles all scroll smoothness globally
+```
+
+**Reusable animation variants:**
+```tsx
+// lib/animations.ts
+export const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+}
+
+export const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } }
+}
+
+export const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.8 } }
+}
+```
+
+---
+
+## RESPONSIVE BEHAVIOR
+
+```
+Mobile  < 768px:
+  - Hero: font-size 48px → 36px for name
+  - Timeline: single column, no alternating
+  - Case studies: single column
+  - Framework: vertical stack
+  - Nav: hamburger menu with AnimatePresence slide-down
+  - Counters: 2×2 grid
+
+Tablet  768–1024px:
+  - Case studies: 2 col
+  - Framework: horizontal but smaller
+
+Desktop > 1024px:
+  - Full layout as described
+```
+
+---
+
+## METADATA (layout.tsx)
+
+```tsx
+export const metadata: Metadata = {
+  title: 'Abdulrahman Bazarah — Systems Architect & Business Builder',
+  description: 'I build systems that grow businesses. Specializing in digital transformation, AI automation, and operational excellence.',
+  keywords: ['Systems Architect', 'Digital Transformation', 'AI Automation', 'Business Development', 'Abdulrahman Bazarah'],
+  openGraph: {
+    title: 'Abdulrahman Bazarah — Systems Architect',
+    description: 'Building systems that grow businesses.',
+    url: 'https://bazarah.dev',
+  }
+}
+```
+
+---
+
+## REPLIT SETUP INSTRUCTIONS
+
+```bash
+# 1. Create Next.js project
+npx create-next-app@14 . --typescript --tailwind --eslint --app --src-dir
+
+# 2. Install packages
+npm install framer-motion @studio-freight/lenis lucide-react clsx
+
+# 3. Run dev server
+npm run dev
+
+# 4. Replit will auto-detect port 3000
+```
+
+**Important for Replit:**
+- Set Node.js version to 18+
+- Use `.replit` file to set run command: `npm run dev`
+- All placeholder links marked with `{/* UPDATE THIS */}`
+
+---
+
+## QUALITY CHECKLIST
+
+Before finishing, verify:
+- [ ] Lenis smooth scroll works on all sections
+- [ ] All Framer Motion animations trigger correctly on scroll
+- [ ] Counter animation counts up when Impact section enters viewport
+- [ ] Navbar changes style on scroll
+- [ ] Mobile hamburger menu works with AnimatePresence
+- [ ] All hover states feel premium
+- [ ] No layout shift on load (fonts loaded correctly)
+- [ ] Dark background consistent across all sections
+- [ ] All placeholder links marked clearly
+
+---
+
+*This is a premium portfolio. Every pixel, every animation, every word should feel intentional and world-class.*
