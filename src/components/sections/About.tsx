@@ -26,7 +26,7 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="relative flex justify-center md:justify-start"
+            className="relative flex justify-center md:justify-start md:order-2"
             style={{ perspective: '1000px' }}
           >
             <div className="relative">
