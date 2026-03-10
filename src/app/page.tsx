@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Intro from "@/components/Intro";
 import Navbar from "@/components/layout/Navbar";
@@ -19,10 +19,26 @@ const Contact = dynamic(() => import("@/components/sections/Contact"));
 
 export default function Home() {
   const [introComplete, setIntroComplete] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const hasSeenIntro = localStorage.getItem("hasSeenIntro") === "true";
+    if (hasSeenIntro) {
+      setIntroComplete(true);
+    }
+    setMounted(true);
+  }, []);
+
+  const handleIntroComplete = () => {
+    setIntroComplete(true);
+    localStorage.setItem("hasSeenIntro", "true");
+  };
+
+  if (!mounted) return null;
 
   return (
     <>
-      {!introComplete && <Intro onComplete={() => setIntroComplete(true)} />}
+      {!introComplete && <Intro onComplete={handleIntroComplete} />}
       <main
         style={{
           opacity: introComplete ? 1 : 0,
