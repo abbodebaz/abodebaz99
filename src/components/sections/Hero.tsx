@@ -118,6 +118,7 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         className="relative z-10 text-center px-6 max-w-4xl mx-auto"
+        style={{ paddingTop: '18vh' }}
       >
         <motion.h1
           variants={delayedItem}
