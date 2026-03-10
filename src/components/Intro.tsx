@@ -255,7 +255,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
               minWidth: '100%',
               height: '56.25vw',
               minHeight: '100%',
-              opacity: 0.12,
+              opacity: 0.45,
               pointerEvents: 'none',
               zIndex: 0,
             }}
@@ -263,7 +263,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
 
           <div style={{
             position: 'absolute', inset: 0,
-            background: 'rgba(5,8,16,0.82)',
+            background: 'rgba(5,8,16,0.28)',
             zIndex: 1,
             pointerEvents: 'none',
           }} />
