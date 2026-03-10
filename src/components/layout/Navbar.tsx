@@ -43,6 +43,10 @@ export default function Navbar() {
     <nav
       className="fixed top-0 left-0 right-0 z-50 border-b"
       style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
         backgroundColor: 'rgba(5,8,16,0.0)',
         borderBottomColor: 'rgba(59,130,246,0)',
       }}
