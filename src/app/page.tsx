@@ -36,13 +36,13 @@ export default function Home() {
   return (
     <>
       {!introComplete && <Intro onComplete={handleIntroComplete} />}
+      <Navbar />
       <main
         style={{
           opacity: introComplete ? 1 : 0,
           transition: "opacity 0.8s ease",
         }}
       >
-        <Navbar />
         <Hero />
         <About />
         <Journey />
