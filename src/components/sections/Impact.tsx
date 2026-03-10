@@ -36,7 +36,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 
 export default function Impact() {
   return (
-    <section id="impact" dir="rtl" className="py-24 md:py-32 px-6 bg-bg-secondary">
+    <section id="impact" dir="rtl" className="py-24 md:py-32 px-6 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial="hidden"

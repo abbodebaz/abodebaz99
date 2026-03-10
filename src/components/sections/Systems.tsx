@@ -59,14 +59,14 @@ export default function Systems() {
           <motion.h2
             variants={fadeInUp}
             className="font-arabic text-3xl md:text-5xl font-bold text-white mb-4"
-            style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
+            style={{ fontFamily: "var(--font-arabic)", direction: "rtl" }}
           >
             الأنظمة التي قمت ببنائها
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="font-arabic text-[#9CA3AF] text-lg"
-            style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
+            style={{ fontFamily: "var(--font-arabic)", direction: "rtl" }}
           >
             مشكلات حقيقية. حلول عملية. نتائج قابلة للقياس.
           </motion.p>
@@ -98,7 +98,7 @@ export default function Systems() {
 
               <h3
                 className="font-arabic text-xl font-semibold text-white mb-6"
-                style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
+                style={{ fontFamily: "var(--font-arabic)", direction: "rtl" }}
               >
                 {study.title}
               </h3>
@@ -106,13 +106,21 @@ export default function Systems() {
               <div className="mb-4 pr-4 border-r-2 border-red-500/40">
                 <p
                   className="font-arabic text-xs text-red-400/70 mb-1 font-medium"
-                  style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl', letterSpacing: '0' }}
+                  style={{
+                    fontFamily: "var(--font-arabic)",
+                    direction: "rtl",
+                    letterSpacing: "0",
+                  }}
                 >
                   المشكلة
                 </p>
                 <p
                   className="font-arabic text-[#9CA3AF] text-sm leading-relaxed"
-                  style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl', lineHeight: 1.9 }}
+                  style={{
+                    fontFamily: "var(--font-arabic)",
+                    direction: "rtl",
+                    lineHeight: 1.9,
+                  }}
                 >
                   {study.problem}
                 </p>
@@ -121,13 +129,21 @@ export default function Systems() {
               <div className="mb-6 pr-4 border-r-2 border-accent/40">
                 <p
                   className="font-arabic text-xs text-accent/70 mb-1 font-medium"
-                  style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl', letterSpacing: '0' }}
+                  style={{
+                    fontFamily: "var(--font-arabic)",
+                    direction: "rtl",
+                    letterSpacing: "0",
+                  }}
                 >
                   الحل
                 </p>
                 <p
                   className="font-arabic text-[#9CA3AF] text-sm leading-relaxed"
-                  style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl', lineHeight: 1.9 }}
+                  style={{
+                    fontFamily: "var(--font-arabic)",
+                    direction: "rtl",
+                    lineHeight: 1.9,
+                  }}
                 >
                   {study.solution}
                 </p>
@@ -136,13 +152,16 @@ export default function Systems() {
               <div className="pt-4 border-t border-[rgba(59,130,246,0.08)]">
                 <span
                   className="font-arabic font-bold text-lg"
-                  style={{ fontFamily: 'var(--font-arabic)', color: 'var(--success)' }}
+                  style={{
+                    fontFamily: "var(--font-arabic)",
+                    color: "var(--success)",
+                  }}
                 >
                   {study.impact}
                 </span>
                 <span
                   className="font-arabic text-[#4B5563] text-sm mr-2"
-                  style={{ fontFamily: 'var(--font-arabic)' }}
+                  style={{ fontFamily: "var(--font-arabic)" }}
                 >
                   {study.impactDetail}
                 </span>
