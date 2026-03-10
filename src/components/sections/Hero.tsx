@@ -77,7 +77,7 @@ export default function Hero() {
 
       <div
         className="absolute inset-0 z-[1]"
-        style={{ background: 'rgba(10,10,10,0.72)' }}
+        style={{ background: 'rgba(10,10,10,0.58)' }}
       />
 
       <div
@@ -119,28 +119,51 @@ export default function Hero() {
         animate="visible"
         className="relative z-10 text-center px-6 max-w-4xl mx-auto"
       >
-        <motion.p variants={item} className="font-arabic text-[#9CA3AF] text-lg md:text-xl mb-2" style={{ direction: 'rtl' }}>
-          كل شركة تشتغل على أنظمة.
-        </motion.p>
-        <motion.p variants={item} className="font-arabic text-[#9CA3AF] text-lg md:text-xl mb-2" style={{ direction: 'rtl' }}>
-          معظم هذي الأنظمة مكسورة.
-        </motion.p>
-        <motion.p variants={item} className="font-arabic text-accent text-lg md:text-xl font-medium mb-12" style={{ direction: 'rtl' }}>
-          شغلتي أصلّحها.
-        </motion.p>
+        <motion.div variants={item} className="mb-10" style={{ direction: 'rtl' }}>
+          <p
+            className="font-arabic"
+            style={{
+              fontFamily: 'var(--font-arabic)',
+              fontSize: 'clamp(17px, 2.2vw, 22px)',
+              color: 'rgba(255,255,255,0.45)',
+              lineHeight: 2,
+              direction: 'rtl',
+              letterSpacing: '0.01em',
+            }}
+          >
+            البيانات مشتتة.
+            <span style={{ margin: '0 10px', color: 'rgba(59,130,246,0.3)' }}>·</span>
+            القرارات بطيئة.
+            <span style={{ margin: '0 10px', color: 'rgba(59,130,246,0.3)' }}>·</span>
+            الفريق منهك.
+          </p>
+          <p
+            className="font-arabic mt-2"
+            style={{
+              fontFamily: 'var(--font-arabic)',
+              fontSize: 'clamp(20px, 2.8vw, 28px)',
+              fontWeight: 600,
+              color: 'rgba(255,255,255,0.92)',
+              direction: 'rtl',
+              letterSpacing: '0.01em',
+            }}
+          >
+            أنا أحل هذا.
+          </p>
+        </motion.div>
 
         <motion.h1
           variants={delayedItem}
-          className="font-sora text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight"
-          style={{ direction: 'ltr' }}
+          className="font-sora font-bold text-white mb-6 leading-tight"
+          style={{ direction: 'ltr', fontSize: 'clamp(32px, 5vw, 64px)' }}
         >
           Abdulrahman Bazarah
         </motion.h1>
 
         <motion.p
           variants={delayedItem}
-          className="font-arabic text-[#9CA3AF] tracking-[0.1em] text-xs md:text-sm"
-          style={{ direction: 'rtl' }}
+          className="font-arabic text-[#9CA3AF]"
+          style={{ direction: 'rtl', fontFamily: 'var(--font-arabic)', letterSpacing: 'normal' }}
         >
           قائد تطوير أعمال &middot; مهندس أنظمة &middot; باني أتمتة و AI
         </motion.p>

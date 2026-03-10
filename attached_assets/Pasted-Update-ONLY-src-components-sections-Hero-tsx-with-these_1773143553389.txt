@@ -1,0 +1,93 @@
+Update ONLY src/components/sections/Hero.tsx with these specific changes:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CHANGE 1 — THE THREE LINES (most important)
+
+Replace the three motion.p elements at the top with this new design:
+
+REMOVE these lines completely:
+- 'كل شركة تشتغل على أنظمة.'
+- 'معظم هذي الأنظمة مكسورة.'  
+- 'شغلتي أصلّحها.'
+
+REPLACE with this structure:
+
+<motion.div variants={item} className="mb-10" style={{ direction: 'rtl' }}>
+  <p
+    className="font-arabic"
+    style={{
+      fontFamily: 'var(--font-arabic)',
+      fontSize: 'clamp(17px, 2.2vw, 22px)',
+      color: 'rgba(255,255,255,0.45)',
+      lineHeight: 2,
+      direction: 'rtl',
+      letterSpacing: '0.01em',
+    }}
+  >
+    البيانات مشتتة.
+    <span style={{ margin: '0 10px', color: 'rgba(59,130,246,0.3)' }}>·</span>
+    القرارات بطيئة.
+    <span style={{ margin: '0 10px', color: 'rgba(59,130,246,0.3)' }}>·</span>
+    الفريق منهك.
+  </p>
+  <p
+    className="font-arabic mt-2"
+    style={{
+      fontFamily: 'var(--font-arabic)',
+      fontSize: 'clamp(20px, 2.8vw, 28px)',
+      fontWeight: 600,
+      color: 'rgba(255,255,255,0.92)',
+      direction: 'rtl',
+      letterSpacing: '0.01em',
+    }}
+  >
+    أنا أحل هذا.
+  </p>
+</motion.div>
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CHANGE 2 — NAME SIZE
+
+Find the h1 with "Abdulrahman Bazarah" and change ONLY the fontSize:
+
+FROM: text-5xl md:text-7xl lg:text-8xl
+TO: remove those tailwind classes and add inline style fontSize
+
+Add to the h1 style prop:
+fontSize: 'clamp(32px, 5vw, 64px)'
+
+Keep font-sora class and all other styles exactly as-is.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CHANGE 3 — VIDEO OPACITY
+
+Find the iframe for the Vimeo background video.
+Change its opacity from 0.72 overlay to make the video more visible.
+
+Find this div (the dark overlay on top of the video):
+style={{ background: 'rgba(10,10,10,0.72)' }}
+
+Change it to:
+style={{ background: 'rgba(10,10,10,0.58)' }}
+
+This makes the video 14% more visible without affecting readability.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CHANGE 4 — SUBTITLE LINE
+
+Find this line:
+'قائد تطوير أعمال · مهندس أنظمة · باني أتمتة و AI'
+
+Keep the text but update its style to be slightly more refined:
+- Add fontFamily: 'var(--font-arabic)'
+- Change tracking-[0.2em] to normal letter spacing
+- Add direction: 'rtl' to the element's style
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DO NOT CHANGE:
+- Any animation logic or variants
+- The button text or its behavior  
+- The green dot "متاح لمشاريع جديدة"
+- The particles, glowRef, or mouse tracking
+- The ChevronDown scroll indicator
+- Any imports or hooks
