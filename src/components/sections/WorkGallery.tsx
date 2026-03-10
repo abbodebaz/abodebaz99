@@ -4,221 +4,338 @@ import { fadeInUp, staggerContainer } from '@/lib/animations'
 import { ExternalLink } from 'lucide-react'
 
 const badgeColors: Record<string, { bg: string; text: string }> = {
-  '\u0645\u062A\u062C\u0631':        { bg: 'rgba(16,185,129,0.12)',  text: '#10B981' },
-  '\u062A\u0639\u0631\u064A\u0641\u064A':      { bg: 'rgba(59,130,246,0.12)',  text: '#60A5FA' },
-  '\u062A\u0637\u0628\u064A\u0642 \u0648\u064A\u0628':   { bg: 'rgba(139,92,246,0.12)', text: '#A78BFA' },
-  '\u0639\u0642\u0627\u0631\u064A':       { bg: 'rgba(245,158,11,0.12)',  text: '#FBBF24' },
-  '\u062E\u062F\u0645\u0627\u062A':       { bg: 'rgba(236,72,153,0.12)',  text: '#F472B6' },
-  '\u062F\u0648\u0631\u0627\u062A':       { bg: 'rgba(20,184,166,0.12)',  text: '#2DD4BF' },
-  '\u0627\u0633\u062A\u0634\u0627\u0631\u0629':     { bg: 'rgba(99,102,241,0.12)',  text: '#818CF8' },
-  '\u0634\u062E\u0635\u064A':        { bg: 'rgba(59,130,246,0.12)',  text: '#60A5FA' },
-  '\u0645\u0646\u0635\u0629':        { bg: 'rgba(139,92,246,0.12)', text: '#A78BFA' },
-  '\u0645\u0637\u0627\u0639\u0645':       { bg: 'rgba(251,146,60,0.12)',  text: '#FB923C' },
-  '\u0634\u0631\u0643\u0629':        { bg: 'rgba(156,163,175,0.12)', text: '#9CA3AF' },
-  '\u062A\u0642\u0646\u064A\u0629':       { bg: 'rgba(59,130,246,0.12)',  text: '#60A5FA' },
-  '\u0645\u062C\u0645\u0648\u0639\u0629':      { bg: 'rgba(156,163,175,0.12)', text: '#9CA3AF' },
+  'متجر':        { bg: 'rgba(16,185,129,0.12)',  text: '#10B981' },
+  'تعريفي':      { bg: 'rgba(59,130,246,0.12)',  text: '#60A5FA' },
+  'تطبيق ويب':   { bg: 'rgba(139,92,246,0.12)', text: '#A78BFA' },
+  'عقاري':       { bg: 'rgba(245,158,11,0.12)',  text: '#FBBF24' },
+  'خدمات':       { bg: 'rgba(236,72,153,0.12)',  text: '#F472B6' },
+  'دورات':       { bg: 'rgba(20,184,166,0.12)',  text: '#2DD4BF' },
+  'استشارة':     { bg: 'rgba(99,102,241,0.12)',  text: '#818CF8' },
+  'شخصي':        { bg: 'rgba(59,130,246,0.12)',  text: '#60A5FA' },
+  'منصة':        { bg: 'rgba(139,92,246,0.12)', text: '#A78BFA' },
+  'مطاعم':       { bg: 'rgba(251,146,60,0.12)',  text: '#FB923C' },
+  'شركة':        { bg: 'rgba(156,163,175,0.12)', text: '#9CA3AF' },
+  'تقنية':       { bg: 'rgba(59,130,246,0.12)',  text: '#60A5FA' },
+  'مجموعة':      { bg: 'rgba(156,163,175,0.12)', text: '#9CA3AF' },
 }
 
 const projects = [
   {
-    title: "\u0645\u062A\u062C\u0631 \u0639\u0648\u062F\u064A\u0629",
-    desc: "\u0645\u062A\u062C\u0631 \u0645\u062A\u062E\u0635\u0635 \u0641\u064A \u0627\u0644\u0639\u0648\u062F: \u0635\u0641\u062D\u0627\u062A \u0645\u0646\u062A\u062C \u0645\u0642\u0646\u0639\u0629\u060C \u062A\u0628\u0633\u064A\u0637 \u062E\u0637\u0648\u0627\u062A \u0627\u0644\u0634\u0631\u0627\u0621\u060C \u0648\u0631\u0628\u0637 \u062F\u0641\u0639 \u0648\u0634\u062D\u0646.",
-    badge: "\u0645\u062A\u062C\u0631",
+    title: "متجر عودية",
+    desc: "متجر متخصص في العود: صفحات منتج مقنعة، تبسيط خطوات الشراء، وربط دفع وشحن.",
+    badge: "متجر",
     url: "https://oudeyah.com/",
   },
   {
     title: "Blessing Floral",
-    desc: "\u0645\u062A\u062C\u0631 \u0632\u0647\u0648\u0631 \u0648\u0647\u062F\u0627\u064A\u0627 \u0645\u0639 \u0637\u0644\u0628\u0627\u062A \u0648\u062A\u0648\u0635\u064A\u0644 \u0648\u0631\u0633\u0627\u0626\u0644 \u062A\u0623\u0643\u064A\u062F \u2014 \u062A\u062C\u0631\u0628\u0629 \u0634\u0631\u0627\u0621 \u0645\u062E\u062A\u0635\u0631\u0629 \u0648\u0648\u0627\u0636\u062D\u0629.",
-    badge: "\u0645\u062A\u062C\u0631",
+    desc: "متجر زهور وهدايا مع طلبات وتوصيل ورسائل تأكيد — تجربة شراء مختصرة وواضحة.",
+    badge: "متجر",
     url: "https://blessingfloral.com/",
   },
   {
-    title: "\u064A\u0644\u0627 \u0641\u0644\u0627\u0641\u0644 \u2014 \u062C\u062F\u0629",
-    desc: "\u0642\u0627\u0626\u0645\u0629 \u0645\u0646\u064A\u0648 \u0648\u0627\u0636\u062D\u0629 \u0648\u0631\u0648\u0627\u0628\u0637 \u062A\u0637\u0628\u064A\u0642\u0627\u062A \u0627\u0644\u062A\u0648\u0635\u064A\u0644 \u0645\u0639 \u0645\u0639\u0644\u0648\u0645\u0627\u062A \u0627\u0644\u0641\u0631\u0648\u0639 \u0648\u0623\u0648\u0642\u0627\u062A \u0627\u0644\u0639\u0645\u0644.",
-    badge: "\u0645\u0637\u0627\u0639\u0645",
+    title: "يلا فلافل — جدة",
+    desc: "قائمة مينو واضحة وروابط تطبيقات التوصيل مع معلومات الفروع وأوقات العمل.",
+    badge: "مطاعم",
     url: "https://yallafalafeljed.com/",
   },
   {
-    title: "PLAB \u2014 \u0627\u0644\u0637\u0628\u0627\u0639\u0629 \u0627\u0644\u0630\u0643\u064A\u0629",
-    desc: "\u0646\u0638\u0627\u0645 \u0637\u0628\u0627\u0639\u0629 \u062C\u0627\u0645\u0639\u064A: \u0631\u0641\u0639 \u0645\u0644\u0641\u0627\u062A\u060C \u062A\u062D\u0648\u064A\u0644 PDF\u060C \u0646\u0642\u0627\u0637 \u0644\u0644\u0637\u0644\u0627\u0628\u060C \u0648\u0637\u0628\u0627\u0639\u0629 \u0639\u0628\u0631 PrintNode.",
-    badge: "\u062A\u0637\u0628\u064A\u0642 \u0648\u064A\u0628",
+    title: "PLAB — الطباعة الذكية",
+    desc: "نظام طباعة جامعي: رفع ملفات، تحويل PDF، نقاط للطلاب، وطباعة عبر PrintNode.",
+    badge: "تطبيق ويب",
     url: "https://rpd-sa.com/",
   },
   {
     title: "Earth Hills",
-    desc: "\u0639\u0631\u0636 \u0648\u062D\u062F\u0627\u062A \u0639\u0642\u0627\u0631\u064A\u0629 \u0628\u0641\u0644\u0627\u062A\u0631 \u0630\u0643\u064A\u0629\u060C \u0645\u0639\u0631\u0636 \u0635\u0648\u0631 \u0627\u062D\u062A\u0631\u0627\u0641\u064A \u0648\u062E\u0631\u064A\u0637\u0629\u060C \u0645\u0639 \u0646\u0645\u0648\u0630\u062C \u062A\u0648\u0627\u0635\u0644 \u0644\u062D\u0638\u064A.",
-    badge: "\u0639\u0642\u0627\u0631\u064A",
+    desc: "عرض وحدات عقارية بفلاتر ذكية، معرض صور احترافي وخريطة، مع نموذج تواصل لحظي.",
+    badge: "عقاري",
     url: "https://earth-hills.com/",
   },
   {
-    title: "Belleza \u2014 \u0639\u0642\u0627\u0631\u0627\u062A \u0641\u0627\u062E\u0631\u0629",
-    desc: "\u0648\u0627\u062C\u0647\u0629 \u0623\u0646\u064A\u0642\u0629 \u0644\u0639\u0642\u0627\u0631\u0627\u062A \u0641\u0627\u062E\u0631\u0629: \u0628\u0637\u0627\u0642\u0627\u062A \u0639\u0642\u0627\u0631 \u0628\u0635\u0648\u0631 \u0639\u0627\u0644\u064A\u0629 \u0648\u062A\u0641\u0627\u0635\u064A\u0644 \u0648\u0627\u0636\u062D\u0629.",
-    badge: "\u0639\u0642\u0627\u0631\u064A",
+    title: "Belleza — عقارات فاخرة",
+    desc: "واجهة أنيقة لعقارات فاخرة: بطاقات عقار بصور عالية وتفاصيل واضحة.",
+    badge: "عقاري",
     url: "https://ab2030.vip/real2/",
   },
   {
-    title: "\u0633\u064A\u0631\u0627\u0641 \u0644\u0644\u0625\u0646\u062A\u0627\u062C \u0627\u0644\u0633\u064A\u0646\u0645\u0627\u0626\u064A",
-    desc: "\u0645\u0648\u0642\u0639 \u0641\u062E\u0645 RTL \u0645\u0639 \u0639\u0631\u0636 \u0623\u0639\u0645\u0627\u0644 \u0633\u064A\u0646\u0645\u0627\u0626\u064A\u0629 \u0648\u062A\u062C\u0631\u0628\u0629 \u0645\u0633\u062A\u062E\u062F\u0645 \u0633\u0644\u0633\u0629 \u062A\u0639\u0643\u0633 \u0647\u0648\u064A\u0629 \u0627\u0644\u0634\u0631\u0643\u0629.",
-    badge: "\u062A\u0639\u0631\u064A\u0641\u064A",
+    title: "سيراف للإنتاج السينمائي",
+    desc: "موقع فخم RTL مع عرض أعمال سينمائية وتجربة مستخدم سلسة تعكس هوية الشركة.",
+    badge: "تعريفي",
     url: "https://xd7d7.com/ser/",
   },
   {
     title: "Walid Alajlan",
-    desc: "\u0645\u0648\u0642\u0639 \u0634\u062E\u0635\u064A \u0641\u0627\u062E\u0631 \u0645\u0639 \u062A\u0623\u062B\u064A\u0631\u0627\u062A Scroll-Snap \u0648\u0645\u0648\u0634\u0646 \u0623\u0646\u064A\u0642 \u064A\u0639\u0643\u0633 \u0627\u0644\u0647\u0648\u064A\u0629.",
-    badge: "\u0634\u062E\u0635\u064A",
+    desc: "موقع شخصي فاخر مع تأثيرات Scroll-Snap وموشن أنيق يعكس الهوية.",
+    badge: "شخصي",
     url: "https://ab2030.vip/alajlan/",
   },
   {
     title: "Mazen AlSaleh",
-    desc: "\u0628\u0648\u0631\u062A\u0641\u0648\u0644\u064A\u0648 \u0645\u0635\u0648\u0651\u0631 \u0633\u064A\u0646\u0645\u0627\u0626\u064A: \u0645\u0639\u0631\u0636 \u0623\u0639\u0645\u0627\u0644 \u0648\u0641\u064A\u062F\u064A\u0648 \u0648\u0631\u0648\u0627\u0628\u0637 \u062A\u0648\u0627\u0635\u0644 \u0628\u0634\u0643\u0644 \u0623\u0646\u064A\u0642 \u0648\u0633\u0631\u064A\u0639.",
-    badge: "\u0634\u062E\u0635\u064A",
+    desc: "بورتفوليو مصور سينمائي: معرض أعمال وفيديو وروابط تواصل بشكل أنيق وسريع.",
+    badge: "شخصي",
     url: "https://m2maz.com/",
   },
   {
     title: "House of PG",
-    desc: "\u0639\u0631\u0636 \u0623\u0639\u0645\u0627\u0644 \u0648\u062E\u062F\u0645\u0627\u062A \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0645\u0639 \u062F\u0639\u0648\u0629 \u0648\u0627\u0636\u062D\u0629 \u0644\u0644\u062A\u0648\u0627\u0635\u0644.",
-    badge: "\u062A\u0639\u0631\u064A\u0641\u064A",
+    desc: "عرض أعمال وخدمات العلامة مع دعوة واضحة للتواصل.",
+    badge: "تعريفي",
     url: "http://houseofpg.com/",
   },
   {
     title: "Winner",
-    desc: "\u062A\u0639\u0631\u064A\u0641 \u0628\u0627\u0644\u0634\u0631\u0643\u0629 \u0648\u062E\u062F\u0645\u0627\u062A\u0647\u0627 \u0645\u0639 \u0623\u0642\u0633\u0627\u0645 \u0623\u0639\u0645\u0627\u0644 \u0648\u0622\u0631\u0627\u0621 \u0639\u0645\u0644\u0627\u0621 \u0648\u0646\u0645\u0648\u0630\u062C \u062A\u0648\u0627\u0635\u0644 \u0633\u0631\u064A\u0639.",
-    badge: "\u062A\u0639\u0631\u064A\u0641\u064A",
+    desc: "تعريف بالشركة وخدماتها مع أقسام أعمال وآراء عملاء ونموذج تواصل سريع.",
+    badge: "تعريفي",
     url: "https://ab2030.vip/winner/",
   },
   {
-    title: "Beehive \u2014 \u0648\u0643\u0627\u0644\u0629 \u062A\u0633\u0648\u064A\u0642",
-    desc: "\u0648\u0627\u062C\u0647\u0629 \u062C\u0630\u0627\u0628\u0629 \u0628\u0646\u0645\u0637 SaaS: \u0625\u0628\u0631\u0627\u0632 \u0627\u0644\u062E\u062F\u0645\u0627\u062A \u0648\u0627\u0644\u0645\u0634\u0627\u0631\u064A\u0639 \u0648\u0646\u0645\u0648\u0630\u062C \u062A\u0648\u0627\u0635\u0644 \u0645\u0648\u062C\u0647 \u0644\u0644\u062A\u062D\u0648\u064A\u0644.",
-    badge: "\u062E\u062F\u0645\u0627\u062A",
+    title: "Beehive — وكالة تسويق",
+    desc: "واجهة جذابة بنمط SaaS: إبراز الخدمات والمشاريع ونموذج تواصل موجه للتحويل.",
+    badge: "خدمات",
     url: "https://beehivesa.com",
   },
   {
-    title: "MEPAINTS \u2014 \u062F\u0647\u0627\u0646\u0627\u062A",
-    desc: "\u0643\u062A\u0627\u0644\u0648\u062C \u0623\u0644\u0648\u0627\u0646 \u0648\u062A\u0637\u0628\u064A\u0642\u0627\u062A\u060C \u0645\u0639\u0631\u0636 \u0623\u0639\u0645\u0627\u0644 \u0642\u0628\u0644/\u0628\u0639\u062F\u060C \u0648\u0646\u0645\u0648\u0630\u062C \u0639\u0631\u0636 \u0633\u0639\u0631 \u0645\u062A\u0635\u0644 \u0628\u0648\u0627\u062A\u0633\u0627\u0628.",
-    badge: "\u062E\u062F\u0645\u0627\u062A",
+    title: "MEPAINTS — دهانات",
+    desc: "كتالوج ألوان وتطبيقات، معرض أعمال قبل/بعد، ونموذج عرض سعر متصل بواتساب.",
+    badge: "خدمات",
     url: "https://ab2030.vip/mepaints/",
   },
   {
-    title: "\u0634\u0631\u0643\u0629 \u0627\u0644\u0639\u0631\u064A\u0641\u064A \u0627\u0644\u062A\u062C\u0627\u0631\u064A\u0629",
-    desc: "\u062A\u0639\u0631\u064A\u0641 \u0628\u0627\u0644\u062E\u062F\u0645\u0627\u062A \u0648\u0633\u0627\u0628\u0642\u0629 \u0627\u0644\u0623\u0639\u0645\u0627\u0644 \u0645\u0639 \u0635\u0641\u062D\u0627\u062A \u0645\u0634\u0627\u0631\u064A\u0639 \u0648\u062A\u0648\u0627\u0635\u0644 \u0644\u0628\u062F\u0621 \u0627\u0644\u0634\u0631\u0627\u0643\u0627\u062A.",
-    badge: "\u0634\u0631\u0643\u0629",
+    title: "شركة العريفي التجارية",
+    desc: "تعريف بالخدمات وسابقة الأعمال مع صفحات مشاريع وتواصل لبدء الشراكات.",
+    badge: "شركة",
     url: "https://alorificompany.com/",
   },
   {
-    title: "BOD \u2014 \u062D\u0644\u0648\u0644 \u0631\u0642\u0645\u064A\u0629",
-    desc: "\u0634\u0631\u0643\u0629 \u062A\u0642\u0646\u064A\u0629 \u062A\u0642\u062F\u0651\u0645 \u062D\u0644\u0648\u0644 \u0648\u0645\u0646\u062A\u062C\u0627\u062A \u0631\u0642\u0645\u064A\u0629\u061B \u0635\u0641\u062D\u0627\u062A \u062E\u062F\u0645\u0627\u062A \u0648\u0627\u0636\u062D\u0629 \u0648\u0645\u0648\u062C\u0647\u0629 \u0644\u0644\u062A\u062D\u0648\u064A\u0644.",
-    badge: "\u062A\u0642\u0646\u064A\u0629",
+    title: "BOD — حلول رقمية",
+    desc: "شركة تقنية تقدّم حلول ومنتجات رقمية؛ صفحات خدمات واضحة وموجهة للتحويل.",
+    badge: "تقنية",
     url: "https://bod-sa.com/",
   },
   {
-    title: "\u0645\u062C\u0645\u0648\u0639\u0629 \u0623\u062D\u0645\u062F \u0628\u0627\u0633\u0645\u062D",
-    desc: "\u0645\u0648\u0642\u0639 \u0627\u0644\u0645\u062C\u0645\u0648\u0639\u0629: \u0646\u0628\u0630\u0629 \u0639\u0646 \u0627\u0644\u0634\u0631\u0643\u0627\u062A \u0627\u0644\u062A\u0627\u0628\u0639\u0629 \u0648\u0627\u0644\u062A\u0648\u0627\u0635\u0644 \u0648\u0627\u0644\u0625\u0639\u0644\u0627\u0646\u0627\u062A \u0627\u0644\u0625\u0639\u0644\u0627\u0645\u064A\u0629.",
-    badge: "\u0645\u062C\u0645\u0648\u0639\u0629",
+    title: "مجموعة أحمد باسمح",
+    desc: "موقع المجموعة: نبذة عن الشركات التابعة والتواصل والإعلانات الإعلامية.",
+    badge: "مجموعة",
     url: "https://a-basamhgrp.com/",
   },
   {
-    title: "\u062F. \u0639\u0627\u0626\u0634\u0629 \u0627\u0644\u062F\u062E\u064A\u0644",
-    desc: "\u0645\u0646\u0635\u0629 \u062F\u0648\u0631\u0627\u062A \u0631\u0642\u0645\u064A\u0629: \u0635\u0641\u062D\u0627\u062A \u0645\u0628\u064A\u0639\u0627\u062A \u0645\u0642\u0646\u0639\u0629\u060C \u0639\u0636\u0648\u064A\u0627\u062A\u060C \u062F\u0641\u0639 \u0622\u0645\u0646\u060C \u0648\u062A\u0646\u0628\u064A\u0647\u0627\u062A \u062A\u0644\u0642\u0627\u0626\u064A\u0629.",
-    badge: "\u062F\u0648\u0631\u0627\u062A",
+    title: "د. عائشة الدخيل",
+    desc: "منصة دورات رقمية: صفحات مبيعات مقنعة، عضويات، دفع آمن، وتنبيهات تلقائية.",
+    badge: "دورات",
     url: "https://draishaaldakhil.com/",
   },
   {
-    title: "\u062F. \u0631\u064A\u0645\u0627 \u0627\u0644\u0634\u0644\u0647\u0648\u0628",
-    desc: "\u062D\u062C\u0632 \u0627\u0633\u062A\u0634\u0627\u0631\u0629 \u0628\u062E\u0637\u0648\u0629 \u0648\u0627\u062D\u062F\u0629 \u0645\u0639 \u0646\u0645\u0648\u0630\u062C \u0645\u062A\u0635\u0644 \u0628\u0648\u0627\u062A\u0633\u0627\u0628 \u0648\u0623\u0633\u0626\u0644\u0629 \u062A\u0623\u0647\u064A\u0644\u064A\u0629.",
-    badge: "\u0627\u0633\u062A\u0634\u0627\u0631\u0629",
+    title: "د. ريما الشلهوب",
+    desc: "حجز استشارة بخطوة واحدة مع نموذج متصل بواتساب وأسئلة تأهيلية.",
+    badge: "استشارة",
     url: "https://ab2030.vip/drrema/",
   },
 ]
 
 export default function WorkGallery() {
+  const featuredProjects = projects.slice(0, 2)
+  const gridProjects = projects.slice(2)
+
   return (
-    <section id="work-gallery" className="pb-24 md:pb-32 px-6">
+    <section id="work-gallery" dir="rtl" className="py-24 md:py-32 px-6">
       <div className="max-w-6xl mx-auto">
+        {/* Section Header */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="mb-12"
+          className="mb-16"
+          style={{ direction: 'rtl', textAlign: 'right' }}
         >
-          <div className="flex items-center gap-4 mb-12">
-            <div className="h-px flex-1" style={{ background: 'rgba(59,130,246,0.15)' }} />
-            <span className="text-xs uppercase tracking-[0.3em] text-[#4B5563]">More Work</span>
-            <div className="h-px flex-1" style={{ background: 'rgba(59,130,246,0.15)' }} />
-          </div>
+          <motion.span
+            variants={fadeInUp}
+            className="font-arabic inline-block text-xs uppercase tracking-widest text-accent mb-4"
+            style={{ fontFamily: 'var(--font-arabic)' }}
+          >
+            أعمالي
+          </motion.span>
 
-          <div className="flex items-end justify-between flex-wrap gap-4">
-            <div>
-              <motion.span variants={fadeInUp} className="inline-block text-xs uppercase tracking-[0.3em] text-accent mb-3">
-                All Projects
-              </motion.span>
-              <motion.h3 variants={fadeInUp} className="font-sora text-2xl md:text-3xl font-bold text-white">
-                More Projects Delivered
-              </motion.h3>
-            </div>
-            <motion.p variants={fadeInUp} className="text-[#4B5563] text-sm">
-              {projects.length}+ projects across multiple industries
+          <div className="flex items-end justify-between flex-wrap gap-6">
+            <motion.h2
+              variants={fadeInUp}
+              className="font-arabic text-3xl md:text-4xl font-bold text-white"
+              style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
+            >
+              مشاريع سلّمتها وهي شغّالة
+            </motion.h2>
+
+            <motion.p
+              variants={fadeInUp}
+              className="font-arabic text-[#4B5563] text-sm"
+              style={{ fontFamily: 'var(--font-arabic)' }}
+            >
+              {projects.length}+ مشروع في قطاعات متعددة
             </motion.p>
           </div>
         </motion.div>
 
+        {/* Featured Projects */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          className="grid md:grid-cols-2 gap-6 mb-12"
         >
-          {projects.map((project) => {
+          {featuredProjects.map((project) => {
             const colors = badgeColors[project.badge] ?? { bg: 'rgba(59,130,246,0.1)', text: '#60A5FA' }
 
             return (
-              <motion.a
+              <motion.div
                 key={project.title}
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
                 variants={fadeInUp}
-                className="group relative p-5 rounded-xl flex flex-col gap-3 transition-all duration-300"
+                className="group relative p-8 rounded-2xl flex flex-col min-h-[280px] transition-all duration-300 overflow-hidden"
                 style={{
                   background: 'rgba(255,255,255,0.02)',
                   border: '1px solid rgba(59,130,246,0.08)',
+                  direction: 'rtl',
                 }}
                 whileHover={{
-                  y: -4,
-                  borderColor: 'rgba(59,130,246,0.25)',
+                  y: -6,
+                  borderColor: 'rgba(59,130,246,0.28)',
                   backgroundColor: 'rgba(255,255,255,0.04)',
                 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
               >
-                <div className="flex items-center justify-between">
+                {/* Badge & External Link */}
+                <div className="flex items-center justify-between mb-6">
+                  <ExternalLink
+                    size={16}
+                    className="opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{ color: '#3B82F6' }}
+                  />
                   <span
-                    className="text-[10px] px-2.5 py-1 rounded-full font-medium uppercase tracking-wider"
-                    style={{ background: colors.bg, color: colors.text }}
+                    className="text-xs px-3 py-1.5 rounded-full font-medium"
+                    style={{ background: colors.bg, color: colors.text, fontFamily: 'var(--font-arabic)' }}
                   >
                     {project.badge}
                   </span>
+                </div>
+
+                {/* Content */}
+                <h3
+                  className="font-arabic text-xl font-bold text-white mb-4"
+                  style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
+                >
+                  {project.title}
+                </h3>
+
+                <p
+                  className="font-arabic text-[#6B7280] text-sm leading-relaxed mb-6 flex-1"
+                  style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
+                >
+                  {project.desc}
+                </p>
+
+                {/* Visit Link */}
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontSize: '12px',
+                    color: '#3B82F6',
+                    fontFamily: 'var(--font-arabic)',
+                    direction: 'rtl',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    marginTop: 'auto',
+                    paddingTop: '12px',
+                    borderTop: '1px solid rgba(59,130,246,0.08)',
+                  }}
+                >
+                  زيارة المشروع ←
+                </a>
+              </motion.div>
+            )
+          })}
+        </motion.div>
+
+        {/* Grid Projects */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {gridProjects.map((project) => {
+            const colors = badgeColors[project.badge] ?? { bg: 'rgba(59,130,246,0.1)', text: '#60A5FA' }
+
+            return (
+              <motion.div
+                key={project.title}
+                variants={fadeInUp}
+                className="group relative p-5 rounded-xl flex flex-col min-h-[160px] transition-all duration-300 overflow-hidden"
+                style={{
+                  background: 'rgba(255,255,255,0.02)',
+                  border: '1px solid rgba(59,130,246,0.08)',
+                  direction: 'rtl',
+                }}
+                whileHover={{
+                  y: -4,
+                  borderColor: 'rgba(59,130,246,0.28)',
+                  backgroundColor: 'rgba(255,255,255,0.04)',
+                }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+              >
+                {/* Badge & External Link */}
+                <div className="flex items-center justify-between mb-4">
                   <ExternalLink
                     size={14}
                     className="opacity-0 group-hover:opacity-100 transition-opacity"
                     style={{ color: '#3B82F6' }}
                   />
+                  <span
+                    className="text-xs px-2.5 py-1 rounded-full font-medium"
+                    style={{ background: colors.bg, color: colors.text, fontFamily: 'var(--font-arabic)' }}
+                  >
+                    {project.badge}
+                  </span>
                 </div>
 
-                <h4 className="font-sora text-sm font-semibold text-white leading-snug">
+                {/* Content */}
+                <h4
+                  className="font-arabic text-sm font-semibold text-white mb-2"
+                  style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
+                >
                   {project.title}
                 </h4>
 
-                <p className="text-[#6B7280] text-xs leading-relaxed line-clamp-2">
+                <p
+                  className="font-arabic text-[#6B7280] text-xs leading-relaxed line-clamp-2 flex-1 mb-3"
+                  style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
+                >
                   {project.desc}
                 </p>
 
-                <div
-                  className="text-[11px] mt-auto pt-3 border-t flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity"
-                  style={{ borderColor: 'rgba(59,130,246,0.1)', color: '#3B82F6' }}
+                {/* Visit Link */}
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="opacity-0 group-hover:opacity-100 transition-opacity"
+                  style={{
+                    fontSize: '12px',
+                    color: '#3B82F6',
+                    fontFamily: 'var(--font-arabic)',
+                    direction: 'rtl',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    marginTop: 'auto',
+                    paddingTop: '8px',
+                    borderTop: '1px solid rgba(59,130,246,0.08)',
+                  }}
                 >
-                  Visit Project &rarr;
-                </div>
-              </motion.a>
+                  زيارة المشروع ←
+                </a>
+              </motion.div>
             )
           })}
         </motion.div>
