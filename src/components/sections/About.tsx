@@ -105,9 +105,9 @@ export default function About() {
               variants={fadeInUp}
               className="font-arabic font-sora text-3xl md:text-4xl font-bold text-white mb-6 leading-snug"
             >
-              ما أكتفي بالنصيحة.
+              لا أقدّم توصيات فقط.
               <br />
-              <span className="text-accent">أبني.</span>
+              <span className="text-accent">أبني الأنظمة التي تجعلها تعمل.</span>
             </motion.h2>
 
             <motion.p
