@@ -21,6 +21,7 @@ const delayedItem: Variants = {
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false)
+  const [videoReady, setVideoReady] = useState(false)
   const glowRef = useRef<HTMLDivElement>(null)
 
   const handleMouse = useCallback((e: MouseEvent) => {
@@ -31,6 +32,7 @@ export default function Hero() {
 
   useEffect(() => {
     setMounted(true)
+    setTimeout(() => setVideoReady(true), 800)
     window.addEventListener('mousemove', handleMouse)
     return () => window.removeEventListener('mousemove', handleMouse)
   }, [handleMouse])
@@ -57,22 +59,25 @@ export default function Hero() {
   return (
     <section dir="rtl" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <iframe
-          src="https://player.vimeo.com/video/1172103667?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&controls=0&transparent=0"
-          frameBorder="0"
-          allow="autoplay; fullscreen; picture-in-picture"
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '177.78vh',
-            minWidth: '100%',
-            height: '56.25vw',
-            minHeight: '100%',
-          }}
-          title="Hero Background"
-        />
+        {videoReady && (
+          <iframe
+            src="https://player.vimeo.com/video/1172103667?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1&controls=0&transparent=0"
+            frameBorder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            loading="lazy"
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '177.78vh',
+              minWidth: '100%',
+              height: '56.25vw',
+              minHeight: '100%',
+            }}
+            title="Hero Background"
+          />
+        )}
       </div>
 
       <div

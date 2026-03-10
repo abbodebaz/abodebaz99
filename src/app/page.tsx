@@ -6,13 +6,13 @@ import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
 import Footer from "@/components/layout/Footer";
 
-const About = dynamic(() => import("@/components/sections/About"));
-const Journey = dynamic(() => import("@/components/sections/Journey"));
-const Systems = dynamic(() => import("@/components/sections/Systems"));
-const WorkGallery = dynamic(() => import("@/components/sections/WorkGallery"));
-const Impact = dynamic(() => import("@/components/sections/Impact"));
-const Framework = dynamic(() => import("@/components/sections/Framework"));
-const Contact = dynamic(() => import("@/components/sections/Contact"));
+const About = dynamic(() => import("@/components/sections/About"), { ssr: false });
+const Journey = dynamic(() => import("@/components/sections/Journey"), { ssr: false });
+const Systems = dynamic(() => import("@/components/sections/Systems"), { ssr: false });
+const WorkGallery = dynamic(() => import("@/components/sections/WorkGallery"), { ssr: false });
+const Impact = dynamic(() => import("@/components/sections/Impact"), { ssr: false });
+const Framework = dynamic(() => import("@/components/sections/Framework"), { ssr: false });
+const Contact = dynamic(() => import("@/components/sections/Contact"), { ssr: false });
 
 export default function Home() {
   const [introComplete, setIntroComplete] = useState(false);

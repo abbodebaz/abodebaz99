@@ -193,7 +193,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
       const x = Math.sin(seed + 1) * 10000
       return x - Math.floor(x)
     }
-    return Array.from({ length: 120 }, (_, i) => {
+    return Array.from({ length: 60 }, (_, i) => {
       const isHero = i % 15 === 0
       return {
         id: i,
@@ -320,6 +320,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                 '--dy': `${s.dy}px`,
                 opacity: s.opacity,
                 zIndex: 2,
+                willChange: 'transform, opacity',
                 animation: `twinkle ${s.twinkleDur}s ${s.delay}s ease-in-out infinite, floatStar ${s.floatDur}s ${s.delay}s ease-in-out infinite`,
               } as React.CSSProperties}
             />
