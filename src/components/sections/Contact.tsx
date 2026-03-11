@@ -98,7 +98,7 @@ export default function Contact() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
         >
           <motion.a
-            href="https://linkedin.com/in/abdulrahmanbazarah"
+            href="https://www.linkedin.com/in/abdulrhman-bazarah/"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.04, y: -2 }}
@@ -109,7 +109,7 @@ export default function Contact() {
           </motion.a>
 
           <motion.a
-            href="https://wa.me/966XXXXXXXXX"
+            href="https://wa.me/966552898232"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.04, y: -2 }}
@@ -120,7 +120,7 @@ export default function Contact() {
           </motion.a>
 
           <motion.a
-            href="mailto:hello@bazarah.dev"
+            href="mailto:abodebaz@gmail.com"
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
             className="flex items-center gap-2 px-8 py-3.5 text-[#9CA3AF] hover:text-white rounded-lg font-medium text-sm tracking-wide transition-colors"
