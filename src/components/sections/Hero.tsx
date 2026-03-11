@@ -83,7 +83,7 @@ export default function Hero() {
       </div>
 
       <div
-        className="absolute inset-0 z-[1]"
+        className="absolute inset-0 z-[1] bg-[#00000014]"
         style={{ background: 'rgba(10,10,10,0.58)' }}
       />
 
