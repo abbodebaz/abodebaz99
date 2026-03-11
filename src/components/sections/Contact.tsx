@@ -83,7 +83,7 @@ export default function Contact() {
           className="font-arabic font-sora text-2xl md:text-3xl font-bold text-white mb-4 leading-tight"
           style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
         >
-          فكرتك تستحق نظاماً حقيقياً.<br />خلنا نبنيه.
+          فكرتك تستحق نظاماً حقيقياً.
         </motion.h2>
         <motion.p
           variants={fadeInUp}
