@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "nextapp",
+      "runtimeExecutable": "/Users/mac/Downloads/موقع عبدالرحمن/Cinematic-Portfolio-Build/node_modules/.bin/next",
+      "runtimeArgs": ["dev"],
+      "port": 5000,
+      "autoPort": true
+    }
+  ]
+}
