@@ -469,7 +469,6 @@ export default function PaidAds() {
               <AdCard
                 key={result.platform}
                 result={result}
-                index={i}
                 dimmed={dimmed}
                 onClick={() => setSelectedCard(result)}
               />
