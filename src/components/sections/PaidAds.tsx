@@ -155,7 +155,7 @@ const adResults = [
 /* ─── Card ─── */
 function AdCard({
   result,
-  index,
+  index: _index,
   dimmed,
   onClick,
 }: {
