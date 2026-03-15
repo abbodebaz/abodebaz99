@@ -4,48 +4,56 @@ import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 const caseStudies = [
   {
-    tag: "العمليات",
-    title: "نظام عمليات التوصيل",
-    problem:
-      "كانت عمليات التوصيل مجزأة بدون نظام مركزي للتتبع. الفرق تعمل بشكل منفصل، الطلبات تضيع، والإدارة لا تمتلك رؤية واضحة لسير العمليات.",
-    solution:
-      "قمت ببناء لوحة تحكم مركزية تربط إدارة الطلبات وتوزيع المهام على الفرق مع تتبع حالة العمليات بشكل فوري عبر جميع مراحل التشغيل.",
-    impact: "+30٪ كفاءة التوصيل",
-    impactDetail: "خلال 60 يومًا من إطلاق النظام",
+    tag: "الإعلانات المدفوعة",
+    title: "نظام إعلانات يحوّل الإنفاق إلى إيراد",
+    problem: "ميزانية إعلانية تُصرف بدون بيانات واضحة — لا تتبع دقيق، لا تحسين مستمر، ولا ربط بين الإعلان ومسار العميل.",
+    solution: "بنيت منظومة إعلانية كاملة: pixel tracking، فنل مُقسَّم حسب مرحلة العميل، حملات retargeting مؤتمتة، وربط مباشر بين الإعلان والـ CRM لقياس الـ ROI الحقيقي.",
+    impact: "4x ROAS",
+    impactDetail: "مع تخفيض تكلفة الاكتساب 42%",
+    featured: true,
   },
   {
     tag: "التجارة الإلكترونية",
     title: "نظام نمو المبيعات الإلكترونية",
-    problem:
-      "المتجر الإلكتروني كان يحقق زيارات جيدة لكن معدل التحويل ضعيف. لم تكن هناك بيانات عن سلوك العملاء ولا استهداف إعلاني ولا مسار مبيعات واضح.",
-    solution:
-      "أعدت تصميم رحلة العميل، طبّقت أدوات التحليلات، أنشأت تسلسلات بريد إلكتروني مؤتمتة، وربطت منصات الإعلانات ببيانات نظام إدارة العملاء (CRM).",
-    impact: "+60٪ نمو في المبيعات",
-    impactDetail: "خلال 3 أشهر",
+    problem: "زيارات عالية، تحويل ضعيف — بدون بيانات سلوكية أو استهداف إعلاني أو مسار مبيعات واضح.",
+    solution: "أعدت تصميم رحلة العميل كاملاً، ربطت منصات الإعلانات بالـ CRM، وأطلقت تسلسلات بريد مؤتمتة مبنية على السلوك.",
+    impact: "+60%",
+    impactDetail: "نمو في المبيعات خلال 3 أشهر",
+    featured: false,
+  },
+  {
+    tag: "العمليات",
+    title: "نظام عمليات التوصيل",
+    problem: "فرق تعمل بشكل منفصل، طلبات تضيع، وإدارة بدون رؤية واضحة لسير العمليات.",
+    solution: "بنيت لوحة تحكم مركزية تربط الطلبات والفرق والتتبع الفوري عبر جميع مراحل التشغيل.",
+    impact: "+30%",
+    impactDetail: "كفاءة التوصيل خلال 60 يوماً",
+    featured: false,
   },
   {
     tag: "عمليات الإيرادات",
     title: "إطار عمل نمو الإيرادات",
-    problem:
-      "فريق المبيعات كان يعمل بدون هيكل واضح. لم تكن هناك رؤية لمسار الصفقات أو متابعة منتظمة أو مؤشرات أداء واضحة للإدارة.",
-    solution:
-      "قمت بتطبيق نظام CRM متكامل يتضمن متابعة آلية للعملاء، تتبع مراحل الصفقات، ولوحات تحكم لقياس الأداء.",
-    impact: "+20٪ نمو الإيرادات",
-    impactDetail: "في الربع الأول بعد إطلاق النظام",
+    problem: "فريق مبيعات بدون هيكل — لا رؤية لمسار الصفقات، لا متابعة منتظمة، لا KPIs واضحة.",
+    solution: "طبّقت CRM متكامل مع متابعة آلية وتتبع مراحل الصفقات ولوحات أداء فورية للإدارة.",
+    impact: "+20%",
+    impactDetail: "نمو الإيرادات في الربع الأول",
+    featured: false,
   },
   {
     tag: "التحول الرقمي",
     title: "برنامج رقمنة الأعمال",
-    problem:
-      "العمليات الأساسية كانت تعتمد على العمل اليدوي والورقي، مما جعل التوسع صعبًا بدون بنية رقمية.",
-    solution:
-      "قمت بتحليل جميع العمليات، رقمنة الإجراءات خطوة بخطوة، تدريب الفرق، وبناء أنظمة تقارير تساعد الإدارة على اتخاذ قرارات فورية.",
-    impact: "−25٪ من التكاليف التشغيلية",
-    impactDetail: "مع مضاعفة القدرة على التوسع",
+    problem: "عمليات يدوية وورقية تعيق التوسع — كل خطوة تحتاج تدخلاً بشرياً.",
+    solution: "حللت جميع العمليات، رقّمتها خطوة بخطوة، ودربت الفرق على أنظمة تقارير تُمكّن القرارات الفورية.",
+    impact: "−25%",
+    impactDetail: "من التكاليف التشغيلية مع مضاعفة الطاقة",
+    featured: false,
   },
 ];
 
 export default function Systems() {
+  const featured = caseStudies[0];
+  const rest = caseStudies.slice(1);
+
   return (
     <section id="systems" className="py-24 md:py-32 px-6" dir="rtl">
       <div className="max-w-6xl mx-auto">
@@ -56,115 +64,117 @@ export default function Systems() {
           variants={staggerContainer}
           className="text-center mb-16"
         >
+          <motion.span variants={fadeInUp} className="font-arabic inline-block text-xs uppercase tracking-[0.3em] text-accent mb-4">
+            الأعمال
+          </motion.span>
           <motion.h2
             variants={fadeInUp}
-            className="font-arabic text-3xl md:text-5xl font-bold text-white mb-4"
-            style={{ fontFamily: "var(--font-arabic)", direction: "rtl" }}
+            className="font-arabic font-bold text-white mb-4"
+            style={{ fontFamily: "var(--font-arabic)", direction: "rtl", fontSize: "clamp(26px, 4vw, 48px)" }}
           >
-            الأنظمة التي قمت ببنائها
+            أنظمة بنيتها. نتائج تُقاس.
           </motion.h2>
           <motion.p
             variants={fadeInUp}
-            className="font-arabic text-[#9CA3AF] text-lg"
+            className="font-arabic text-[#9CA3AF]"
             style={{ fontFamily: "var(--font-arabic)", direction: "rtl" }}
           >
-            مشكلات حقيقية. حلول عملية. نتائج قابلة للقياس.
+            مشكلات حقيقية. تنفيذ فعلي. أرقام لا تكذب.
           </motion.p>
         </motion.div>
 
+        {/* Featured card */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          whileHover={{ boxShadow: '0 0 60px rgba(59,130,246,0.18)' }}
+          className="rounded-2xl p-8 md:p-10 mb-6 transition-all duration-500 cursor-default"
+          style={{
+            background: "linear-gradient(135deg, rgba(59,130,246,0.07) 0%, rgba(255,255,255,0.02) 100%)",
+            border: "1px solid rgba(59,130,246,0.25)",
+          }}
+        >
+          <div className="flex flex-col md:flex-row md:items-center gap-8">
+            {/* Big impact number */}
+            <div className="shrink-0 text-center md:text-right">
+              <div
+                className="font-sora font-bold leading-none"
+                style={{ fontSize: "clamp(56px, 8vw, 96px)", color: "#3B82F6", letterSpacing: "-0.03em" }}
+              >
+                {featured.impact}
+              </div>
+              <p className="font-arabic text-[#9CA3AF] text-sm mt-1" style={{ fontFamily: "var(--font-arabic)" }}>
+                {featured.impactDetail}
+              </p>
+            </div>
+
+            <div className="hidden md:block w-px self-stretch bg-accent/15 mx-2" />
+
+            <div className="flex-1">
+              <span className="inline-block px-3 py-1 text-xs font-medium text-accent bg-accent/10 rounded-full mb-3">
+                {featured.tag}
+              </span>
+              <h3 className="font-arabic text-xl md:text-2xl font-bold text-white mb-4" style={{ fontFamily: "var(--font-arabic)" }}>
+                {featured.title}
+              </h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="pr-4 border-r-2 border-red-500/40">
+                  <p className="font-arabic text-xs text-red-400/70 mb-1 font-medium" style={{ fontFamily: "var(--font-arabic)" }}>المشكلة</p>
+                  <p className="font-arabic text-[#9CA3AF] text-sm leading-relaxed" style={{ fontFamily: "var(--font-arabic)", lineHeight: 1.8 }}>{featured.problem}</p>
+                </div>
+                <div className="pr-4 border-r-2 border-accent/40">
+                  <p className="font-arabic text-xs text-accent/70 mb-1 font-medium" style={{ fontFamily: "var(--font-arabic)" }}>الحل</p>
+                  <p className="font-arabic text-[#9CA3AF] text-sm leading-relaxed" style={{ fontFamily: "var(--font-arabic)", lineHeight: 1.8 }}>{featured.solution}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Rest of cards */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.15 } },
-          }}
-          className="grid md:grid-cols-2 gap-6"
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
+          className="grid md:grid-cols-2 gap-5"
         >
-          {caseStudies.map((study) => (
+          {rest.map((study) => (
             <motion.div
               key={study.title}
               variants={fadeInUp}
-              className="group rounded-xl p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(59,130,246,0.1)] cursor-default"
+              whileHover={{ borderColor: "rgba(59,130,246,0.35)", boxShadow: "0 20px 50px rgba(59,130,246,0.1)", y: -4 }}
+              className="rounded-xl p-7 transition-all duration-300 cursor-default"
               style={{
                 background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(59,130,246,0.12)",
+                border: "1px solid rgba(59,130,246,0.1)",
               }}
             >
-              <span className="inline-block px-3 py-1 text-xs font-medium text-accent bg-accent/10 rounded-full mb-4">
-                {study.tag}
-              </span>
+              <div className="flex items-start justify-between mb-5">
+                <span className="inline-block px-3 py-1 text-xs font-medium text-accent bg-accent/10 rounded-full">
+                  {study.tag}
+                </span>
+                <div className="text-left">
+                  <div className="font-sora font-bold text-2xl text-accent leading-none">{study.impact}</div>
+                  <div className="font-arabic text-[#6B7280] text-xs mt-0.5" style={{ fontFamily: "var(--font-arabic)" }}>{study.impactDetail}</div>
+                </div>
+              </div>
 
-              <h3
-                className="font-arabic text-xl font-semibold text-white mb-6"
-                style={{ fontFamily: "var(--font-arabic)", direction: "rtl" }}
-              >
+              <h3 className="font-arabic text-lg font-bold text-white mb-5" style={{ fontFamily: "var(--font-arabic)" }}>
                 {study.title}
               </h3>
 
-              <div className="mb-4 pr-4 border-r-2 border-red-500/40">
-                <p
-                  className="font-arabic text-xs text-red-400/70 mb-1 font-medium"
-                  style={{
-                    fontFamily: "var(--font-arabic)",
-                    direction: "rtl",
-                    letterSpacing: "0",
-                  }}
-                >
-                  المشكلة
-                </p>
-                <p
-                  className="font-arabic text-[#9CA3AF] text-sm leading-relaxed"
-                  style={{
-                    fontFamily: "var(--font-arabic)",
-                    direction: "rtl",
-                    lineHeight: 1.9,
-                  }}
-                >
-                  {study.problem}
-                </p>
-              </div>
-
-              <div className="mb-6 pr-4 border-r-2 border-accent/40">
-                <p
-                  className="font-arabic text-xs text-accent/70 mb-1 font-medium"
-                  style={{
-                    fontFamily: "var(--font-arabic)",
-                    direction: "rtl",
-                    letterSpacing: "0",
-                  }}
-                >
-                  الحل
-                </p>
-                <p
-                  className="font-arabic text-[#9CA3AF] text-sm leading-relaxed"
-                  style={{
-                    fontFamily: "var(--font-arabic)",
-                    direction: "rtl",
-                    lineHeight: 1.9,
-                  }}
-                >
-                  {study.solution}
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-[rgba(59,130,246,0.08)]">
-                <span
-                  className="font-arabic font-bold text-lg"
-                  style={{
-                    fontFamily: "var(--font-arabic)",
-                    color: "var(--success)",
-                  }}
-                >
-                  {study.impact}
-                </span>
-                <span
-                  className="font-arabic text-[#4B5563] text-sm mr-2"
-                  style={{ fontFamily: "var(--font-arabic)" }}
-                >
-                  {study.impactDetail}
-                </span>
+              <div className="space-y-4">
+                <div className="pr-4 border-r-2 border-red-500/40">
+                  <p className="font-arabic text-xs text-red-400/70 mb-1 font-medium" style={{ fontFamily: "var(--font-arabic)" }}>المشكلة</p>
+                  <p className="font-arabic text-[#9CA3AF] text-xs leading-relaxed" style={{ fontFamily: "var(--font-arabic)", lineHeight: 1.8 }}>{study.problem}</p>
+                </div>
+                <div className="pr-4 border-r-2 border-accent/40">
+                  <p className="font-arabic text-xs text-accent/70 mb-1 font-medium" style={{ fontFamily: "var(--font-arabic)" }}>الحل</p>
+                  <p className="font-arabic text-[#9CA3AF] text-xs leading-relaxed" style={{ fontFamily: "var(--font-arabic)", lineHeight: 1.8 }}>{study.solution}</p>
+                </div>
               </div>
             </motion.div>
           ))}

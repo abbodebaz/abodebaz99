@@ -1,7 +1,7 @@
 'use client'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import { useMemo, useState, useEffect, useRef, useCallback } from 'react'
+import { useMemo, useState, useEffect, useRef, useCallback, MouseEvent as ReactMouseEvent } from 'react'
 import type { Variants } from 'framer-motion'
 
 const container: Variants = {
@@ -14,14 +14,19 @@ const delayedItem: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 1.6 } }
 }
 
+const ROLES = ['أحوّل الأفكار إلى أنظمة', 'أبني ما يصعب تقليده', 'أتمتة · AI · نتائج']
+
 export default function Hero() {
   const [mounted, setMounted] = useState(false)
   const [videoReady, setVideoReady] = useState(false)
+  const [roleIndex, setRoleIndex] = useState(0)
   const glowRef = useRef<HTMLDivElement>(null)
+  const magnetRef = useRef<HTMLDivElement>(null)
+  const [magnetPos, setMagnetPos] = useState({ x: 0, y: 0 })
 
   const handleMouse = useCallback((e: MouseEvent) => {
     if (glowRef.current) {
-      glowRef.current.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(59,130,246,0.05), transparent 40%)`
+      glowRef.current.style.background = `radial-gradient(800px circle at ${e.clientX}px ${e.clientY}px, rgba(59,130,246,0.18), rgba(59,130,246,0.05) 40%, transparent 70%)`
     }
   }, [])
 
@@ -31,6 +36,13 @@ export default function Hero() {
     window.addEventListener('mousemove', handleMouse)
     return () => window.removeEventListener('mousemove', handleMouse)
   }, [handleMouse])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex(i => (i + 1) % ROLES.length)
+    }, 2800)
+    return () => clearInterval(interval)
+  }, [])
 
   const particles = useMemo(() => {
     function seededRandom(seed: number) {
@@ -49,6 +61,21 @@ export default function Hero() {
   const handleEnter = () => {
     const el = document.querySelector('#about')
     if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const handleMagnetMove = (e: ReactMouseEvent<HTMLDivElement>) => {
+    const el = magnetRef.current
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    const cx = rect.left + rect.width / 2
+    const cy = rect.top + rect.height / 2
+    const dx = e.clientX - cx
+    const dy = e.clientY - cy
+    setMagnetPos({ x: dx * 0.35, y: dy * 0.35 })
+  }
+
+  const handleMagnetLeave = () => {
+    setMagnetPos({ x: 0, y: 0 })
   }
 
   return (
@@ -135,29 +162,53 @@ export default function Hero() {
           Abdulrahman Bazarah
         </motion.h1>
 
-        <motion.p
+        <motion.div
           variants={delayedItem}
-          className="font-arabic text-[#9CA3AF]"
-          style={{ direction: 'rtl', fontFamily: 'var(--font-arabic)', letterSpacing: 'normal' }}
+          style={{ minHeight: '1.8em', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
         >
-          قائد تطوير أعمال &middot; مهندس أنظمة &middot; باني أتمتة و AI
-        </motion.p>
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={roleIndex}
+              initial={{ y: 24, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -24, opacity: 0 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="font-arabic"
+              style={{
+                direction: 'rtl',
+                fontFamily: 'var(--font-arabic)',
+                fontSize: 'clamp(15px, 1.8vw, 20px)',
+                color: 'rgba(156,163,175,0.9)',
+              }}
+            >
+              {ROLES[roleIndex]}
+            </motion.p>
+          </AnimatePresence>
+        </motion.div>
 
         <motion.div
           variants={delayedItem}
           className="flex items-center gap-2 justify-center mt-6 mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="font-arabic text-[#4B5563] text-xs tracking-widest" style={{ direction: 'rtl' }}>
+          <span className="font-arabic text-sm" style={{ direction: 'rtl', color: 'rgba(255,255,255,0.6)' }}>
             متاح لمشاريع جديدة
           </span>
         </motion.div>
 
-        <motion.div variants={delayedItem} className="relative inline-block">
+        <motion.div
+          ref={magnetRef}
+          variants={delayedItem}
+          className="relative inline-block"
+          onMouseMove={handleMagnetMove}
+          onMouseLeave={handleMagnetLeave}
+          animate={{ x: magnetPos.x, y: magnetPos.y }}
+          transition={{ type: 'spring', stiffness: 200, damping: 18, mass: 0.5 }}
+        >
           <button
             onClick={handleEnter}
             className="font-arabic relative border border-accent/50 bg-black/40 backdrop-blur-sm text-white px-9 py-3.5 tracking-[0.08em] text-sm transition-all duration-300 hover:bg-accent/20 hover:border-accent hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
-            style={{ direction: 'rtl' }}
+            style={{ direction: 'rtl', borderRadius: '100px' }}
           >
             اكتشف أكثر &larr;
           </button>
@@ -169,7 +220,7 @@ export default function Hero() {
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <ChevronDown className="text-[#4B5563]" size={28} />
+        <ChevronDown className="text-white/40" size={28} />
       </motion.div>
     </section>
   )

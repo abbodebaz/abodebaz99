@@ -7,75 +7,61 @@ const DAY_DATA: Record<number, { day: string; time: string; messages: { icon: st
     day: 'Sunday',
     time: '9:12 AM',
     messages: [
-      { icon: '📋', text: 'الأسبوع بدأ — لسا ما عندنا خطة واضحة للمبيعات' },
-      { icon: '📊', text: 'التقرير الأسبوعي ما اكتمل — الفريق يجمع البيانات يدوياً' },
-      { icon: '💬', text: '٣ عملاء ما ردينا عليهم من الأسبوع الماضي' },
-      { icon: '⏰', text: 'الاجتماع الصباحي بعد ٢٠ دقيقة — ما عندنا أرقام' },
+      { icon: '💸', text: 'فرصة بيع ضاعت الأسبوع الماضي — ما أحد لاحظها في الوقت الصح' },
+      { icon: '🔄', text: 'الفريق يعيد نفس العمل يدوياً كل أسبوع — والوقت يُحرق بلا نتيجة' },
     ],
   },
   1: {
     day: 'Monday',
     time: '8:47 AM',
     messages: [
-      { icon: '📊', text: 'التقرير مو جاهز — الفريق لسا يجمع البيانات يدوياً' },
-      { icon: '📦', text: '٣٢ طلب متأخر — ما في أحد عنده صورة كاملة' },
-      { icon: '💸', text: 'المبيعات نفس الشهر الماضي — ما نعرف وين المشكلة' },
-      { icon: '👥', text: 'الاجتماع بعد ساعة — ما عندنا أرقام واضحة' },
+      { icon: '📊', text: 'المدير يطلب أرقام الأداء — وجمعها سيأخذ ٣ ساعات من وقتك' },
+      { icon: '👥', text: 'عميل انتظر ٣ أيام ولم يتلقَّ رداً — اليوم تعاقد مع المنافس' },
     ],
   },
   2: {
     day: 'Tuesday',
     time: '9:03 AM',
     messages: [
-      { icon: '🔔', text: 'العميل يسأل عن تقدم المشروع — ما عندنا update موحّد' },
-      { icon: '🗂️', text: 'الفريق شغّال على ٤ أنظمة مختلفة — البيانات مشتتة' },
-      { icon: '🧾', text: 'فاتورة متأخرة من الأسبوع الماضي — ما لاحظنا' },
-      { icon: '📉', text: 'اجتماع المراجعة الأسبوعية — الأرقام مو محدّثة' },
+      { icon: '🔔', text: 'العميل يسأل عن تقدم المشروع — ولا أحد عنده إجابة موحّدة' },
+      { icon: '📉', text: 'المبيعات ثابتة منذ شهرين — لكن لا أحد يعرف أين يكمن الخلل' },
     ],
   },
   3: {
     day: 'Wednesday',
     time: '8:55 AM',
     messages: [
-      { icon: '📅', text: 'منتصف الأسبوع — ما نعرف إذا نحقق هدف الشهر' },
-      { icon: '🚚', text: 'فريق التوصيل يسأل عن الطلبات — ما في لوحة مركزية' },
-      { icon: '📈', text: 'المدير يطلب ملخص الأداء — سيستغرق ٣ ساعات تجميعه' },
-      { icon: '⚠️', text: '٥ شكاوى عملاء — اكتشفناها متأخرين' },
+      { icon: '⚠️', text: 'مشاكل الأمس لم تُحسم — وتتراكم فوقها مشاكل اليوم' },
+      { icon: '🎯', text: 'نصف الأهداف الشهرية لن تكتمل — والشهر بدأ للتو' },
     ],
   },
   4: {
     day: 'Thursday',
     time: '9:21 AM',
     messages: [
-      { icon: '🏁', text: 'آخر يوم عمل — ما أنهينا نصف المهام المخططة' },
-      { icon: '📝', text: 'تقرير نهاية الأسبوع — لازم يكون جاهز قبل الدوام' },
-      { icon: '🔧', text: 'العمليات توقفت مرتين هذا الأسبوع — ما نعرف السبب' },
-      { icon: '🎯', text: 'الأهداف الأسبوعية — ٤٠٪ منها ما اكتملت' },
+      { icon: '🏁', text: 'آخر يوم في الأسبوع — ونصف المهام لم تُنجز بعد' },
+      { icon: '📝', text: 'تقرير نهاية الأسبوع مطلوب الآن — والأرقام ليست جاهزة' },
     ],
   },
   5: {
     day: 'Friday',
     time: '10:15 AM',
     messages: [
-      { icon: '📆', text: 'الأسبوع انتهى — الأرقام الحقيقية لسا ما تجمّعت' },
-      { icon: '😶', text: 'عميل محتمل انتظر ردنا ٣ أيام — خسرناه' },
-      { icon: '🔄', text: 'الفريق يعمل يدوياً على نفس المهام كل أسبوع' },
-      { icon: '❓', text: 'أين ذهب وقتنا هذا الأسبوع؟ — ما في إجابة واضحة' },
+      { icon: '😶', text: 'عميل محتمل انتظر ردنا ٣ أيام — وخسرناه للأبد' },
+      { icon: '🔁', text: 'الأسبوع انتهى بنفس الفوضى التي بدأ بها' },
     ],
   },
   6: {
     day: 'Saturday',
     time: '11:30 AM',
     messages: [
-      { icon: '📵', text: 'عطلة — لكن الرسائل ما توقفت' },
-      { icon: '🔥', text: 'مشكلة في النظام — ما في أحد يعرف كيف يحلها' },
-      { icon: '👁️', text: 'العمليات تسير بدون رقابة — ونكتشف المشاكل متأخرين' },
-      { icon: '🔁', text: 'الأسبوع القادم سيبدأ بنفس الفوضى' },
+      { icon: '🔥', text: 'عطلة — لكن المشاكل لم تأخذ إجازة' },
+      { icon: '🔁', text: 'الأسبوع القادم سيبدأ بنفس الدوامة' },
     ],
   },
 }
 
-const MSG_STARTS = [1200, 4500, 7800, 11000]
+const MSG_STARTS = [800, 3500]
 const CHAR_SPEED = 28
 
 function playTick() {
@@ -125,10 +111,10 @@ function TypingCard({ icon, text, onDone }: { icon: string; text: string; onDone
       style={{
         position: 'relative',
         overflow: 'hidden',
-        background: 'rgba(255,255,255,0.03)',
-        border: `1px solid ${done ? 'rgba(59,130,246,0.25)' : 'rgba(59,130,246,0.12)'}`,
-        backdropFilter: 'blur(12px)',
-        boxShadow: done ? '0 0 16px rgba(59,130,246,0.08)' : '0 4px 24px rgba(0,0,0,0.3)',
+        background: done ? 'rgba(59,130,246,0.07)' : 'rgba(255,255,255,0.055)',
+        border: `1px solid ${done ? 'rgba(59,130,246,0.35)' : 'rgba(255,255,255,0.1)'}`,
+        backdropFilter: 'blur(20px)',
+        boxShadow: done ? '0 0 24px rgba(59,130,246,0.12), inset 0 1px 0 rgba(255,255,255,0.06)' : '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06)',
         direction: 'rtl' as const,
         transition: 'border-color 0.6s, box-shadow 0.6s',
       }}
@@ -174,6 +160,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
   const [dayData, setDayData] = useState(DAY_DATA[1])
   const [exiting, setExiting] = useState(false)
   const [flash, setFlash] = useState(false)
+  const [showSkip, setShowSkip] = useState(false)
   const stableOnComplete = useCallback(onComplete, [onComplete])
   const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -219,6 +206,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
     const t: ReturnType<typeof setTimeout>[] = []
 
     t.push(setTimeout(() => setPhase(1), 1000))
+    t.push(setTimeout(() => setShowSkip(true), 3000))
 
     MSG_STARTS.forEach((ms, i) => {
       t.push(setTimeout(() => {
@@ -227,8 +215,8 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
       }, ms))
     })
 
-    t.push(setTimeout(() => { triggerFlash(); setPhase(2) }, 13500))
-    t.push(setTimeout(() => { triggerFlash(); setPhase(3) }, 17000))
+    t.push(setTimeout(() => { triggerFlash(); setPhase(2) }, 7500))
+    t.push(setTimeout(() => { triggerFlash(); setPhase(3) }, 11000))
 
     return () => t.forEach(clearTimeout)
   }, [])
@@ -246,6 +234,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
           <iframe
             src="https://player.vimeo.com/video/1172104399?badge=0&autopause=0&background=1&autoplay=1&loop=1&muted=1&controls=0&transparent=0"
             allow="autoplay; fullscreen; picture-in-picture"
+            className="intro-video"
             style={{
               position: 'absolute',
               top: '50%',
@@ -255,7 +244,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
               minWidth: '100%',
               height: '56.25vw',
               minHeight: '100%',
-              opacity: 0.45,
+              opacity: 0.62,
               pointerEvents: 'none',
               zIndex: 0,
             }}
@@ -263,7 +252,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
 
           <div style={{
             position: 'absolute', inset: 0,
-            background: 'rgba(5,8,16,0.28)',
+            background: 'rgba(5,8,16,0.12)',
             zIndex: 1,
             pointerEvents: 'none',
           }} />
@@ -284,6 +273,11 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
           )}
 
           <style jsx global>{`
+            @media (max-width: 768px) {
+              .intro-video {
+                left: 25% !important;
+              }
+            }
             @keyframes blink { 0%,100% { opacity: 1 } 50% { opacity: 0 } }
             @keyframes twinkle {
               0%, 100% { opacity: var(--star-opacity); }
@@ -335,10 +329,10 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
           />
 
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full pointer-events-none"
             style={{
-              background: 'radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)',
-              filter: 'blur(60px)',
+              background: 'radial-gradient(circle, rgba(59,130,246,0.13) 0%, rgba(59,130,246,0.04) 45%, transparent 70%)',
+              filter: 'blur(80px)',
             }}
           />
 
@@ -349,6 +343,36 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
               animation: 'scanline 8s linear infinite',
             }}
           />
+
+          <AnimatePresence>
+            {showSkip && (
+              <motion.button
+                key="skip-btn"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6 }}
+                onClick={handleEnterClick}
+                className="absolute top-6 left-6 z-[20] font-arabic"
+                style={{
+                  fontSize: '12px',
+                  color: 'rgba(255,255,255,0.35)',
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  letterSpacing: '0.08em',
+                  fontFamily: 'var(--font-arabic)',
+                  direction: 'rtl',
+                  transition: 'color 0.3s',
+                  padding: '8px 4px',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.7)' }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.35)' }}
+              >
+                تخطي ←
+              </motion.button>
+            )}
+          </AnimatePresence>
 
           <div style={{ position: 'relative', zIndex: 10, width: '100%', display: 'flex', justifyContent: 'center' }}>
           <AnimatePresence mode="wait">
@@ -560,7 +584,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                   >
                     <span className="flex items-center gap-2">
                       اكتشف عبدالرحمن
-                      <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">&larr;</span>
+                      <span className="inline-block transition-transform duration-300 group-hover:-translate-x-1">&larr;</span>
                     </span>
                   </button>
                 </motion.div>

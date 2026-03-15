@@ -7,90 +7,129 @@ const phases = [
   {
     number: "01",
     icon: Search,
-    title: "فهم الأعمال",
-    description: "بدأت بدراسة كيف تشتغل الشركات — عملياتها، عقباتها، وعوائق نموها. كل نظام يبدأ بفهم الأعمال أولاً."
+    title: "فهمت الأعمال أولاً",
+    description: "درست كيف تشتغل الشركات من الداخل — عملياتها وأين يتسرب النمو."
   },
   {
     number: "02",
     icon: Building2,
-    title: "بناء الأنظمة الرقمية",
-    description: "ترجمت احتياجات الأعمال إلى بنية رقمية — CRMs ولوحات بيانات وأدوات تشغيل. أنظمة استبدلت العمل اليدوي وأوجدت نظاماً واضحاً."
+    title: "بنيت الأنظمة الرقمية",
+    description: "حوّلت احتياجات الأعمال إلى CRMs ولوحات بيانات وأدوات تشغيل."
   },
   {
     number: "03",
     icon: Link,
-    title: "ربط البيانات",
-    description: "دمجت الأدوات والمنصات المتفرقة لإنشاء تدفق موحد للبيانات. رؤية فورية عبر العمليات والمبيعات والتسويق."
+    title: "وصّلت البيانات والإعلانات",
+    description: "ربطت منصات الإعلانات المدفوعة بالـ CRM لرؤية موحدة عبر التسويق والمبيعات."
   },
   {
     number: "04",
     icon: Bot,
-    title: "الذكاء الاصطناعي والأتمتة",
-    description: "طبّقت AI والأتمتة للتخلص من المهام المتكررة، والتنبؤ بالأنماط، وجعل الشركات أسرع وأذكى."
+    title: "أتمتة + AI = نتائج",
+    description: "طبّقت الأتمتة والذكاء الاصطناعي لتسريع دورة المبيعات وإلغاء المهام المتكررة."
   }
 ]
 
 export default function Journey() {
   return (
-    <section id="journey" dir="rtl" className="py-24 md:py-32 px-6">
-      <div className="max-w-5xl mx-auto">
+    <section id="journey" dir="rtl" className="py-24 px-6">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
-          <motion.h2 variants={fadeInUp} className="font-arabic font-sora text-3xl md:text-5xl font-bold text-white mb-4">
-            مسيرتي في بناء الأنظمة
+          <motion.span variants={fadeInUp} className="font-arabic inline-block text-xs uppercase tracking-[0.3em] text-accent mb-4">
+            المسيرة
+          </motion.span>
+          <motion.h2 variants={fadeInUp} className="font-arabic font-bold text-white mb-3" style={{ fontSize: 'clamp(26px, 3.5vw, 42px)' }}>
+            كيف وصلت لهنا
           </motion.h2>
-          <motion.p variants={fadeInUp} className="font-arabic text-[#9CA3AF] text-lg max-w-2xl mx-auto">
-            من فهم الأعمال إلى بناء الأنظمة التي تكبّرها.
+          <motion.p variants={fadeInUp} className="font-arabic text-[#9CA3AF]">
+            من فهم الأعمال إلى الأنظمة التي تكبّرها.
           </motion.p>
         </motion.div>
 
-        <div className="relative">
-          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-[rgba(59,130,246,0.2)] hidden md:block" />
+        {/* Cards + arrows row */}
+        <div className="flex flex-col md:flex-row items-stretch gap-0">
+          {phases.map((phase, index) => {
+            const Icon = phase.icon
+            const isLast = index === phases.length - 1
 
-          <div className="space-y-12 md:space-y-0">
-            {phases.map((phase, index) => {
-              const Icon = phase.icon
-              const isLeft = index % 2 === 0
+            return (
+              <div key={phase.number} className="flex flex-row md:flex-row items-center flex-1 min-w-0">
 
-              return (
+                {/* Card */}
                 <motion.div
-                  key={phase.number}
-                  initial="hidden"
-                  whileInView="visible"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  variants={{
-                    hidden: { opacity: 0, x: isLeft ? 50 : -50 },
-                    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' as const } }
+                  transition={{ duration: 0.5, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ borderColor: 'rgba(59,130,246,0.45)', background: 'rgba(59,130,246,0.05)' }}
+                  className="flex-1 p-6 rounded-2xl transition-all duration-300 cursor-default h-full"
+                  style={{
+                    background: 'rgba(255,255,255,0.02)',
+                    border: '1px solid rgba(59,130,246,0.12)',
+                    backdropFilter: 'blur(10px)',
                   }}
-                  className={`relative md:flex md:items-center md:mb-16 ${isLeft ? 'md:justify-end' : 'md:justify-start'}`}
                 >
-                  <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-accent border-4 border-bg-primary z-10" />
-
-                  <div className={`md:w-[45%] ${isLeft ? 'md:pl-12' : 'md:pr-12'}`}>
-                    <div className="p-8 rounded-xl" style={{
-                      background: 'rgba(255,255,255,0.02)',
-                      backdropFilter: 'blur(10px)',
-                      border: '1px solid rgba(59,130,246,0.12)',
-                      borderRightWidth: '3px',
-                      borderRightColor: '#3B82F6',
-                    }}>
-                      <div className="flex items-center gap-4 mb-4">
-                        <span className="text-accent font-sora font-bold text-sm">{phase.number}</span>
-                        <Icon className="text-accent" size={22} />
-                      </div>
-                      <h3 className="font-arabic font-sora text-xl font-semibold text-white mb-3">{phase.title}</h3>
-                      <p className="font-arabic text-[#9CA3AF] text-sm leading-relaxed">{phase.description}</p>
+                  {/* Step dot */}
+                  <div className="flex items-center gap-2 mb-5">
+                    <div
+                      className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+                      style={{
+                        background: 'rgba(59,130,246,0.12)',
+                        border: '2px solid rgba(59,130,246,0.4)',
+                        boxShadow: '0 0 10px rgba(59,130,246,0.25)',
+                      }}
+                    >
+                      <motion.div
+                        className="w-2.5 h-2.5 rounded-full bg-accent"
+                        animate={{ scale: [1, 1.5, 1], opacity: [0.7, 1, 0.7] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
+                      />
                     </div>
+                    <span className="text-accent font-sora font-bold text-xs tracking-widest">{phase.number}</span>
                   </div>
+
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-4" style={{ background: 'rgba(59,130,246,0.08)' }}>
+                    <Icon className="text-accent" size={16} />
+                  </div>
+
+                  <h3 className="font-arabic font-bold text-white text-base mb-2" style={{ fontFamily: 'var(--font-arabic)' }}>{phase.title}</h3>
+                  <p className="font-arabic text-[#6B7280] text-xs leading-relaxed" style={{ fontFamily: 'var(--font-arabic)' }}>{phase.description}</p>
                 </motion.div>
-              )
-            })}
-          </div>
+
+                {/* Arrow between cards */}
+                {!isLast && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.12 + 0.3 }}
+                    className="hidden md:flex flex-col items-center justify-center shrink-0 px-2"
+                  >
+                    <div className="flex items-center gap-0.5">
+                      <div className="w-6 h-px" style={{ background: 'rgba(59,130,246,0.5)' }} />
+                      <div className="w-6 h-px" style={{ background: 'rgba(59,130,246,0.5)' }} />
+                      {/* Arrow head pointing left (RTL) */}
+                      <div
+                        style={{
+                          width: 0,
+                          height: 0,
+                          borderTop: '5px solid transparent',
+                          borderBottom: '5px solid transparent',
+                          borderRight: '8px solid rgba(59,130,246,0.7)',
+                        }}
+                      />
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>

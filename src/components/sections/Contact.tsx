@@ -16,10 +16,8 @@ export default function Contact() {
     <section
       id="contact"
       dir="rtl"
-      className="relative py-32 px-6 overflow-hidden"
-      style={{
-        background: 'linear-gradient(to bottom, #0A0A0A 0%, #0F0F0F 100%)',
-      }}
+      className="relative py-24 px-6 overflow-hidden"
+      style={{ background: '#060810' }}
     >
       {/* Video Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -36,7 +34,7 @@ export default function Contact() {
               minWidth: '100%',
               height: '56.25vw',
               minHeight: '100%',
-              opacity: 0.28,
+              opacity: 0.5,
               pointerEvents: 'none',
               border: 'none',
             }}
@@ -44,33 +42,40 @@ export default function Contact() {
         )}
       </div>
 
-      {/* Dark overlay on video */}
+      {/* Gradient overlay — keeps text readable but lets video breathe */}
       <div
         className="absolute inset-0 z-[1]"
-        style={{ background: 'rgba(5,8,16,0.78)' }}
+        style={{
+          background: 'linear-gradient(to bottom, rgba(6,8,16,0.65) 0%, rgba(6,8,16,0.55) 50%, rgba(6,8,16,0.75) 100%)',
+        }}
       />
 
+      {/* Top glow line */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 opacity-60"
-        style={{ background: 'linear-gradient(to right, transparent, #3B82F6, transparent)', zIndex: 2 }}
-      />
-      <div
-        className="absolute -top-40 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%)', filter: 'blur(40px)', zIndex: 2 }}
+        className="absolute top-0 left-0 right-0 h-px z-[2]"
+        style={{ background: 'linear-gradient(to right, transparent, rgba(59,130,246,0.6), transparent)' }}
       />
 
+      {/* Ambient blue glow */}
       <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-[2]"
-        aria-hidden="true"
-      >
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] z-[2] pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at center top, rgba(59,130,246,0.2) 0%, transparent 70%)',
+          filter: 'blur(20px)',
+        }}
+      />
+
+      {/* Watermark text */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-[2]" aria-hidden="true">
         <span
-          className="font-arabic font-sora text-[120px] md:text-[200px] font-bold opacity-[0.015] whitespace-nowrap"
-          style={{ color: 'white' }}
+          className="font-sora font-black opacity-[0.025] whitespace-nowrap"
+          style={{ fontSize: 'clamp(80px, 18vw, 220px)', color: 'white', letterSpacing: '-0.04em' }}
         >
-          نبني
+          ابدأ
         </span>
       </div>
 
+      {/* Content */}
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -78,60 +83,118 @@ export default function Contact() {
         variants={staggerContainer}
         className="max-w-3xl mx-auto text-center relative z-10"
       >
+        {/* Label */}
+        <motion.span
+          variants={fadeInUp}
+          className="font-arabic inline-block text-xs uppercase tracking-[0.3em] text-accent mb-6"
+          style={{ fontFamily: 'var(--font-arabic)' }}
+        >
+          تواصل معي
+        </motion.span>
+
+        {/* Headline */}
         <motion.h2
           variants={fadeInUp}
-          className="font-arabic font-sora text-2xl md:text-3xl font-bold text-white mb-4 leading-tight"
-          style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
+          className="font-arabic font-bold text-white mb-6"
+          style={{
+            fontFamily: 'var(--font-arabic)',
+            fontSize: 'clamp(32px, 5.5vw, 72px)',
+            lineHeight: 1.45,
+            textShadow: '0 2px 40px rgba(0,0,0,0.5)',
+          }}
         >
-          فكرتك تستحق نظاماً حقيقياً.
+          فكرتك تستحق
+          <br />
+          <span style={{ color: '#3B82F6' }}>نظاماً حقيقياً.</span>
         </motion.h2>
+
+        {/* Subtext */}
         <motion.p
           variants={fadeInUp}
-          className="font-arabic text-[#9CA3AF] text-lg mb-12"
-          style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}
+          className="font-arabic text-white/60 text-lg mb-14 leading-relaxed"
+          style={{ fontFamily: 'var(--font-arabic)' }}
         >
           إذا حسيت إن شركتك تشتغل بجهد أكثر من اللازم — أنا من تبحث عنه.
         </motion.p>
 
+        {/* Buttons */}
         <motion.div
           variants={fadeInUp}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
         >
+          {/* Primary — LinkedIn */}
           <motion.a
             href="https://www.linkedin.com/in/abdulrhman-bazarah/"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.04, y: -2 }}
+            whileHover={{ scale: 1.03, y: -4 }}
             whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2 px-8 py-3.5 bg-accent text-white rounded-lg font-medium text-sm tracking-wide transition-shadow btn-glow"
+            className="relative flex items-center gap-3 px-10 py-4 rounded-2xl font-sora font-bold text-base text-white overflow-hidden group"
+            style={{
+              background: 'linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)',
+              boxShadow: '0 0 40px rgba(59,130,246,0.45), 0 8px 32px rgba(0,0,0,0.4)',
+              minWidth: '180px',
+            }}
           >
-            <Linkedin size={18} /> LinkedIn
+            {/* shine sweep */}
+            <span
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              style={{
+                background: 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.18) 50%, transparent 60%)',
+                backgroundSize: '200% 100%',
+              }}
+            />
+            <Linkedin size={20} />
+            <span>LinkedIn</span>
           </motion.a>
 
+          {/* Secondary — WhatsApp */}
           <motion.a
             href="https://wa.me/966552898232"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.04, y: -2 }}
+            whileHover={{ scale: 1.03, y: -4 }}
             whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2 px-8 py-3.5 border border-accent text-white rounded-lg font-medium text-sm tracking-wide bg-transparent transition-all hover:bg-accent/10"
+            className="relative flex items-center gap-3 px-10 py-4 rounded-2xl font-sora font-bold text-base text-white overflow-hidden group"
+            style={{
+              background: 'linear-gradient(135deg, #22C55E 0%, #16A34A 100%)',
+              boxShadow: '0 0 40px rgba(34,197,94,0.35), 0 8px 32px rgba(0,0,0,0.4)',
+              minWidth: '180px',
+            }}
           >
-            <MessageCircle size={18} /> WhatsApp
+            <span
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              style={{
+                background: 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%)',
+              }}
+            />
+            <MessageCircle size={20} />
+            <span>WhatsApp</span>
           </motion.a>
 
+          {/* Ghost — Email */}
           <motion.a
             href="mailto:abodebaz@gmail.com"
-            whileHover={{ scale: 1.04, y: -2 }}
+            whileHover={{ scale: 1.03, y: -4 }}
             whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2 px-8 py-3.5 text-[#9CA3AF] hover:text-white rounded-lg font-medium text-sm tracking-wide transition-colors"
+            className="flex items-center gap-2.5 px-8 py-4 rounded-2xl font-sora font-medium text-sm transition-colors duration-200"
+            style={{
+              color: 'rgba(255,255,255,0.5)',
+              border: '1px solid rgba(255,255,255,0.1)',
+            }}
           >
-            <Mail size={18} /> إيميل
+            <Mail size={17} />
+            <span>abodebaz@gmail.com</span>
           </motion.a>
         </motion.div>
 
-        <motion.p variants={fadeInUp} className="font-arabic text-[#4B5563] text-sm">
-          عادةً أرد خلال ٢٤ ساعة.
-        </motion.p>
+        {/* Reply time */}
+        <motion.div variants={fadeInUp} className="flex items-center justify-center gap-2">
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E', display: 'inline-block', boxShadow: '0 0 8px #22C55E' }} />
+          <p className="font-arabic text-white/30 text-sm" style={{ fontFamily: 'var(--font-arabic)' }}>
+            عادةً أرد خلال ٢٤ ساعة
+          </p>
+        </motion.div>
       </motion.div>
     </section>
   )

@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from 'react'
 import { fadeInUp, staggerContainer, scaleIn } from '@/lib/animations'
 
 const stats = [
-  { value: 60, suffix: "%", label: "نمو المبيعات الإلكترونية" },
-  { value: 30, suffix: "%", label: "كفاءة التشغيل" },
-  { value: 20, suffix: "%", label: "نمو الإيرادات" },
-  { value: 4, suffix: "+", label: "قطاع تحوّل" },
+  { value: 50, suffix: "+", label: "مشروع منجز" },
+  { value: 10, suffix: "+", label: "سنوات خبرة" },
+  { value: 5, suffix: "+", label: "قطاعات عمل" },
+  { value: 3, suffix: "", label: "تخصصات" },
 ]
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
@@ -93,7 +93,7 @@ export default function Impact() {
           className="max-w-2xl mx-auto text-center border-r-2 border-accent pr-6"
         >
           <p className="font-arabic text-[#9CA3AF] text-lg italic leading-relaxed" style={{ direction: 'rtl' }}>
-            &ldquo;الأنظمة ما تحل المشاكل فقط. هي تضاعف الممكن.&rdquo;
+            &ldquo;أبني الأشياء بحيث تشتغل وأنت نايم.&rdquo;
           </p>
           <p className="text-[#4B5563] text-sm mt-3">— Abdulrahman Bazarah</p>
         </motion.div>

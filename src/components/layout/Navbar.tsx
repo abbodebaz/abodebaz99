@@ -7,8 +7,8 @@ const navLinks = [
   { name: 'من أنا', href: '#about' },
   { name: 'مسيرتي', href: '#journey' },
   { name: 'أعمالي', href: '#systems' },
-  { name: 'الأثر', href: '#impact' },
-  { name: 'المنهجية', href: '#framework' },
+  { name: 'النتائج', href: '#impact' },
+  { name: 'طريقتي', href: '#framework' },
   { name: 'تواصل', href: '#contact' },
 ]
 
@@ -54,7 +54,7 @@ export default function Navbar() {
       }}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className="font-sora text-2xl font-bold text-accent tracking-tight">
+        <a href="#" className="font-sora text-3xl font-bold text-accent tracking-tight">
           AB
         </a>
 
