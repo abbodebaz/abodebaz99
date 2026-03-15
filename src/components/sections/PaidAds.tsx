@@ -463,7 +463,7 @@ export default function PaidAds() {
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
           className="grid grid-cols-1 sm:grid-cols-2 gap-5"
         >
-          {adResults.map((result, i) => {
+          {adResults.map((result) => {
             const dimmed = activeFilter !== null && activeFilter !== result.platform
             return (
               <AdCard
