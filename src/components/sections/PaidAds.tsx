@@ -155,12 +155,10 @@ const adResults = [
 /* ─── Card ─── */
 function AdCard({
   result,
-  index: _index,
   dimmed,
   onClick,
 }: {
   result: typeof adResults[0]
-  index: number
   dimmed: boolean
   onClick: () => void
 }) {
