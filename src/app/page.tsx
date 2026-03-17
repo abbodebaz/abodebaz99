@@ -12,6 +12,7 @@ const Journey = dynamic(() => import("@/components/sections/Journey"), { ssr: fa
 const Systems = dynamic(() => import("@/components/sections/Systems"), { ssr: false });
 const WorkGallery = dynamic(() => import("@/components/sections/WorkGallery"), { ssr: false });
 const PaidAds = dynamic(() => import("@/components/sections/PaidAds"), { ssr: false });
+const Certifications = dynamic(() => import("@/components/sections/Certifications"), { ssr: false });
 const Impact = dynamic(() => import("@/components/sections/Impact"), { ssr: false });
 const Framework = dynamic(() => import("@/components/sections/Framework"), { ssr: false });
 const Contact = dynamic(() => import("@/components/sections/Contact"), { ssr: false });
@@ -54,6 +55,7 @@ export default function Home() {
         <Systems />
         <WorkGallery />
         <PaidAds />
+        <Certifications />
         <Impact />
         <Framework />
         <Contact />
