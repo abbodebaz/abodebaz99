@@ -8,7 +8,6 @@ import Hero from "@/components/sections/Hero";
 import Footer from "@/components/layout/Footer";
 
 const About = dynamic(() => import("@/components/sections/About"), { ssr: false });
-const Journey = dynamic(() => import("@/components/sections/Journey"), { ssr: false });
 const Systems = dynamic(() => import("@/components/sections/Systems"), { ssr: false });
 const WorkGallery = dynamic(() => import("@/components/sections/WorkGallery"), { ssr: false });
 const PaidAds = dynamic(() => import("@/components/sections/PaidAds"), { ssr: false });
@@ -51,7 +50,6 @@ export default function Home() {
       >
         <Hero />
         <About />
-        <Journey />
         <Systems />
         <WorkGallery />
         <PaidAds />
