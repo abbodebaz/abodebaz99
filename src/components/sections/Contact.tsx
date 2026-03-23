@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Linkedin, MessageCircle, Mail } from 'lucide-react'
-import Image from 'next/image'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
 export default function Contact() {
