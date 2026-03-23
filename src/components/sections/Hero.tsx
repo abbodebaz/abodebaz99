@@ -157,7 +157,7 @@ export default function Hero() {
         <motion.h1
           variants={delayedItem}
           className="font-sora font-bold text-white mb-6 leading-tight"
-          style={{ direction: 'ltr', fontSize: 'clamp(32px, 5vw, 64px)' }}
+          style={{ direction: 'ltr', fontSize: 'clamp(28px, 4.5vw, 64px)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
         >
           Abdulrahman Bazarah
         </motion.h1>
