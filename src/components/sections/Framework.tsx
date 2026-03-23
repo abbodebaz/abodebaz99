@@ -77,7 +77,7 @@ export default function Framework() {
             className="font-arabic text-[#9CA3AF]"
             style={{ fontFamily: 'var(--font-arabic)' }}
           >
-            منهجية قابلة للتكرار تشتغل في كل القطاعات.
+            نفس الطريقة تشتغل مع الجميع — بغض النظر عن حجم الشركة أو القطاع.
           </motion.p>
         </motion.div>
 

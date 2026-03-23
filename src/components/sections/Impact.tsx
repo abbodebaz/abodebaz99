@@ -49,7 +49,7 @@ export default function Impact() {
             نتائج تتكلم
           </motion.span>
           <motion.h2 variants={fadeInUp} className="font-arabic font-sora text-3xl md:text-5xl font-bold text-white mb-4">
-            الأرقام
+            ما اللي اتحقق
           </motion.h2>
           <motion.p variants={fadeInUp} className="font-arabic text-[#9CA3AF] text-lg">
             كل نظام أبنيه يُقاس بأثره على الأعمال.

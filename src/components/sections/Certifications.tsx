@@ -104,7 +104,7 @@ export default function Certifications() {
               className="font-arabic font-bold text-white"
               style={{ fontFamily: 'var(--font-arabic)', fontSize: 'clamp(26px, 4vw, 44px)' }}
             >
-              مهارات موثّقة بشهادات دولية
+              الشهادات اللي عندي
             </motion.h2>
             <motion.div
               variants={fadeInUp}

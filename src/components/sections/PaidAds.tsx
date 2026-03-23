@@ -395,7 +395,7 @@ export default function PaidAds() {
             className="font-arabic font-bold text-white mb-3"
             style={{ fontFamily: 'var(--font-arabic)', fontSize: 'clamp(26px, 4vw, 48px)' }}
           >
-            إعلانات تُحوّل الإنفاق إلى إيراد.
+            الإعلانات اللي فعلاً تجيب نتايج.
           </motion.h2>
           <motion.p variants={fadeInUp} className="font-arabic text-[#9CA3AF]" style={{ fontFamily: 'var(--font-arabic)' }}>
             أبني الحملات على بيانات حقيقية — لا تخمين.
