@@ -129,7 +129,7 @@ const projects = [
     title: "سيراف للإنتاج السينمائي",
     desc: "موقع فخم RTL مع عرض أعمال سينمائية وتجربة مستخدم سلسة تعكس هوية الشركة.",
     badge: "تعريفي",
-    url: "https://xd7d7.com/ser/",
+    url: "https://syrf-abodebaz.replit.app/",
   },
   {
     title: "Mazen AlSaleh",
@@ -159,7 +159,7 @@ const projects = [
     title: "مجموعة أحمد باسمح",
     desc: "موقع المجموعة: نبذة عن الشركات التابعة والتواصل والإعلانات الإعلامية.",
     badge: "مجموعة",
-    url: "https://a-basamhgrp.com/",
+    url: "#",
   },
   {
     title: "د. عائشة الدخيل",
