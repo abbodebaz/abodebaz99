@@ -2,13 +2,14 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Linkedin, MessageCircle, Mail } from 'lucide-react'
+import Image from 'next/image'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
 export default function Contact() {
-  const [videoReady, setVideoReady] = useState(false)
+  const [imageReady, setImageReady] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => setVideoReady(true), 1200)
+    const timer = setTimeout(() => setImageReady(true), 1200)
     return () => clearTimeout(timer)
   }, [])
 
@@ -19,24 +20,22 @@ export default function Contact() {
       className="relative py-24 px-6 overflow-hidden"
       style={{ background: '#060810' }}
     >
-      {/* Video Background */}
+      {/* Background Image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {videoReady && (
-          <iframe
-            src="https://player.vimeo.com/video/1172103500?badge=0&autopause=0&background=1&autoplay=1&loop=1&muted=1&controls=0&transparent=0"
-            allow="autoplay; fullscreen; picture-in-picture"
+        {imageReady && (
+          <img
+            src="/images/contact-hero.png"
+            alt="Contact background"
             style={{
               position: 'absolute',
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              width: '177.78vh',
-              minWidth: '100%',
-              height: '56.25vw',
-              minHeight: '100%',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
               opacity: 0.5,
               pointerEvents: 'none',
-              border: 'none',
             }}
           />
         )}
