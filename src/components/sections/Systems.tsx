@@ -72,14 +72,14 @@ export default function Systems() {
             className="font-arabic font-bold text-white mb-4"
             style={{ fontFamily: "var(--font-arabic)", direction: "rtl", fontSize: "clamp(26px, 4vw, 48px)" }}
           >
-            أنظمة بنيتها. نتائج تُقاس.
+            ركزت على أنظمة ما تحتاج متابعة يومية
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="font-arabic text-[#9CA3AF]"
             style={{ fontFamily: "var(--font-arabic)", direction: "rtl" }}
           >
-            مشكلات حقيقية. تنفيذ فعلي. أرقام لا تكذب.
+            ما في شي بدون بيانات — والبيانات حقيقية.
           </motion.p>
         </motion.div>
 
