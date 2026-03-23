@@ -370,16 +370,6 @@ function GridCard({ project }: { project: Project }) {
 export default function WorkGallery() {
   const [activeFilter, setActiveFilter] = useState('الكل')
   const [visibleCount, setVisibleCount] = useState(6)
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
-
-  const handleFilter = (f: string) => { setActiveFilter(f); setVisibleCount(6) }
   const loadMore = () => setVisibleCount(prev => prev + 6)
 
   const featuredProjects = projects.slice(0, 2)
