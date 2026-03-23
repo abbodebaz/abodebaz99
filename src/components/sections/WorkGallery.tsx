@@ -437,7 +437,7 @@ export default function WorkGallery() {
             return (
               <button
                 key={filter}
-                onClick={() => handleFilter(filter)}
+                onClick={() => setActiveFilter(filter)}
                 className="font-arabic text-xs px-4 py-2 rounded-full transition-all duration-200"
                 style={{
                   fontFamily: 'var(--font-arabic)',
