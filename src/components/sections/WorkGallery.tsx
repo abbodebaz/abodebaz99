@@ -282,9 +282,15 @@ function FeaturedCard({ project }: { project: Project }) {
 
 function GridCard({ project }: { project: Project }) {
   const colors = badgeColors[project.badge] ?? { bg: 'rgba(59,130,246,0.1)', text: '#60A5FA', gradient: 'rgba(59,130,246,0.04)' }
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '100px' })
+  const [isExpanded, setIsExpanded] = useState(false)
+  const maxDescLength = 70
+  const isTruncated = project.desc.length > maxDescLength
 
   return (
     <motion.div
+      ref={ref}
       variants={fadeInUp}
       className="group relative p-5 rounded-xl flex flex-col min-h-[160px] transition-all duration-300 overflow-hidden"
       style={{
@@ -306,23 +312,36 @@ function GridCard({ project }: { project: Project }) {
       </div>
 
       <div className="flex items-center gap-2 mb-2">
-        <img
-          src={getFavicon(project.url)}
-          alt=""
-          width={22}
-          height={22}
-          className="rounded-md shrink-0"
-          style={{ background: 'rgba(255,255,255,0.06)', padding: '3px' }}
-          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
-        />
+        {inView && (
+          <img
+            src={getFavicon(project.url)}
+            alt=""
+            width={22}
+            height={22}
+            className="rounded-md shrink-0"
+            style={{ background: 'rgba(255,255,255,0.06)', padding: '3px' }}
+            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+          />
+        )}
         <h4 className="font-arabic text-sm font-semibold text-white" style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}>
           {project.title}
         </h4>
       </div>
 
-      <p className="font-arabic text-[#6B7280] text-xs leading-relaxed line-clamp-2 flex-1 mb-3" style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}>
-        {project.desc}
+      <p className="font-arabic text-[#6B7280] text-xs leading-relaxed flex-1 mb-3" style={{ fontFamily: 'var(--font-arabic)', direction: 'rtl' }}>
+        {isExpanded ? project.desc : project.desc.slice(0, maxDescLength)}
+        {isTruncated && !isExpanded && '...'}
       </p>
+
+      {isTruncated && (
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="text-xs font-medium text-accent hover:text-accent/80 transition-colors mb-3"
+          style={{ fontFamily: 'var(--font-arabic)', textAlign: 'right' }}
+        >
+          {isExpanded ? 'أقل ↑' : 'المزيد ↓'}
+        </button>
+      )}
 
       <a
         href={project.url}
@@ -350,7 +369,7 @@ function GridCard({ project }: { project: Project }) {
 
 export default function WorkGallery() {
   const [activeFilter, setActiveFilter] = useState('الكل')
-  const [showAll, setShowAll] = useState(false)
+  const [visibleCount, setVisibleCount] = useState(6)
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -360,18 +379,18 @@ export default function WorkGallery() {
     return () => window.removeEventListener('resize', check)
   }, [])
 
-  // Reset showAll when filter changes
-  const handleFilter = (f: string) => { setActiveFilter(f); setShowAll(false) }
+  const handleFilter = (f: string) => { setActiveFilter(f); setVisibleCount(6) }
+  const loadMore = () => setVisibleCount(prev => prev + 6)
 
   const featuredProjects = projects.slice(0, 2)
   const gridProjects = projects.slice(2)
   const filteredAll = activeFilter === 'الكل' ? null : projects.filter(p => p.badge === activeFilter)
 
-  // On mobile limit to 3 grid items (2 featured + 3 grid = 5 total)
-  const visibleGrid = (isMobile && !showAll) ? gridProjects.slice(0, 3) : gridProjects
-  const visibleFiltered = (filteredAll && isMobile && !showAll) ? filteredAll.slice(0, 5) : filteredAll
-  const hasMore = isMobile && !showAll && (
-    filteredAll ? filteredAll.length > 5 : gridProjects.length > 3
+  // Progressive loading: show 6 initially, then 6 more with each click
+  const visibleGrid = gridProjects.slice(0, visibleCount)
+  const visibleFiltered = filteredAll ? filteredAll.slice(0, visibleCount) : null
+  const hasMore = (
+    filteredAll ? visibleFiltered!.length < filteredAll.length : visibleGrid.length < gridProjects.length
   )
 
   return (
@@ -478,7 +497,7 @@ export default function WorkGallery() {
                 ))}
               </motion.div>
 
-              {/* Show More button — mobile only */}
+              {/* Load More button */}
               {hasMore && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -486,8 +505,8 @@ export default function WorkGallery() {
                   className="flex justify-center mt-8"
                 >
                   <button
-                    onClick={() => setShowAll(true)}
-                    className="font-arabic text-sm px-8 py-3 rounded-full transition-all duration-300"
+                    onClick={loadMore}
+                    className="font-arabic text-sm px-8 py-3 rounded-full transition-all duration-300 hover:bg-accent/15"
                     style={{
                       fontFamily: 'var(--font-arabic)',
                       background: 'rgba(59,130,246,0.08)',
@@ -495,7 +514,7 @@ export default function WorkGallery() {
                       border: '1px solid rgba(59,130,246,0.25)',
                     }}
                   >
-                    شاهد المزيد ↓
+                    حمّل المزيد ↓
                   </button>
                 </motion.div>
               )}
@@ -525,7 +544,7 @@ export default function WorkGallery() {
                     ))}
                   </motion.div>
 
-                  {/* Show More button — mobile only, filtered */}
+                  {/* Load More button — filtered */}
                   {hasMore && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
@@ -533,8 +552,8 @@ export default function WorkGallery() {
                       className="flex justify-center mt-8"
                     >
                       <button
-                        onClick={() => setShowAll(true)}
-                        className="font-arabic text-sm px-8 py-3 rounded-full transition-all duration-300"
+                        onClick={loadMore}
+                        className="font-arabic text-sm px-8 py-3 rounded-full transition-all duration-300 hover:bg-accent/15"
                         style={{
                           fontFamily: 'var(--font-arabic)',
                           background: 'rgba(59,130,246,0.08)',
@@ -542,7 +561,7 @@ export default function WorkGallery() {
                           border: '1px solid rgba(59,130,246,0.25)',
                         }}
                       >
-                        شاهد المزيد ↓
+                        حمّل المزيد ↓
                       </button>
                     </motion.div>
                   )}
