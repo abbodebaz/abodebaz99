@@ -33,16 +33,14 @@ export default function Home() {
     localStorage.setItem("hasSeenIntro", "true");
   };
 
-  if (!mounted) return null;
-
   return (
     <>
       <AuroraBackground />
-      {!introComplete && <Intro onComplete={handleIntroComplete} />}
-      {introComplete && <Navbar />}
+      {mounted && !introComplete && <Intro onComplete={handleIntroComplete} />}
+      {(!mounted || introComplete) && <Navbar />}
       <main
         style={{
-          opacity: introComplete ? 1 : 0,
+          opacity: !mounted || introComplete ? 1 : 0,
           transition: "opacity 0.8s ease",
           transform: 'none',
           willChange: 'auto',
