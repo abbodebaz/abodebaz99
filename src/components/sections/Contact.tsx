@@ -23,7 +23,7 @@ export default function Contact() {
       <div className="absolute inset-0 z-0 overflow-hidden">
         {imageReady && (
           <img
-            src="/images/contact-hero.png"
+            src="/images/contact-hero.jpg"
             alt="Contact background"
             style={{
               position: 'absolute',

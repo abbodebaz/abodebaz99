@@ -61,7 +61,7 @@ const DAY_DATA: Record<number, { day: string; time: string; messages: { icon: st
   },
 }
 
-const MSG_STARTS = [800, 3500]
+const MSG_STARTS = [2800, 5500]
 const CHAR_SPEED = 28
 
 function playTick() {
@@ -215,8 +215,8 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
       }, ms))
     })
 
-    t.push(setTimeout(() => { triggerFlash(); setPhase(2) }, 7500))
-    t.push(setTimeout(() => { triggerFlash(); setPhase(3) }, 11000))
+    t.push(setTimeout(() => { triggerFlash(); setPhase(2) }, 9500))
+    t.push(setTimeout(() => { triggerFlash(); setPhase(3) }, 13000))
 
     return () => t.forEach(clearTimeout)
   }, [])
@@ -385,10 +385,26 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                 transition={{ duration: 1.2, ease: 'easeInOut' }}
                 className="flex flex-col items-center gap-4 w-full px-4 sm:px-5 max-w-[460px]"
               >
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 0.6, y: 0 }}
+                  transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+                  className="font-arabic mb-5 text-center"
+                  style={{
+                    fontSize: '17px',
+                    color: 'white',
+                    direction: 'rtl',
+                    fontFamily: 'var(--font-arabic)',
+                    letterSpacing: '0.02em',
+                  }}
+                >
+                  في كل صباح عمل.. هذه الرسائل تنتظرك
+                </motion.p>
+
                 <motion.div
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: 'easeOut' }}
+                  transition={{ duration: 0.8, ease: 'easeOut', delay: 1.2 }}
                   className="flex items-center gap-3 mb-2"
                 >
                   <motion.div
@@ -500,7 +516,7 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                     marginBottom: '20px',
                   }}
                 >
-                  {"Abdulrahman Bazarah".split("").map((char, i) => (
+                  {"Abdulrahman".split("").map((char, i) => (
                     <motion.span
                       key={i}
                       variants={{

@@ -159,7 +159,7 @@ export default function Hero() {
           className="font-sora font-bold text-white mb-6 leading-tight"
           style={{ direction: 'ltr', fontSize: 'clamp(28px, 4.5vw, 64px)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
         >
-          Abdulrahman Bazarah
+          Abdulrahman
         </motion.h1>
 
         <motion.div

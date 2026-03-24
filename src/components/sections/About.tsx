@@ -159,7 +159,7 @@ export default function About() {
                       <div className="absolute inset-0 rounded-2xl overflow-hidden" style={{ background: '#060810', zIndex: 1 }}>
                         <Image
                           src="/images/profile.jpg"
-                          alt="Abdulrahman Bazarah"
+                          alt="Abdulrahman"
                           fill
                           className="object-cover object-top"
                           priority
@@ -253,7 +253,7 @@ export default function About() {
               whileInView="visible"
               viewport={{ once: true }}
               variants={staggerContainer}
-              className="order-2 md:order-1"
+              className="order-2 md:order-1 text-right"
             >
               <motion.span
                 variants={fadeInUp}
@@ -305,7 +305,7 @@ export default function About() {
                 ))}
               </motion.ul>
 
-              <motion.div variants={fadeInUp}>
+              <motion.div variants={fadeInUp} className="flex justify-end">
                 <button
                   onClick={handleContact}
                   className="font-arabic relative border border-accent/50 bg-black/40 backdrop-blur-sm text-white px-8 py-3 text-sm transition-all duration-300 hover:bg-accent/20 hover:border-accent hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"

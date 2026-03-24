@@ -95,7 +95,7 @@ export default function Impact() {
           <p className="font-arabic text-[#9CA3AF] text-lg italic leading-relaxed" style={{ direction: 'rtl' }}>
             &ldquo;أبني الأشياء بحيث تشتغل وأنت نايم.&rdquo;
           </p>
-          <p className="text-[#4B5563] text-sm mt-3">— Abdulrahman Bazarah</p>
+          <p className="text-[#4B5563] text-sm mt-3">— Abdulrahman</p>
         </motion.div>
       </div>
     </section>

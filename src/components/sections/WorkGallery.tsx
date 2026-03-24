@@ -384,7 +384,7 @@ export default function WorkGallery() {
   )
 
   return (
-    <section id="work-gallery" dir="rtl" className="py-24 md:py-32 px-6">
+    <section id="work-gallery" dir="rtl" className="py-16 md:py-20 px-6">
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}

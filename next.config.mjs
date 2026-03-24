@@ -2,6 +2,7 @@
 const nextConfig = {
   allowedDevOrigins: ['*'],
   images: {
+    formats: ['image/webp', 'image/avif'],
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: '*.vimeocdn.com' },

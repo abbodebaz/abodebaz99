@@ -104,7 +104,7 @@ const adResults = [
       { label: 'تكلفة النقرة', value: '$0.043' },
     ],
     sector: 'متجر إلكتروني',
-    image: '/images/ads/snap.png',
+    image: '/images/ads/snap.webp',
     detail: 'حملة توعية ومبيعات لمتجر إلكتروني. اعتمدنا على إعلانات Story + Spotlight مع استهداف دقيق حسب الاهتمامات والمناطق. تكلفة النقرة جاءت أقل من المعدل الصناعي بـ 60٪.',
   },
   {
@@ -119,7 +119,7 @@ const adResults = [
       { label: 'حملات نشطة', value: '4' },
     ],
     sector: 'متعدد القطاعات',
-    image: '/images/ads/tiktok.png',
+    image: '/images/ads/tiktok.webp',
     detail: '4 حملات متزامنة عبر قطاعات مختلفة. استخدمنا In-Feed Ads مع تغيير الـ creatives أسبوعياً للحفاظ على معدل التفاعل. CPM منخفض يعكس جودة الاستهداف.',
   },
   {
@@ -133,7 +133,7 @@ const adResults = [
       { label: 'تكلفة النتيجة', value: '$0.23' },
     ],
     sector: 'متعدد القطاعات',
-    image: '/images/ads/meta.png',
+    image: '/images/ads/meta.webp',
     detail: 'حملات Conversion و Lead Generation على Facebook و Instagram. الـ A/B testing على الـ creatives خفّض تكلفة النتيجة من $0.80 إلى $0.23 خلال 3 أسابيع.',
   },
   {
@@ -147,7 +147,7 @@ const adResults = [
       { label: 'الإنفاق', value: '1.97K SAR' },
     ],
     sector: 'حملات بحث',
-    image: '/images/ads/google.png',
+    image: '/images/ads/google.webp',
     detail: 'حملات Search Ads مبنية على بحث كلمات مفتاحية دقيق. اعتمدنا على Exact + Phrase Match مع negative keywords لتصفية الزوار غير المهتمين وتحسين جودة النقرات.',
   },
 ]

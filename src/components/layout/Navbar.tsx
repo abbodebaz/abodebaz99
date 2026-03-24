@@ -53,12 +53,12 @@ export default function Navbar() {
         transform: 'translateZ(0)',
       }}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div dir="rtl" className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#" className="font-sora text-3xl font-bold text-accent tracking-tight">
           AB
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <button
               key={link.name}
@@ -82,7 +82,7 @@ export default function Navbar() {
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-white"
+          className="lg:hidden text-white"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -95,7 +95,7 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="md:hidden overflow-hidden bg-bg-primary/95 backdrop-blur-md border-t border-[rgba(59,130,246,0.12)]"
+            className="lg:hidden overflow-hidden bg-bg-primary/95 backdrop-blur-md border-t border-[rgba(59,130,246,0.12)]"
           >
             <div className="px-6 py-4 flex flex-col gap-4">
               {navLinks.map((link) => (
