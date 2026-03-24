@@ -5,20 +5,18 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif'],
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: '*.vimeocdn.com' },
     ],
   },
   async headers() {
     return [
       {
-        source: '/images/:path*',
+        source: '/(.*)',
         headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
-        ],
-      },
-      {
-        source: '/_next/static/:path*',
-        headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-src 'self' https://player.vimeo.com;",
+          },
         ],
       },
     ]
