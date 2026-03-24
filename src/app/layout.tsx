@@ -1,16 +1,10 @@
 import type { Metadata } from "next";
-import { Sora, DM_Sans, Readex_Pro } from 'next/font/google';
+import { Sora, Readex_Pro } from 'next/font/google';
 import "./globals.css";
 
 const sora = Sora({
   subsets: ['latin'],
   variable: '--font-sora',
-  display: 'swap',
-});
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-dm-sans',
   display: 'swap',
 });
 
@@ -39,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${sora.variable} ${dmSans.variable} ${readexPro.variable} font-sans antialiased`}>
+      <body className={`${sora.variable} ${readexPro.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>
