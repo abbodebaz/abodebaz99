@@ -514,6 +514,8 @@ export default function Intro({ onComplete }: { onComplete: () => void }) {
                     textShadow: '0 0 100px rgba(59,130,246,0.4)',
                     lineHeight: 1.1,
                     marginBottom: '20px',
+                    direction: 'ltr',
+                    unicodeBidi: 'isolate',
                   }}
                 >
                   {"Abdulrahman".split("").map((char, i) => (
