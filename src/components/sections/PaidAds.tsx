@@ -402,6 +402,61 @@ export default function PaidAds() {
           </motion.p>
         </motion.div>
 
+        {/* My approach */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12"
+        >
+          {[
+            {
+              icon: '📊',
+              title: 'استهداف بالبيانات',
+              desc: 'أبني الجمهور على أرقام حقيقية — مو تخمين أو حظ.',
+            },
+            {
+              icon: '🔬',
+              title: 'A/B Testing مستمر',
+              desc: 'أغيّر الـ creatives أسبوعياً وأقارن النتائج عشان أوصل لأفضل أداء.',
+            },
+            {
+              icon: '🔗',
+              title: 'ربط الإعلان بالنتيجة',
+              desc: 'أتتبع كل ريال من الكليك الأول لحد ما يتحول لعميل فعلي.',
+            },
+            {
+              icon: '📉',
+              title: 'تحسين مستمر',
+              desc: 'أقلّص التكلفة وأرفع العائد كل أسبوع بناءً على البيانات.',
+            },
+            {
+              icon: '🎯',
+              title: 'بيكسل وإعادة استهداف',
+              desc: 'أركّب البيكسل على كل منصة وأعيد استهداف الزوار اللي ما اشتروا.',
+            },
+          ].map((item) => (
+            <motion.div
+              key={item.title}
+              variants={fadeInUp}
+              className="rounded-xl p-5 text-center"
+              style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(59,130,246,0.1)',
+              }}
+            >
+              <div className="text-2xl mb-3">{item.icon}</div>
+              <h4 className="font-arabic font-bold text-white text-sm mb-2" style={{ fontFamily: 'var(--font-arabic)' }}>
+                {item.title}
+              </h4>
+              <p className="font-arabic text-[#6B7280] text-xs leading-relaxed" style={{ fontFamily: 'var(--font-arabic)' }}>
+                {item.desc}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+
         {/* Total summary bar */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
